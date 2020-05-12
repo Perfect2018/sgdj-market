@@ -1,0 +1,30 @@
+<!--pages/components/shopGoodsList/index.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="shop-goods-list">
+  <block wx:for="{{shopGoodsList}}" wx:key="index">
+    <view class="shop-goods-item">
+      <view class="item-left">
+        <image lazy-load class="item-image" src="{{util._getImageUrl(item.img1)}}" mode="aspectFill"></image>
+      </view>
+      <view class="item-right">
+        <view class="item-title color-000">
+          {{item.goodsName}}
+        </view>
+        <view class="item-pub flex-start flex-items-end">
+          <view class="color-f80 item-price">￥{{item.discountPrice}}</view>
+          <view class="color-666 text-del">￥{{item.price}}</view>
+        </view>
+        <view class="item-pub item-soldSiz">
+          <view class="color-666">销量：{{item.soldSize?item.soldSize:0}}份</view>
+        </view>
+        
+        <view class="item-pub flex-between item-price">
+          <view class="color-666">产地：{{item.yieldly}}</view>
+          <view>
+            <image lazy-load class="icon-location" src="{{iconTJ}}" mode="scaleToFill"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,338 @@
+/* pages/envelopes/envelopes.wxss */
+page{
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(204, 204, 204, 0.5); */
+  background-color: #EAE6E6;
+  /* padding: 120rpx 60rpx; */
+  box-sizing: border-box;
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+  padding: 120rpx 60rpx;
+  box-sizing: border-box;
+ 
+}
+
+.container>view{
+  height: 100%;
+  background-color: #fff;
+  border-radius: 16rpx;
+  position: relative;
+}
+
+.noPack{
+  text-align: center;
+  height: 50%;
+  /* height: 100%;
+  line-height: 100%; */
+}
+
+
+.noPack::before{
+  display: inline-block;
+  content: "";
+  height: 100%;
+  vertical-align: middle;
+}
+
+.envelopes{
+  max-height: 700rpx;
+  padding-top: 20rpx;
+}
+
+.list{
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #A5A5A5;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.list .left{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+image{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.list .center{
+  width: 70%;
+  padding: 5rpx 10rpx;
+  box-sizing: border-box;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap; */
+  vertical-align: center;
+}
+
+.list:last-child{
+  border: none;
+}
+
+.title{
+  height: 50rpx;
+  /* width: 100%; */
+  line-height: 50rpx;
+  overflow: hidden;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #000;
+}
+
+.tip{
+  /* width: 100%; */
+  overflow: hidden;
+  color: #8D898A;
+  font-size: 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.list .right{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 700;
+  background-color: #f80;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.selected{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #A5A5A5;
+  font-size: 20rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.btns{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 60rpx;
+  /* margin-top: 100rpx; */
+  position: absolute;
+  bottom: 100rpx;
+  box-sizing: border-box;
+}
+
+.btn{
+  /* flex: 1; */
+  width: 200rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background-color: #f80;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+}
+
+.card{
+  width:100%;
+  /* height: 500rpx; */
+  border-radius: 16rpx;
+  padding: 15rpx 40rpx;
+  position: fixed;
+  top: 200rpx;
+  box-sizing: border-box;
+}
+
+.give-text{
+  background-color: #F35657;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding-left: 20rpx;
+  /* margin-bottom: 40rpx; */
+  color: #fff;
+  box-sizing: border-box;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+
+.detail{
+  background-color: #f1f1f1;
+  padding: 20rpx 20rpx 20rpx 20rpx;
+  box-sizing: border-box;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+
+/* .detail>view:first-child{
+  margin-top: 40rpx;
+} */
+
+.item{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: #fff;
+  height: 100rpx;
+  align-items: center;
+  line-height: 100rpx;
+  padding: 0 6rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}
+
+.item input{
+  width: 300rpx;
+  text-align: end;
+  padding-right: 6rpx;
+  box-sizing: border-box;
+}
+
+.slogan{
+  height: 200rpx;
+  padding: 0 6rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+  border-radius: 16rpx;
+}
+
+.slogan textarea{
+  width: 100%;
+  height: 160rpx;
+ 
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.bottom-btns{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100rpx;
+  /* margin-top: 20rpx;
+  bottom: 20rpx; */
+  box-sizing: border-box;
+}
+
+.place{
+  color: #A5A5A5;
+}
+
+.cover{
+  width: 100%;
+  height: 100%;
+  padding-top: 100rpx;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  box-sizing: border-box;
+}
+
+.cover>view{
+  width: 550rpx;
+  height: 850rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 40rpx 40rpx 40rpx; 
+  box-sizing: border-box;
+  /* background-color: red; */
+  position: relative;
+  background-image: url('https://submarket.shuguodj.com/hb.jpg');
+  background-size: cover;
+  border-radius: 10rpx;
+} 
+
+.cover .close{
+  width: 100%;
+  height: 40rpx;
+  text-align: right;
+  /* position: absolute;
+  right: 20rpx;
+  top: 20rpx; */
+}
+
+.cover .close image{
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.cover-img{
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.cover-image{
+  width: 100%;
+  height: 150rpx;
+  text-align: center;
+  line-height: 150rpx;
+  padding: 15rpx 0;
+  box-sizing: border-box;
+  /* height: 100%; */
+  /* z-index: -1; */
+}
+
+.cover image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.name{
+  height: 70rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+}
+
+.remark{
+  color: #FEBB57;
+  font-size: 30rpx;
+  text-align: center;
+  width: 100%;
+  height: 150rpx;
+  padding: 10rpx;
+  border: 1rpx solid #868686;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+}
+
+.cover .select{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 130rpx;
+  font-size: 24rpx;
+  color: rgb(61, 56, 56);
+  text-align: center;
+}
+
+.select view{
+  width: 100%;
+}
+
+.tip-top{
+  color: #FEBB57;
+}
+
+
+.getMore{
+  font-size: 32rpx;
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+}

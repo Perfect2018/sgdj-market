@@ -1,0 +1,29 @@
+<!--pages/components/snapUpList.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="snapUp-list">
+  <block wx:for="{{goodsList}}" wx:key="index">
+    <view class="snapUp-item {{item.shopState==='01' ?'':'shop-off'}}" bindtap="_toView" data-navigate="snapUpDetail" data-id="{{item.id}}">
+      <view class="snapUp-item-image">
+        <image lazy-load class="snapUp-image" mode="widthFix" src="{{util._getImageUrl(item.img1)}}"></image>
+        <view wx:if="{{item.distribution=='01'}}" class="snapUp-item-tit">分销</view>
+      </view>
+
+      <view class="snapUp-buyDetail">
+        <view class="snapUp-buyDetail-price">
+          <text class="snapUp-couponRate">￥{{util._getFixedMoney(item.discountPrice?item.discountPrice:item.couponRate)}}</text>
+          <text class="snapUp-price">原价：￥{{util._getFixedMoney(item.price)}}</text>
+        </view>
+        <view class="snapUp-buyDetail-right">
+          <text class="snapUp-soldSize">已抢{{item.soldSize?item.soldSize:0}}份</text>
+          <view class="flex-start items-center fs-24 color-666">
+            <image class="location_o" src="../../images/sgdj_location_o.png" mode="scaleToFill" />{{util._getKm(item.distances)}}km
+          </view>
+        </view>
+      </view>
+      <view class="snapUp-title">
+        <!-- <view class="snapUp-loot">抢</view> -->
+        <view>【{{item.goodsName}}】{{item.goodsDescribe}}</view>
+      </view>
+    </view>
+  </block>
+</view>

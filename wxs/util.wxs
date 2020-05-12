@@ -1,0 +1,89 @@
+// 图片链接
+function _getImageUrl(id) {
+  // return 'https://submarket.shuguodj.com/outByteImgById?id=' + id;
+  return 'http://192.168.1.7:8181/outByteImgById?id=' + id;
+}
+
+// 格式km(单位)
+function _getKm(distances) {
+  return distances ? (distances / 1000).toFixed(2) : '0.00'; 
+}
+// 保留小数点位数
+function _toFixed(num, digits) {
+  num = Number(num);
+  return num ? num.toFixed(digits) : '0.00';
+}
+// 时间格式化
+var formatNumber =function(n)  {
+  n = n.toString()
+  return n[1] ? n : '0' + n;
+}
+
+function _formatTime (date){
+  var date = getDate(date);
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+}
+// 获取年月日
+function _getYMD(timestamp) {
+  if (timestamp) {
+    var date = timestamp ? getDate(timestamp) : '';
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    var d = date.getDate();
+    timestamp = [y, m < 10 ? "0" + m : m, d < 10 ? "0" + d : d].join("-");
+  } else {
+    timestamp = "";
+  }
+  return timestamp;
+}
+// 保留两位小数点
+function _getFixedMoney(money) {
+  money = Number(money);
+  return money ? money.toFixed(2) : '0.00';
+}
+// null判断
+function _getIsNull(temp) {
+  return temp && temp != 'null' ? true : false;
+}
+
+//去除null
+function _isNotNull(str) {
+  str += "";
+  return str.replace(getRegExp("null", "img"), '').replace(getRegExp("NaN", "img"), '').replace(getRegExp("undefined", "img"), '');
+}
+// 是否显示起送价
+function _showOnDestributionPrice(totalAmt, onDestributionPrice) {
+  return Number(totalAmt) < Number(onDestributionPrice);
+}
+// 数组步长格式化
+function _stepArray(array = [], step = 2) {
+  var temp = [];
+  return array.reduce(function(prev, elem, index) {
+    temp.push(elem);
+    if (temp.length === step) {
+      prev.push(temp);
+      temp = [];
+    } else if (temp.length && (array.length - 1) === index) {
+      prev.push(temp);
+    }
+    return prev;
+  }, []);
+}
+module.exports = {
+  _getImageUrl: _getImageUrl,
+  _getFixedMoney: _getFixedMoney,
+  _getKm: _getKm,
+  _toFixed: _toFixed,
+  _getYMD: _getYMD,
+  _getIsNull: _getIsNull,
+  _isNotNull: _isNotNull,
+  _showOnDestributionPrice: _showOnDestributionPrice,
+  _stepArray: _stepArray,
+  _formatTime:_formatTime
+}

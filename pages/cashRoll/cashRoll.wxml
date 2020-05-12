@@ -1,0 +1,34 @@
+<!--pages/cashRoll/cashRoll.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view>
+<!-- <block wx:if="{{cashRollList && custCoupons}}">
+  <view class="none">目前没有可用优惠券</view>
+</block> -->
+<block wx:for="{{cashRollList}}" wx:key="index">
+  <view class="cashRoll">
+    <view class="type">现金券</view>
+    <view class="center">
+    <view class="cashRoll-shopName" data-id="{{item.shopId}}" bindtap="_toView" data-navigate="shop">{{item.shopName}}</view>
+    <view class="cashRoll-price">余额：{{util._getFixedMoney(item.cashRollMoney)}}元</view>
+    </view>
+    <view class="right">
+      <view>有效期至：</view>
+      <view class="time">2020.05.01</view>
+    </view>
+  </view>
+</block>
+<block wx:for="{{custCoupons}}" wx:key="index">
+  <view class="custCoupons" data-id="{{item.shopId}}" bindtap="_toView" data-navigate="shop">
+    <view class="type">优惠券</view>
+    <view class="center">
+     <view class="cashRoll-shopName">{{item.shopName}}</view>
+     <!-- <view class="cashRoll-shopName" data-id="{{item.shopId}}" bindtap="_toView" data-navigate="shop">付款吉林省放假放假范德萨</view> -->
+    <view class="custCoupons-price">{{item.couponAmt}}元代金券 满{{item.fullAmtToUse}}元可用</view>
+    </view>
+    <view class="right">
+    <view>有效期至：</view>
+     <view class="time">{{util._getYMD(item.validEndDate)}}</view>
+    </view>
+  </view>
+</block>
+</view>

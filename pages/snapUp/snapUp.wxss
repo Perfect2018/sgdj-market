@@ -1,0 +1,41 @@
+/* pages/snapUp/snapUp.wxss */
+
+.snapUp {
+  box-sizing: border-box;
+}
+
+.snapUp-header {
+  padding: 0 10rpx;
+  width: 100%;
+  margin: 30rpx auto;
+  height: 40rpx;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.snapUp-embellish {
+  width: 10rpx;
+  height: 30rpx;
+  background-color: #f80;
+  margin-right: 10rpx;
+}
+
+.snapUp-title {
+  line-height: 30rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.snapUp-body {
+  
+}
+
+.ad {
+  width: 100%;
+  font-size: 0;
+}
+
+.ad-image {
+  height: 400rpx;
+}

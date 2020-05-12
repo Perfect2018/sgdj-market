@@ -1,0 +1,96 @@
+/* pages/components/orderList/index.wxss */
+
+.orderList {
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.item {
+  font-size: 26rpx;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.item  {
+  transition: all 1s linear;
+}
+
+.between {
+  display: flex;
+  justify-content: space-between;
+  color: #aaa;
+  padding: 10rpx 0;
+}
+
+.orderNum .first {
+  font-size: 28rpx;
+  color: #000;
+  font-weight: bold;
+}
+
+.orderNum .last {
+  color: #f80;
+}
+
+/* .card {
+  margin: 20rpx;
+  padding: 20rpx;
+  font-size: 24rpx;
+  border-radius: 30rpx;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.card-header {
+  font-size: 28rpx;
+  font-weight: bold;
+  border-bottom: 1rpx solid #eee;
+  padding: 10rpx 0;
+}
+
+.card-footer {
+  border-top: 1rpx solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20rpx;
+}
+
+.card-btn {
+  font-size: 24rpx;
+  color: #f80;
+  border: 2rpx solid #f80;
+  border-radius: 10rpx;
+  padding: 5rpx 15rpx;
+  margin: 5rpx 10rpx;
+  display: inline-block;
+}
+
+.card-buy {
+  color: #fff;
+  border: 2rpx solid #f80;
+  background-color: #f80;
+}
+
+.card-body {
+  width: 100%;
+}
+
+.card-item {
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.card-item-body {
+  background-color: #fff;
+  box-shadow: 2rpx 2rpx 5rpx 2rpx #eee;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.card-item-price {
+  color: #f80;
+  display: inline-block;
+  font-weight: bold;
+} */

@@ -1,0 +1,108 @@
+/* pages/components/snapUpList.wxss */
+
+.shop-off {
+  filter: grayscale(60%);
+}
+
+.snapUp-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.snapUp-item {
+  margin: 0 10rpx 20rpx;
+  font-size: 0;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px 2px #ddd;
+  background-color: #fff;
+}
+
+.snapUp-image {
+  height: 450rpx;
+}
+
+.snapUp-item-image {
+  position: relative;
+}
+
+.snapUp-item-tit {
+  position: absolute;
+  left: 0;
+  top: 20rpx;
+  background-color: #f80;
+  color: #fff;
+  font-size: 24rpx;
+  width: 80rpx;
+  height: 40rpx;
+  border-top-right-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  text-align: center;
+  line-height: 40rpx;
+}
+
+.snapUp-buyDetail {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 30rpx;
+}
+
+.snapUp-buyDetail-price {
+  width: 55%;
+  background-color: #d84447;
+  color: #fff;
+  padding: 15rpx 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.snapUp-couponRate {
+  font-size: 36rpx;
+  padding-right: 20rpx;
+  font-weight: bold;
+}
+
+.snapUp-price {
+  text-decoration: line-through;
+  font-size: 24rpx;
+}
+
+.snapUp-buyDetail-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx;
+  background-color: #fec5c5;
+  width: 45%;
+  color: #d84447;
+}
+
+.snapUp-soldSize {
+  font-size: 28rpx;
+  color: #ff3d3d;
+  font-weight: bold;
+}
+
+.location_o {
+  width: 24rpx;
+  height: 24rpx;
+  vertical-align: middle;
+}
+
+.snapUp-title {
+  font-size: 32rpx;
+  padding: 10rpx;
+  font-weight: bold;
+}
+
+/* .snapUp-loot {
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 30rpx;
+  background-color: #d84447;
+  color: #fff;
+  padding: 5rpx;
+  float: left;
+} */

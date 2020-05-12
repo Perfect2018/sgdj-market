@@ -1,0 +1,69 @@
+<!--pages/envelopes/envelopes.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<block wx:if="{{isShow}}">
+	<view class="container">
+		<view wx:if="{{!redPackList}}" class="noPack">暂时没有可领取的红包</view>
+		<view wx:else>
+			<!-- 列表 -->
+			<scroll-view class="envelopes" scroll-y="true">
+				<view wx:for="{{redPackList}}" wx:key="index" class="list" bindtap="getPack" data-key="{{item.redisKey}}" data-mark="{{item.mark}}" data-image="{{item.headImageUrl}}" data-name="{{item.nickname}}" data-remark="{{item.remark}}">
+					<view class="left">
+						<image src="{{item.headImageUrl}}"></image>
+					</view>
+					<view class="center">
+						<view class="title">{{item.nickname}}</view>
+						<view class="tip">{{item.remark}}</view>
+					</view>
+					<view class="{{item.mark ? 'selected':'right'}}">{{item.mark ? "已领取":"抢"}}</view>
+				</view>
+			</scroll-view>
+			<!-- 按钮 -->
+			<view class="btns">
+				<view class="btn" bindtap="cancel">取消</view>
+				<view class="btn" bindtap="_toGive">发红包</view>
+			</view>
+		</view>
+	</view>
+</block>
+<block wx:if="{{isShow1}}">
+	<view class="cover">
+	<!-- <cover-image src="../../images/reciver_red_package.jpg" class="cover-img"></cover-image> -->
+		<view>
+			<view class="close"><image src="../../images/close_@2x.png" bindtap="close"></image></view>
+			<view class="cover-image"><image src="{{headImageUrl}}"></image></view>
+			<view class="name">来自{{name}}的红包</view>
+			<view class="remark">{{remark}}</view>
+			<view class="select">
+				<view class="tip-top">你已抢过该红包，点击查看红包列表</view>
+				<view>已存入账户余额</view>
+			</view>
+			<view class="getMore" bindtap="getMore">查看更多信息</view>
+		</view>
+	</view>
+
+</block>
+<block wx:if="{{isShow2}}">
+	<view class="card">
+		<view class="give-text">发红包</view>
+		<view class="detail">
+			<view class="item">
+				<label>总金额：</label>
+				<input placeholder="0.00" bindinput='_setParams' data-key="total" placeholder-class="place" />
+				<label>元</label>
+			</view>
+			<view class="item">
+				<label>红包数：</label>
+				<input placeholder="红包个数" bindinput='_setParams' data-key="count" placeholder-class="place" />
+				<!-- <label>个</label> -->
+				个
+			</view>
+			<view class="slogan">
+				<textarea placeholder="留言信息(限45字内):" bindinput='_setParams' data-key="content" maxlength="45" placeholder-class="place"></textarea>
+			</view>
+			<view class="bottom-btns">
+				<view bindtap="cancel" class="btn">取消</view>
+				<view bindtap="submit" class="btn">确定</view>
+			</view>
+		</view>
+	</view>
+</block>

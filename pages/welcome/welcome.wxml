@@ -1,0 +1,8 @@
+<!--pages/welcome/welcome.wxml-->
+<view class='container'>
+  <view wx:if="{{counter>0}}" bindtap='_into' class='skip'>{{counter}}</view>
+  <image class='image-info' mode='scaleToFill' src='{{welcomeUrl}}'></image>
+  <!-- <view class='con-title'>
+    <text class='title'>蔬果到家</text>
+  </view> -->
+</view>

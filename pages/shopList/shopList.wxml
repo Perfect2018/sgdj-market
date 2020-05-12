@@ -1,0 +1,10 @@
+<!--pages/shopList/shopList.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view>
+  <view class="shop-ad">
+    <image src="{{util._getImageUrl(adImage)}}" class="ad-image"></image>
+  </view>
+  <view>
+    <shop-list shop-list="{{shopList}}"></shop-list>
+  </view>
+</view>

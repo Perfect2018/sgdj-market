@@ -1,0 +1,39 @@
+/* pages/settlementContract/settlementContract.wxss */
+
+.header {
+  font-weight: bold;
+  font-size: 32rpx;
+  text-align: center;
+  margin: 40rpx 0;
+}
+
+.content {
+  width: 95%;
+  margin: auto;
+}
+
+.content .text-strong {
+  font-weight: bold;
+  text-indent: 0;
+}
+
+.content > view {
+  display: block;
+  font-size: 28rpx;
+  text-indent: 2em;
+  line-height: 1.5em;
+  margin-bottom: 15rpx;
+}
+
+.content > view > view {
+  text-indent: 4em;
+  line-height: 1.5em;
+}
+
+.btn {
+  width: 95%;
+  height: 90rpx;
+  margin: 40rpx auto 80rpx;
+  color: #fff;
+  background-color: #f80;
+}

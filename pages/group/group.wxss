@@ -1,0 +1,65 @@
+/* pages/group/group.wxss */
+
+.group-head {
+  width: 100%;
+  margin: auto;
+  padding: 40rpx 0;
+  border-bottom: 1rpx solid #f80;
+  display: flex;
+}
+
+.group-head-item {
+  width: 50%;
+  text-align: center;
+}
+
+.group-body {
+  width: 100%;
+}
+
+.group-body-item {
+  height: 80rpx;
+  display: flex;
+  padding: 20rpx;
+  align-items: center;
+  border-bottom: 1rpx solid #e9e9e9;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+
+.group-body-item .left {
+  width: 70%;
+}
+
+.group-body-item .right {
+  width: 30%;
+  display: flex;
+  text-align: right;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.group-body-item .right .money {
+  color: #f80;
+}
+
+.group-body-item .right .time {
+  color: #999;
+  font-size: 24rpx;
+}
+
+.group-body-item-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 20rpx;
+  border:1rpx solid #e9e9e9;
+}
+
+.group-body-item-name {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+}

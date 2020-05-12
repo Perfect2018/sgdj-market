@@ -1,0 +1,80 @@
+{
+  "pages": [
+    "pages/welcome/welcome",
+    "pages/index/index",
+    "pages/snapUp/snapUp",
+    "pages/global/global",
+    "pages/shop/shop",
+    "pages/shopAdd/shopAdd",
+    "pages/settlementContract/settlementContract",
+    "pages/imageCropper/imageCropper",
+    "pages/goodsDetail/goodsDetail",
+    "pages/snapUpDetail/snapUpDetail",
+    "pages/orderDetail/orderDetail",
+    "pages/my/my",
+    "pages/withdraw/withdraw",
+    "pages/group/group",
+    "pages/searchList/searchList",
+    "pages/opinion/opinion",
+    "pages/cashRoll/cashRoll",
+    "pages/shoppingCart/shoppingCart",
+    "pages/orderList/orderList",
+    "pages/shoppingAddress/shoppingAddress",
+    "pages/shopList/shopList",
+    "pages/fightGoodsPay/fightGoodsPay",
+    "pages/orderRefund/orderRefund",
+    "pages/map/map",
+    "pages/envelopes/envelopes",
+    "pages/packLIst/packlist"
+  ],
+  "window": {
+    "backgroundColor": "#fff",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#f80",
+    "navigationBarTitleText": "蔬果到家新零售",
+    "navigationBarTextStyle": "white",
+    "onReachBottomDistance": 500
+  },
+  "tabBar": {
+    "color": "#343434",
+    "selectedColor": "#f80",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/images/icon_main02.png",
+        "selectedIconPath": "/images/icon_main01.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/snapUp/snapUp",
+        "iconPath": "/images/icon_sort02.jpg",
+        "selectedIconPath": "/images/icon_sort01.jpg",
+        "text": "嗨购"
+      },
+      {
+        "pagePath": "pages/global/global",
+        "iconPath": "/images/icon_global02.jpg",
+        "selectedIconPath": "/images/icon_global01.jpg",
+        "text": "全球臻选"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "/images/icon_my02.jpg",
+        "selectedIconPath": "/images/icon_my01.jpg",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置将用于查找附近店铺"
+    }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxe61e9b3561336485",
+    "wx91553ce9bb66243e"
+  ],
+  "sitemapLocation": "sitemap.json"
+}

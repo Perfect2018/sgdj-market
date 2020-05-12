@@ -1,0 +1,66 @@
+<!--index.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<block wx:if="{{open}}">
+	<view>
+		<!-- 搜索 -->
+		<view class="search" bindtap="_searchFocus">
+			{{searchHolder}}
+			<van-icon custom-class="search-icon align-middle " name="search" color="#ccc" size="24px" />
+		</view>
+		<!-- <van-search value="{{searchHolder}}" input-align="center" disabled bind:focus="_searchFocus" /> -->
+		<!-- 轮播 -->
+		<swiper class="slide" indicator-dots indicator-active-color="#f80" autoplay circular>
+			<block wx:for="{{swiperImageList}}" wx:key="index">
+				<swiper-item bindtap="_toApp" data-item="{{item.advertImgId}}">
+					<image lazy-load class="slide-image" src="{{util._getImageUrl(item.advertImgId)}}" mode="scaleToFill" />
+				</swiper-item>
+			</block>
+		</swiper>
+		<!-- 分类列表 -->
+		<view class="classify-list">
+			<block wx:for="{{classifyList}}" wx:key="index">
+				<view class="classify-item" bindtap="_toView" data-navigate="shopList" data-id="{{item.id}}">
+					<image lazy-load class="classify-image" src="{{util._getImageUrl(item.imgUrl)}}"></image>
+					<text class="classify-name">{{item.name}}</text>
+				</view>
+			</block>
+		</view>
+
+		<!-- 热门商铺 -->
+		<view class="hotShop">
+			<block wx:for="{{hotShopList}}" wx:key="index">
+				<view class="hotShop-item" bindtap="_toView" data-navigate="shop" data-id="{{item.id}}">
+					<image lazy-load class="hotShop-image" src="{{item.imgUrl}}"></image>
+				</view>
+			</block>
+		</view>
+		<!-- 广告 -->
+		<view class="ad">
+			<image lazy-load class="ad-image" src="{{util._getImageUrl(adImage.advertImgId)}}" mode="scaleToFill" />
+		</view>
+		<!-- 明星店铺 -->
+		<view class="starShop">
+			<view class="starShop-header">
+				<view class="starShop-title">
+					明星商铺
+				</view>
+				<view class="starShop-openShop color-fff" bindtap="_openShop" wx:if="{{open}}">
+					我要开店
+				</view>
+			</view>
+			<view class="starShop-body">
+				<shop-list shop-list="{{shopList}}"></shop-list>
+			</view>
+		</view>
+	</view>
+</block>
+<block wx:else>
+	<!-- 公告 -->
+	<van-notice-bar border="{{ false }}" speed="20" backgroundColor="#FFEFDD" color="#f80" text="系统升级中,部分功能可能会停用,请两小时后再使用...">
+		<text slot="left-icon">[公告]</text>
+	</van-notice-bar>
+	<goods-list goods-list="{{goodsList}}" show-add="{{false}}"></goods-list>
+</block>
+<!-- 红包 -->
+<image src="../../images/rp.png" class="envelopes" bindtap="_toEnvelopes" animation="{{animation}}" data-navigate="envelopes"></image>
+<van-dialog title="提示" message="登录后即可进行开店" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#f80"></van-dialog>

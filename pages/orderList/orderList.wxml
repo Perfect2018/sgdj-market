@@ -1,0 +1,27 @@
+<!--pages/orderList/orderList.wxml-->
+<!-- 店铺功能 -->
+<view class="bg-eee">
+  <van-tabs active="{{orderActive}}" color="#f80" bind:change="_orderActiveChange">
+    <!-- 待付款 -->
+    <van-tab title="待付款">
+      <order-list order-list="{{orderList}}"></order-list>
+    </van-tab>
+    <!-- 待接单 -->
+    <van-tab title="待接单">
+      <order-list order-list="{{orderList}}"></order-list>
+    </van-tab>
+    
+    <!-- 待收货/配送中 -->
+    <van-tab title="配送中">
+      <order-list order-list="{{orderList}}"></order-list>
+    </van-tab>
+    <!-- 已完成 -->
+    <van-tab title="已完成">
+      <order-list order-list="{{orderList}}"></order-list>
+    </van-tab>
+    <!-- 退款/售后 -->
+    <van-tab title="退款/售后">
+      <order-list order-list="{{orderList}}"></order-list>
+    </van-tab>
+  </van-tabs>
+</view>

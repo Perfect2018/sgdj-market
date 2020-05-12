@@ -1,0 +1,203 @@
+<!--pages/goodsDetail/goodsDetail.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+
+<view class="pb-200 {{shopOff?'shop-off':''}}">
+  <!-- 商品图片 -->
+  <view class="goods-detail-image">
+    <image lazy-load class="goodsDetail-image" mode="widthFix" src="{{util._getImageUrl(goodsDetail.img1)}}"></image>
+  </view>
+  <!-- 商品标题 -->
+  <view class="goods-fun-detail flex-between">
+    <view class="goods-fun-left">
+      <view class="goods-fun-item flex-between">
+        <view class="flex-start items-center">
+          <view class="goods-title">{{goodsDetail.goodsName}}
+            <!-- <view class="gwc" bindtap="_addCart" data-id="{{goodsDetail.id}}">
+							<image lazy-load class="gwt-icon" src="{{gwcIcon}}"></image>
+						</view> -->
+          </view>
+        </view>
+        <view wx:if="{{goodsDetail.distribution==='01'}}" class="goods-collect color-fff" bindtap="_toDistribution">去分销</view>
+      </view>
+      <view class="fs-28 goods-fun-item color-888">
+        已售{{goodsDetail.soldSize?goodsDetail.soldSize:0}}份
+      </view>
+      <view class="goods-fun-item flex-start">
+        <view class="goods-price color-f80">
+          ￥{{util._getFixedMoney(goodsDetail.couponRate)}}
+        </view>
+        <view class="goods-discountPrice color-888">
+          ￥{{util._getFixedMoney(goodsDetail.price)}}
+        </view>
+      </view>
+      <view class="goods-fun-item flex-start fs-28">
+        <view class="color-666 inline-block">
+          <van-icon name="checked" color="#f80" size="12px" class="align-middle" />
+          <text decode="{{true}}">企业认证&nbsp;&nbsp;</text>
+        </view>
+        <view class="color-666 inline-block">
+          <van-icon name="checked" color="#f80" size="12px" class="align-middle" />
+          <text decode="{{true}}">担保交易&nbsp;&nbsp;</text>
+        </view>
+        <view class="color-666 inline-block">
+          <van-icon name="checked" color="#f80" size="12px" class="align-middle" />收货后结算
+        </view>
+      </view>
+
+    </view>
+    <view class="goods-fun-right">
+      <image lazy-load class="img" src="{{QRUrl}}" bindtap='_previewImage' data-img="{{QRUrl}}" />
+    </view>
+  </view>
+  <!-- 拼单列表 -->
+  <view class="fight-all" wx:if="{{fightList.length}}">
+    <view class="fight-header">
+      <view>这些人刚刚购买成功，可参与拼单</view>
+      <view class="fs-24 color-888" bindtap="_setFightFlag">查看更多</view>
+    </view>
+    <swiper class="fight-list" autoplay vertical circular easing-function="easeInOutCubic">
+      <swiper-item wx:for="{{util._stepArray(fightList)}}" wx:key="index">
+        <view class="fight-item" wx:for="{{item}}" wx:key="index">
+          <view class="fight-left">
+            <view class="left">
+              <image class="img" src="{{item.custOneHeadImg}}" lazy-load></image>
+              <view>
+                {{item.custOneNickName}}
+              </view>
+            </view>
+            <view class="right">
+              <view class="top">
+                还差
+                <text class="color-f80">1人</text>拼成
+              </view>
+            </view>
+          </view>
+          <view class="fight-right" bindtap="_toView" data-navigate="fightGoodsPay" data-id="{{goodsDetail.id+'&type=fight&fightId='+item.id}}">
+            去拼单
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 店铺 -->
+  <view wx-if="{{open}}" class="shop flex-between items-center">
+    <view class="shop-detail-left flex-start items-center">
+      <view class="shop-logo-image">
+        <image lazy-load class="shop-image" src="{{util._getImageUrl(goodsDetail.shop.shopLogo)}}"></image>
+      </view>
+      <view class="shop-name">
+        {{goodsDetail.shop.shopName}}
+      </view>
+    </view>
+    <view class="shop-detail-right color-fff" bindtap="_toView" data-navigate="shop" data-id="{{goodsDetail.shopId}}">
+      进入店铺
+    </view>
+  </view>
+  <!-- 商品详情 -->
+  <view class="goods-detail color-888">
+    <view class="goods-detail-title color-000">商品详情</view>
+    <view class="detail-item flex-start">
+      <view class="detail-item-left">产品规格：</view>
+      <view class="detail-item-right">{{goodsDetail.noeUnit}}{{goodsDetail.twoNuit}}</view>
+    </view>
+    <view class="detail-item flex-start">
+      <view class="detail-item-left">产地：</view>
+      <view class="detail-item-right">{{goodsDetail.yieldly}}</view>
+    </view>
+    <view class="detail-item flex-start">
+      <view class="detail-item-left">库存量：</view>
+      <view class="detail-item-right">{{goodsDetail.stockSize>0?goodsDetail.stockSize:0}}</view>
+    </view>
+    <!-- <view class="detail-item flex-start">
+      <view class="detail-item-left">保质期：</view>
+      <view class="detail-item-right">{{util._getYMD(goodsDetail.shelfLife)}}</view>
+    </view> -->
+    <view class="detail-item flex-start">
+      <view class="detail-item-left">商品描述：</view>
+      <view class="detail-item-right">{{goodsDetail.goodsDescribe}}</view>
+    </view>
+  </view>
+  <!-- 文案 -->
+  <view wx:if="{{goodsDetail.note.length}}" class="creative">
+    <view class="creative-item" wx:for="{{goodsDetail.note}}" wx:key="index">{{item=="null"?"":item}}</view>
+  </view>
+  <!-- 详情图 -->
+  <view class="goods-detail-image">
+    <block wx:for="{{5}}" wx:key="index">
+      <view wx:if="{{goodsDetail['img'+(index+2)]}}" class="detail-item-image">
+        <image lazy-load class="detail-image" mode="widthFix" src="{{util._getImageUrl(goodsDetail['img'+(index+2)])}}"></image>
+      </view>
+    </block>
+  </view>
+
+  <!-- 更多商品 -->
+  <view class="goods-more">
+    <view class="goods-more-header color-f80">
+      ----------- 更多商品 ----------
+    </view>
+    <view class="goods-more-body">
+      <goods-list goods-list="{{goodsMoreList}}" bind:_addCart="_addCart"></goods-list>
+    </view>
+  </view>
+</view>
+<!-- 拼单 底部支付条 -->
+<block wx:if="{{goodsDetail.groupPrice&&goodsDetail.goodsTypes==='02'}}">
+  <view class="submit-bar {{isIPhoneX?'isIPhoneX':''}}">
+    <view class="submit-btn submit-btn-o" bindtap="_toView" data-navigate="fightGoodsPay" data-id="{{goodsDetail.id}}">
+      <view class="submit-price">￥{{util._getFixedMoney(goodsDetail.couponRate)}}</view>
+      <view>单独购买</view>
+    </view>
+    <view class="submit-btn" bindtap="_toView" data-navigate="fightGoodsPay" data-id="{{goodsDetail.id+'&type=fight'}}">
+      <view class="submit-price">￥{{util._getFixedMoney(goodsDetail.groupPrice)}}</view>
+      <view>发起拼团</view>
+    </view>
+  </view>
+</block>
+<!-- 拼单展示 -->
+<view class="bg-fight-list" bindtap="_setFightFlag" wx:if="{{fightFlag}}">
+  <view class="header">正在拼单</view>
+  <view class="fight-list">
+    <view class="fight-item" wx:for="{{fightList}}" wx:key="index">
+      <view class="fight-left">
+        <view class="left">
+          <image class="img" src="{{item.custOneHeadImg}}" lazy-load></image>
+          <view>
+            {{item.custOneNickName}}
+          </view>
+        </view>
+        <view class="right">
+          <view class="top">
+            还差
+            <text class="color-f80">1人</text>拼成
+          </view>
+        </view>
+      </view>
+      <view class="fight-right" bindtap="_toView" data-navigate="fightGoodsPay" data-id="{{goodsDetail.id+'&type=fight&fightId='+item.id}}">
+        去拼单
+      </view>
+    </view>
+  </view>
+</view>
+<view class="{{isIPhoneX?'isIPhoneX':''}}">
+  <view class="addCart {{shopOff?'shop-off':''}}" bindtap="_addCart" data-id="{{goodsDetail.id}}">加入购物车</view>
+</view>
+
+<!-- 购物车展示 -->
+<movable-area class="cart-view">
+  <movable-view direction="all" inertia class="cart-icon {{shopOff?'shop-off':''}} {{shakeOff?'shake':''}}" bindtap="_toView" data-navigate="shoppingCart" data-id="{{goodsDetail.shopId}}" data-gid="{{goodsDetail.id}}">
+    <van-icon name="cart-o" class="color-f80" info="{{count<100?count:'99'}}" />
+  </movable-view>
+</movable-area>
+<van-dialog title="提示" message="登录后即可添加商品" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#f80"></van-dialog>
+<!-- 海报图展示 -->
+<view v-if="{{showPoster}}" class="{{showPoster?'QR-img QR-z-img':'QR-img'}}" bindtap="_setShowPoster">
+  <image class="img" src="{{distribution.posterImage}}" bindlongpress="_savePosterImage"></image>
+</view>
+<!-- 海报图canvas -->
+<view class="canvas-box">
+  <canvas class="QRCanvas" canvas-id="QRCanvas" />
+</view>
+<!-- 商品图canvas -->
+<view class="canvas-box">
+  <canvas class="QRCanvas-goods" canvas-id="QRCanvasGoods" />
+</view>

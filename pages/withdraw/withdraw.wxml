@@ -1,0 +1,22 @@
+<!--pages/withdraw/withdraw.wxml-->
+<view class="withdraw-top">
+  <view class="withdraw-left">
+    <view class="withdraw-left-top">
+      可提现金额
+    </view>
+    <view class="withdraw-left-bottom">￥{{cashMoney}}</view>
+  </view>
+  <view class="withdraw-right">
+    <view class="withdraw-right-top">
+      零钱
+    </view>
+    <view class="withdraw-right-bottom">￥{{pocketMoney}}</view>
+  </view>
+</view>
+<view class="withdraw-input">
+  <input class="input-item" placeholder="请输入提现金额（满50即可提现）" bindinput="_setParam" data-param="money"></input>
+  <input class="input-item" placeholder="请输入微信绑定银行卡开户姓名" bindinput="_setParam" data-param="name"></input>
+</view>
+<button class="withdraw-btn" bindtap="_getMoney">
+  确认提现
+</button>

@@ -1,0 +1,10 @@
+/* pages/shopList/shopList.wxss */
+
+.shop-ad {
+  width: 100%;
+  font-size: 0;
+}
+
+.ad-image {
+  height: 350rpx;
+}

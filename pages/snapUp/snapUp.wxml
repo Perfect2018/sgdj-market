@@ -1,0 +1,17 @@
+<!--pages/snapUp/snapUp.wxml-->
+<view>
+  <!-- ad -->
+  <view class="ad">
+    <image class="ad-image" src="/images/sgdj_qqg.png"></image>
+  </view>
+  <!-- 嗨购商品列表 -->
+  <view class="snapUp">
+    <view class="snapUp-header">
+      <text class='snapUp-embellish'></text>
+      <text class='snapUp-title'>商品列表</text>
+    </view>
+    <view class="snapUp-body">
+      <snapUp-list goods-list="{{goodsList}}"></snapUp-list>
+    </view>
+  </view>
+</view>

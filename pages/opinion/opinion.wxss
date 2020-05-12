@@ -1,0 +1,36 @@
+/* pages/opinion/opinion.wxss */
+
+page {
+  height: 100%;
+  padding: 0 20rpx;
+  background-color: #f3f1f2;
+  box-sizing: border-box;
+  font-size: 32rpx;
+}
+
+.opinion_content {
+  width: 100%;
+  height: 300rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #888;
+  margin-top: 20rpx;
+}
+
+.opinion_contact {
+  width: 100%;
+  height: 90rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #888;
+  margin-top: 20rpx;
+}
+
+.opinion_hand {
+  height: 90rpx;
+  margin-top: 80rpx;
+  color: #fff;
+  background-color: #f80;
+}

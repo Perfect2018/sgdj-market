@@ -1,0 +1,41 @@
+/* pages/global/global.wxss */
+
+.global {
+  box-sizing: border-box;
+}
+
+.global-header {
+  padding: 0 10rpx;
+  width: 100%;
+  margin: 10rpx auto;
+  height: 40rpx;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+
+}
+
+.global-embellish {
+  width: 10rpx;
+  height: 30rpx;
+  background-color: #f80;
+  margin-right: 10rpx;
+}
+
+.global-title {
+  line-height: 30rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.global-body {
+}
+
+.ad {
+  width: 100%;
+  font-size: 0;
+}
+
+.ad-image {
+  height: 400rpx;
+}

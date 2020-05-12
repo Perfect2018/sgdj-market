@@ -1,0 +1,121 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": true,
+		"postcss": true,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"bundle": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.10.3",
+	"appid": "wx5eeec1e222f5ee3f",
+	"projectname": "sgdj-market",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/shop/shop",
+					"pathName": "pages/shop/shop",
+					"query": "id=2b0757c8be8e43a59ad6ce1b23eced82",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/goodsDetail/goodsDetail",
+					"pathName": "pages/goodsDetail/goodsDetail",
+					"query": "id=7b9cdf77812344ebabae6344c4683af2",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/shopAdd/shopAdd",
+					"pathName": "pages/shopAdd/shopAdd",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/my",
+					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderDetail/orderDetail",
+					"pathName": "pages/orderDetail/orderDetail",
+					"query": "id=ddf40ea05f994e59b06f5c758833110b",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderRefund/orderRefund",
+					"pathName": "pages/orderRefund/orderRefund",
+					"query": "id=ddf40ea05f994e59b06f5c758833110b",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/cashRoll/cashRoll",
+					"pathName": "pages/cashRoll/cashRoll",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/settlementContract/settlementContract",
+					"pathName": "pages/settlementContract/settlementContract",
+					"scene": null
+				}
+			]
+		}
+	}
+}

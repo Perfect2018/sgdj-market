@@ -1,0 +1,9 @@
+/* pages/orderList/orderList.wxss */
+
+page {
+  height: 100%;
+}
+/* 阻止顶部状态条默认滚动 */
+.van-tabs__wrap--scrollable .van-tabs__scroll--line .van-tab {
+  flex: 1; 
+}

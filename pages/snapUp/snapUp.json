@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "嗨购",
+  "usingComponents": {
+    "snapUp-list": "../components/snapUpList/index"
+  }
+}

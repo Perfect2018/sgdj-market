@@ -1,0 +1,241 @@
+<!--pages/shop/shop.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="{{shopOff?'shop-off':''}}">
+	<view class="search" bindtap="search" data-id="{{shopId}}">
+		<view class="search-place">
+			<image src="../../images/ss.png"></image>搜索店铺里的商品
+		</view>
+	</view>
+	<scroll-view style="height: 100%;" scroll-y bindscroll="scroll">
+		<!-- 店铺 -->
+		<view class="shop flex-between items-center">
+			<view class="shop-detail-left flex-start">
+				<view class="shop-logo-image">
+					<image lazy-load class="shop-image" src="{{util._getImageUrl(shop.shopLogo)}}"></image>
+					<view wx:if="{{shopOff}}" class="state">已打烊</view>
+				</view>
+				<view class="detail-right">
+					<view class="shop-name">
+						{{shop.shopName}}
+					</view>
+
+				</view>
+			</view>
+			<view class="shop-detail-right">
+				<view class="shop-qualification-image">
+					<image lazy-load class="img" src="{{util._getImageUrl(shop.aptitudeImgId)}}" bindtap='_previewImage' data-img="{{util._getImageUrl(shop.aptitudeImgId)}}"></image>
+				</view>
+			</view>
+		</view>
+
+		<!-- 即时送 全球臻选 按钮 -->
+		<!-- <view class="flex-center">
+			<view class="{{isGlobalActive=='02'?'btn-item-active btn-item':'btn-item'}}" data-global="02" bindtap="_setIsGlobalActive">
+				<view class="btn-title">即时送</view>
+				<view class="btn-tit color-888">(限时送达)</view>
+			</view>
+			<view class="{{isGlobalActive=='01'?'btn-item-active btn-item':'btn-item'}}" data-global="01" bindtap="_setIsGlobalActive">
+				<view class="btn-title">全球臻选</view>
+				<view class="btn-tit color-888">(源头直发)</view>
+			</view>
+		</view> -->
+		<!-- 店铺功能 -->
+		<van-tabs active="{{shopActive}}" color="#f80" bind:change="_shopActiveChange">
+			<block>
+				<!-- 公告 -->
+				<!-- scrollable="{{false}}" -->
+				<van-notice-bar left-icon="van-icon van-icon-volume-o" border="{{ false }}" speed="60" backgroundColor="#FFEFDD" color="#f80" text="{{shop.shopNotice!=='null'?shop.shopNotice:'欢迎您的光临，谢谢新老用户一直以来的支持，下单请选择...'}}"></van-notice-bar>
+				<!-- 活动图 -->
+				<view class="fs-0">
+					<block wx:if="{{shopNoticeImgList.length===1}}">
+						<image wx:if="{{shopNoticeImgList[0]}}" lazy-load class="notice-image" src="{{util._getImageUrl(shopNoticeImgList[0])}}" mode="scaleToFill" />
+					</block>
+					<block wx:if="{{shopNoticeImgList.length>1}}">
+						<swiper class="notice" indicator-dots indicator-active-color="#f80" autoplay circular>
+							<block wx:for="{{shopNoticeImgList}}" wx:key="index">
+								<swiper-item>
+									<image wx:if="{{item}}" lazy-load class="notice-image" src="{{util._getImageUrl(item)}}" mode="scaleToFill" />
+								</swiper-item>
+							</block>
+						</swiper>
+					</block>
+				</view>
+			</block>
+			<block wx:if="{{isGlobal==='03'}}">
+				<van-tab title="即时送">
+					<!-- 优惠券 -->
+				<view wx:if="{{couponList.length}}" class="shop-discount">
+					<block wx:for="{{couponList}}" wx:key="index">
+						<!-- <image src="../../images/discount.png"></image> -->
+						<view class="item" bindtap="_receiveCoupon" data-id="{{item.id}}">
+							<view class="left">
+								<text>￥</text>
+								<view class="top">{{item.totalAmt}}</view>
+							</view>
+							<view class="right">
+								<view class="bottom">满{{item.fullAmtToUse}}可用</view>
+								<view class="btn">领取</view>
+							</view>
+						</view>
+					</block>
+				</view>
+					<!-- 限价抢购---社区团购 -->
+					<view class="goods-list-type">
+						<image src="../../images/1.png" bindtap="discount"></image>
+						<image src="../../images/2.png" bindtap="group"></image>
+					</view>
+					<view class="goods-category">
+						<view class="goods-category-list-view {{toFixed?'goods-category-list-fixed':''}}">
+							<view class="goods-category-list">
+								<block wx:for="{{shopCategoryList}}" wx:key="index">
+									<text class="{{categoryActive==item.id?'category-item category-item-active':'category-item'}}" bindtap="_setCategoryActive" data-id="{{item.id}}">{{item.name}}</text>
+								</block>
+							</view>
+						</view>
+						<view class="right-icon">
+							<image class="right-icon-o" src="../../images/icon-cyc.png"></image>
+						</view>
+					</view>
+
+					<view class="goods-list">
+						<goods-list goods-list="{{goodsList}}" bind:_addCart="_addCart"></goods-list>
+					</view>
+				</van-tab>
+				<van-tab title="全球臻选" wx:if="{{isGlobal==='03'}}">
+					<!-- <view class="goods-category">
+						<view class="goods-category-list-view {{toFixed?'goods-category-list-fixed':''}}">
+							<view class="goods-category-list">
+								<block wx:for="{{shopCategoryList}}" wx:key="index">
+									<text class="{{categoryActive==item.id?'category-item category-item-active':'category-item'}}" bindtap="_setCategoryActive" data-id="{{item.id}}">{{item.name}}</text>
+								</block>
+							</view>
+						</view>
+						<view class="right-icon">
+							<image class="right-icon-o" src="../../images/icon-cyc.png"></image>
+						</view>
+					</view> -->
+					<!-- 限价抢购---社区团购 -->
+					<!-- <view class="goods-list-type">
+							<image src="../../images/1.png" bindtap="discount"></image>
+							<image src="../../images/2.png" bindtap="group"></image>
+						</view> -->
+					<!-- 优惠券 -->
+					<view wx:if="{{couponList.length}}" class="shop-discount">
+						<block wx:for="{{couponList}}" wx:key="index">
+							<view class="item" bindtap="_receiveCoupon" data-id="{{item.id}}">
+								<view class="left">
+									<text>￥</text>
+									<view class="top">{{item.totalAmt}}</view>
+								</view>
+								<view class="right">
+									<view class="bottom">满{{item.fullAmtToUse}}可用</view>
+									<view class="btn">领取</view>
+								</view>
+							</view>
+						</block>
+					</view>
+					<view class="goods-list">
+						<goods-list goods-list="{{goodsList}}" bind:_addCart="_addCart"></goods-list>
+					</view>
+				</van-tab>
+			</block>
+			<block wx:else>
+				<van-tab title="商品列表">
+					<view class="pt-20">
+						<!-- 优惠券 -->
+						<view wx:if="{{couponList.length}}" class="shop-discount">
+							<block wx:for="{{couponList}}" wx:key="index">
+								<!-- <image src="../../images/discount.png"></image> -->
+								<view class="item" bindtap="_receiveCoupon" data-id="{{item.id}}">
+									<view class="left">
+										<text>￥</text>
+										<view class="top">{{item.totalAmt}}</view>
+									</view>
+									<view class="right">
+										<view class="bottom">满{{item.fullAmtToUse}}可用</view>
+										<view class="btn">领取</view>
+									</view>
+								</view>
+							</block>
+						</view>
+						<!-- 限价抢购---社区团购 -->
+						<view class="goods-list-type">
+							<image src="../../images/1.png" bindtap="discount"></image>
+							<image src="../../images/2.png" bindtap="group"></image>
+						</view>
+
+						<view class="goods-category">
+							<view class="goods-category-list-view {{toFixed?'goods-category-list-fixed':''}}">
+								<view class="goods-category-list">
+									<block wx:for="{{shopCategoryList}}" wx:key="index">
+										<text class="{{categoryActive==item.id?'category-item category-item-active':'category-item'}}" bindtap="_setCategoryActive" data-id="{{item.id}}">{{item.name}}</text>
+									</block>
+								</view>
+							</view>
+							<view class="right-icon">
+								<image class="right-icon-o" src="../../images/icon-cyc.png"></image>
+							</view>
+						</view>
+						<view class="goods-list">
+							<goods-list goods-list="{{goodsList}}" bind:_addCart="_addCart"></goods-list>
+						</view>
+					</view>
+				</van-tab>
+			</block>
+
+			<block wx:if="{{isGlobal !== '04'}}">
+				<van-tab title="优惠方案">
+					<view class="flex-start discount-item">
+						<input class="discount-input" value="{{discountCode}}" placeholder="请输入本店兑换码" bindinput="_discountCodeChange" />
+						<view class="discount-btn" bindtap="_discountCodeConversion">立即兑换</view>
+					</view>
+				</van-tab>
+				<van-tab title="商家信息">
+					<view>
+						<van-cell-group>
+							<van-field value="{{shop.shopName}}" label="店铺名称" disabled />
+							<van-field value=" {{shop.openShopTime!='null'?shop.openShopTime+ '-'+shop.closeShopTime:''}}" label="营业时间 " disabled />
+							<block wx:if="{{showPhone}}">
+								<van-field bindtap="_makePhoneCall" data-phone="{{shop.phone}}" value="{{shop.phone}}" label="电话" disabled />
+							</block>
+							<block wx:else>
+								<van-panel title="电话" custom-class="store-phone">
+									<view class="right" bindtap="_setShowPhone">点击联系商铺</view>
+								</van-panel>
+							</block>
+							<block wx:if="{{showTextarea}}">
+								<van-field value="{{shop.shopStreet}}" type="textarea" label="地址 " autosize disabled border="{{ false }}"></van-field>
+							</block>
+							<van-panel title="营业资质">
+								<view class="shop-detail-image-list">
+									<image wx:if="{{shop.operateImgId.length}}" lazy-load class="shop-detail-image" src="{{util._getImageUrl(shop.operateImgId)}}"></image>
+									<image wx:if="{{shop.aptitudeImgId.length}}" lazy-load class="shop-detail-image" src="{{util._getImageUrl(shop.aptitudeImgId)}}"></image>
+									<image wx:if="{{shop.foodCirculationPermit.length}}" lazy-load class="shop-detail-image" src="{{util._getImageUrl(shop.foodCirculationPermit)}}"></image>
+								</view>
+							</van-panel>
+							<van-panel title="商户二维码" custom-class="border-transparent">
+								<view class="flex-center">
+									<image lazy-load class="shop-qr-image" bindtap='_previewImage' bindlongpress="_saveQRImage" data-img="{{QRUrl}}" src="{{QRUrl}}"></image>
+								</view>
+								<view class="shop-qr-note">长按保存</view>
+							</van-panel>
+						</van-cell-group>
+					</view>
+				</van-tab>
+			</block>
+		</van-tabs>
+
+	</scroll-view>
+</view>
+<movable-area class="cart-view">
+	<movable-view direction="all" inertia class="cart-icon {{shopOff?'shop-off':''}} {{shakeOff?'shake':''}}" bindtap="_toView" data-navigate="shoppingCart" data-id="{{shopId}}">
+		<van-icon name="cart-o" class="color-f80" info="{{count<100?count:'99'}}" />
+	</movable-view>
+</movable-area>
+<van-dialog title="提示" message="登录后即可添加商品" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#ff8800"></van-dialog>
+<view class="canvas-box">
+	<canvas class="QRCanvas-shop" canvas-id="QRCanvas" />
+</view>
+<view class="canvas-box">
+	<canvas class="QRCanvas-shop" canvas-id="shareCanvas" />
+</view>

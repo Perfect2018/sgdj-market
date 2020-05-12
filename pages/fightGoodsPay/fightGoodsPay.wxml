@@ -1,0 +1,80 @@
+<!--pages/fightGoodsPay/fightGoodsPay.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<!-- 收货地址 -->
+<view class="address">
+	<block wx:if="{{address}}">
+		<view class="item w-100 flex-start">
+			<view class="first">收货人：</view>
+			<view class="last">{{address.receiverName}}</view>
+		</view>
+		<view class="item w-100 flex-start">
+			<view class="first">联系电话：</view>
+			<view class="last">{{address.receiverTel1}}</view>
+		</view>
+		<view class="item w-100 flex-start">
+			<view class="first">收货地址：</view>
+			<view class="last">{{util._isNotNull(address.receiverProvince+address.receiverCity+address.receiverCounty+address.receiverTown+address.receiverAddress)}}</view>
+		</view>
+		<view class="item w-100 flex-end">
+			<view class="edit-address" bindtap="_toView" data-navigate="shoppingAddress">修改地址</view>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="add-address" bindtap="_toView" data-navigate="shoppingAddress">管理地址</view>
+	</block>
+</view>
+<!-- 商品详情 -->
+<view class="card">
+	<view class="card-body">
+		<view class="card-item">
+			<view catchtap="_checkedChange" data-index="{{index}}">
+				<van-card centered="{{true}}" price="{{goods.noeUnit+''+goods.twoNuit+' '}}{{goods.goodsTypes=='02'?'(拼单商品)':''}}" title="{{goods.goodsName}}" thumb="{{util._getImageUrl(goods.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="">
+					<view slot="desc" class="flex-between">
+						<text class="card-item-price">￥{{totalAmt}}</text>
+						<van-stepper min="1" max="999" input-width="60px" integer value="{{goods.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{goods.id}}" data-index="{{index}}" bind:change="_setGoodsCount" />
+					</view>
+				</van-card>
+			</view>
+		</view>
+	</view>
+</view>
+<!-- 订单详情 -->
+<view>
+	<view class="detail-item flex-between h-39">
+		<view class="first">配送方式：</view>
+		<view class="last color-888">物流配送</view>
+	</view>
+	<view class="detail-item flex-between">
+		<view class="first">商品金额：</view>
+		<view class="last color-f80">￥{{util._getFixedMoney(totalAmt)}}</view>
+	</view>
+	<view class="detail-item flex-between">
+		<view class="first">运费</view>
+		<view class="last color-f80">￥{{util._getFixedMoney(shippingFee)}}</view>
+	</view>
+
+	<view class="detail-item flex-between">
+		<view class="first">余额抵扣：</view>
+		<view class="last color-f80">-￥{{util._getFixedMoney(useMoney.pocketMoney)}}</view>
+	</view>
+	<view class="detail-item flex-between">
+		<view class="first">现金券抵扣：</view>
+		<view class="last color-f80">-￥{{util._getFixedMoney(useMoney.cashRollMoney)}}</view>
+	</view>
+	<view wx:if="{{goodsList[0].isWholesale == '01'}}" class="detail-item flex-between">
+		<view class="first">期望送达时间：</view>
+		<picker mode="selector" bindchange="_hopeTimeChange" value="{{hopeTimeIndex}}" range="{{hopeTimeArray}}">
+			<view class="{{hopeTime?'':'color-888'}}">{{hopeTime?hopeTime:'请选择期望送达时间'}}</view>
+		</picker>
+	</view>
+	<view class="detail-item flex-between">
+		<view class="first">备注：</view>
+		<textarea class="item-input-notice" value="{{remark}}" bindinput="_remark" placeholder="请输入备注信息" />
+		</view>
+</view>
+<view>
+  <van-submit-bar disabled="{{!hasGlobalGoodsAll && distributionType && util._showOnDestributionPrice(totalAmt,onDestributionPrice)}}" price="{{util._getFixedMoney(finalAmt)*100}}" button-text="提交订单" bind:submit="_submitOrder" button-class="submit-btn"
+    price-class="card-item-price">
+    <view wx:if="{{!hasGlobalGoodsAll && distributionType && util._showOnDestributionPrice(totalAmt,onDestributionPrice)}}" slot="tip">本店满{{onDestributionPrice}}元起送（不包含配送费）</view>
+  </van-submit-bar>
+</view>

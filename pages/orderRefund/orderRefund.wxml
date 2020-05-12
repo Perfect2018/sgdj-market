@@ -1,0 +1,11 @@
+<!--pages/orderRefund/orderRefund.wxml-->
+<van-cell-group>
+	<van-field value="{{amt}}" disabled="{{orderDetail.orderState==='13'||orderDetail.orderState==='14'}}" bind:input="_setParam" data-param="amt" label="退款金额" placeholder="请输入退款金额，最多退{{orderDetail.finalAmt}}元" required />
+	<van-field value="{{reason}}" disabled="{{orderDetail.orderState==='13'||orderDetail.orderState==='14'}}" bind:input="_setParam" data-param="reason" type="textarea" autosize label="退款原因" placeholder="请输入退款原因" required />
+</van-cell-group>
+<view class="btns">
+	<view wx:if="{{orderDetail.orderState!=='13'&&orderDetail.orderState!=='14'}}" class="item select" bindtap="_confirm">确认申请</view>
+	<view wx:if="{{orderDetail.orderState==='13'}}" class="item select">已退款</view>
+	<view wx:if="{{orderDetail.orderState==='14'}}" class="item select">退款中</view>
+	<view wx:if="{{orderDetail.orderState==='14'}}" class="item" bindtap="_cancel">取消申请</view>
+</view>

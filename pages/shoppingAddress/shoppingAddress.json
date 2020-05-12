@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "收货地址",
+  "usingComponents": {
+    "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index",
+    "van-radio-group": "/miniprogram_npm/vant-weapp/radio-group/index",
+    "van-radio": "/miniprogram_npm/vant-weapp/radio/index",
+    "van-field": "/miniprogram_npm/vant-weapp/field/index"
+  }
+}

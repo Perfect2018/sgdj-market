@@ -1,0 +1,93 @@
+/* pages/components/shopGoodsList/index.wxss */
+
+.color-666 {
+  color: #666;
+}
+
+.color-000 {
+  color: #000;
+}
+
+.color-f80 {
+  color: #f80;
+}
+
+.text-del {
+  text-decoration: line-through;
+}
+
+.shop-goods-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-goods-item {
+  display: flex;
+  padding: 20rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #eee;
+}
+
+.shop-goods-item .item-left {
+  width: 20%;
+  min-width: 120rpx;
+  height: 120rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.shop-goods-item .item-right {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.shop-goods-item .item-image {
+  height: 120rpx;
+}
+
+.shop-goods-item .item-price {
+  font-size: 28rpx;
+  margin-right: 20rpx;
+}
+
+.shop-goods-item .item-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.shop-goods-item .item-pub {
+  font-size: 24rpx;
+}
+
+.icon-location {
+  position: absolute;
+  right: 20rpx;
+  bottom: 5rpx;
+  font-size: 0;
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: baseline;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-items-end {
+  display: flex;
+  align-items: baseline;
+}

@@ -1,0 +1,105 @@
+/* pages/components/shopList.wxss */
+
+.color-666 {
+  color: #666;
+  
+}
+
+.tip{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.tip view{
+
+  margin-left: 20rpx;
+  box-sizing: border-box;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.items-center {
+  display: flex;
+  align-items: center;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.shop-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-off {
+  filter: grayscale(60%);
+}
+
+.shop-item {
+  display: flex;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.shop-item .item-left {
+  width: 20%;
+  min-width: 150rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  height: 150rpx;
+  position: relative;
+}
+
+.shop-item .state {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 40rpx;
+  font-size: 24rpx;
+  text-align: center;
+  width: 100%;
+  line-height: 40rpx;
+}
+
+.shop-item .item-right {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+
+.shop-item .item-image {
+  height: 150rpx;
+}
+
+.shop-item .item-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.shop-item .item-pub {
+  font-size: 24rpx;
+}
+
+.icon-location {
+  font-size: 0;
+  width: 24rpx;
+  height: 24rpx;
+  vertical-align: baseline;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}

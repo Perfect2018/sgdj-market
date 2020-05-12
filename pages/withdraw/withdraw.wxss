@@ -1,0 +1,53 @@
+/* pages/withdraw/withdraw.wxss */
+
+.withdraw-top {
+  width: 60%;
+  display: flex;
+  text-align: center;
+  margin: 80rpx auto;
+}
+
+.withdraw-left, .withdraw-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100rpx;
+  color: #000;
+}
+
+.withdraw-right {
+  border-left: 1rpx solid #f80;
+  
+}
+
+.withdraw-right-top, .withdraw-left-top {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.withdraw-right-bottom, .withdraw-left-bottom {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.withdraw-input {
+  width: 95%;
+  margin: 40rpx auto;
+}
+
+.withdraw-input .input-item {
+  height: 70rpx;
+  line-height: 70rpx;
+  border: 1rpx solid #e5e5e5;
+  padding: 10rpx 15rpx;
+  margin: 40rpx auto;
+  border-radius: 10rpx;
+}
+
+.withdraw-btn {
+  width: 95%;
+  margin: 60rpx auto 0;
+  background-color: #f80;
+  color: #fff;
+}

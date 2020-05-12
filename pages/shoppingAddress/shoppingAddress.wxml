@@ -1,0 +1,56 @@
+<!--pages/shippingAddress/shippingAddress.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<block wx:if="{{isShow}}">
+  <view class="address-add-btn" bindtap="_setIsShow"></view>
+  <view class="address-card-list">
+    <block wx:for="{{addressList}}" wx:key="index">
+      <view class="card">
+        <view class="card-body">
+          <view class="card-item">
+            <view class="address-title">{{item.receiverName}}({{item.receiverSex == "男" ? "先生" : "女士"}}) {{item.receiverTel1}}</view>
+            <view class="address-content">{{util._isNotNull(item.receiverProvince+item.receiverCity+item.receiverCounty+item.receiverTown+item.receiverAddress)}}</view>
+          </view>
+        </view>
+        <view class="card-footer">
+          <view wx:if="{{item.isDefaultAddress == '01'}}">
+            <text class="address-default">收货地址</text>
+          </view>
+          <view wx:else>
+            <text class="address-default" bindtap="_defaultAddress" data-id="{{item.id}}">设为默认收货地址</text>
+          </view>
+          <view>
+            <text class="address-edit address-default" bindtap="_editAddress" data-id="{{item.id}}">编辑</text>
+            <text class="address-default" bindtap="_delAddress" data-id="{{item.id}}">删除</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</block>
+<block wx:else>
+  <view class="address-add">
+    <van-cell-group>
+      <van-field value="{{ addReceiver.receiverName }}" type="text" label="收货人" placeholder="请输入收货人" required bind:input="_setParam" data-param="receiverName" />
+      <view class="receiverSex">
+        <view class="receiverSex-left">性别</view>
+        <van-radio-group class="receiverSex-right" value="{{ addReceiver.receiverSex }}" bind:change="_setReceiverSex">
+          <van-radio class="receiverSex-item" name="男" checked-color="#f80">先生</van-radio>
+          <van-radio class="receiverSex-item" name="女" checked-color="#f80">女士</van-radio>
+        </van-radio-group>
+      </view>
+      <van-field value="{{addReceiver.receiverTel1}}" type="number" label="手机号" placeholder="请输入手机号" required bind:input="_setParam" data-param="receiverTel1" />
+
+      <van-field value="{{addReceiver.address}}" required label="收货地址" type="textarea" placeholder="请输入收货地址" autosize bind:input="_setSearchList" bind:focus="_setIsReceiverAddressInput"/>
+
+      <view wx:if="{{searchResult.length}}" class="search-address">
+        <block wx:for="{{searchResult}}" wx:key="index">
+          <view class="search-address-item" bindtap="_pitchOnAddress" data-uid="{{item.uid}}">{{item.name}}
+            <text class="color-888 fs-24">{{item.city}}-{{item.district}}</text>
+          </view>
+        </block>
+      </view>
+      <van-field value="{{addReceiver.receiverAddress}}" required label="详细地址" type="textarea" placeholder="请输入详细地址" autosize bind:input="_setParam" data-param="receiverAddress" disabled="{{isReceiverAddressInput}}"/>
+    </van-cell-group>
+    <button class="save-btn" bindtap="_saveAddress">保 存</button>
+  </view>
+</block>

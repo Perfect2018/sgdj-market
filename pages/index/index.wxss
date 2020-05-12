@@ -1,0 +1,124 @@
+/**index.wxss**/
+
+.search-icon {
+  color: #ccc;
+  float: right;
+  margin-top: 5rpx;
+}
+
+.search {
+  padding: 0 20rpx;
+  width: 90%;
+  border-radius: 5rpx;
+  margin: 20rpx auto;
+  text-align: center;
+  color: #ccc;
+  font-size: 28rpx;
+  background-color: #eee;
+  overflow: hidden;
+  line-height: 60rpx;
+}
+
+.starShop {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.starShop-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #eee;
+}
+
+.starShop-title {
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.starShop-openShop {
+  font-size: 28rpx;
+  padding: 5rpx 15rpx;
+  background-color: #f80;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.hotShop {
+  width: 100%;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+
+.hotShop-item {
+  width: 50%;
+  margin: 10rpx 5rpx;
+  box-sizing: border-box;
+  border-radius: 20rpx;
+  overflow: hidden;
+  height: 200rpx;
+}
+
+.hotShop-image {
+  height: 200rpx;
+}
+
+.classify-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-size: 0;
+  box-sizing: border-box;
+}
+
+.classify-item {
+  padding: 10rpx 0;
+  box-sizing: border-box;
+  width: 20%;
+  height: 150rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.classify-image {
+  width: 100rpx;
+  height: 100rpx;
+  display: block;
+  margin: auto;
+}
+
+.slide {
+  width: 100%;
+  font-size: 0;
+  height: 300rpx;
+}
+
+.slide-image {
+  height: 300rpx;
+}
+
+.ad {
+  width: 100%;
+  font-size: 0;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+ 
+}
+
+.ad .ad-image {
+  height: 200rpx;
+  border-radius: 20rpx;
+}
+
+.envelopes{
+  width: 90rpx;
+  height: 100rpx;
+  position: fixed;
+  left: 640rpx;
+  bottom: 50rpx;
+}

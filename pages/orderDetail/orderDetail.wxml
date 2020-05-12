@@ -1,0 +1,90 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="order-detail-address">
+	<view class="item flex-start">
+		<view class="first">收货人：</view>
+		<view class="last">{{orderDetail.receiver.receiverName}}</view>
+	</view>
+	<view class="item flex-start">
+		<view class="first">联系电话：</view>
+		<view class="last">{{orderDetail.receiver.receiverTel1}}</view>
+	</view>
+	<view class="item flex-start">
+		<view class="first">收货地址：</view>
+		<view class="last">{{util._isNotNull(orderDetail.receiver.receiverProvince+''+orderDetail.receiver.receiverCity+''+orderDetail.receiver.receiverCounty+''+orderDetail.receiver.receiverAddress)}}
+		</view>
+	</view>
+</view>
+<!-- <view class="order-detail-steps">
+	<view class="item">
+		<view class="steps-first">订单跟踪</view>
+		<van-steps steps="{{orderDetailSteps}}" active="{{stepsAction}}" active-color="#f80" custom-class="steps-last" />
+	</view>
+</view> -->
+<view class="order-detail">
+	<view class="shop">
+		<view class="shop-name">{{orderDetail.shopName}}</view>
+		<view class="shop-btn" bindtap="_toView" data-navigate="shop" data-id="{{orderDetail.shopId}}">进入店铺</view>
+	</view>
+	<block wx:for="{{orderDetail.list}}" wx:key="index">
+		<view class="order-item flex-between" bindtap="_toView" data-navigate="goodsDetail" data-id="{{item.goodsId}}">
+			<view class="first color-888">{{item.goodsName}}</view>
+			<view class="last color-f80">￥{{util._getFixedMoney(item.couponRate)}}/{{item.oneLevelUnit+item.twoLevelUnit}} x {{item.goodsCount}}</view>
+		</view>
+	</block>
+	<!-- 退款 -->
+	<view wx:if="{{orderDetail.orderState!=='08' && orderDetail.orderState!=='10'}}" class="refund-btn">
+		<view wx:if="{{orderDetail.orderState!=='13'&&orderDetail.orderState!=='14'}}" class="item" bindtap="_toView" data-navigate="orderRefund" data-id="{{orderId}}">退款/售后</view>
+		<view wx:if="{{orderDetail.orderState==='13'}}" class="item">已退款</view>
+		<view wx:if="{{orderDetail.orderState==='14'}}" class="item" bindtap="_toView" data-navigate="orderRefund" data-id="{{orderId}}">退款中</view>
+	</view>
+
+	<view class="order-detail-item flex-between" data-key="{{orderDetail.orderNo}}" bindlongtap="copy">
+		<view class="first">订单编号：</view>
+		<view class="last color-888">{{orderDetail.orderNo}}</view>
+	</view>
+	<view class="order-detail-item flex-between">
+		<view class="first">商品金额：</view>
+		<view class="last color-888">{{util._getFixedMoney(orderDetail.originalAmt)}}</view>
+	</view>
+	<view class="order-detail-item flex-between">
+		<view class="first">配送方式：</view>
+		<view class="last color-888">{{orderDetail.distributionType=="01"?"平台配送":orderDetail.distributionType=="02"?"上门自提":orderDetail.distributionType=="03"?"物流快递":orderDetail.distributionType=="04"?"商户配送":''}}</view>
+	</view>
+	<view class="order-detail-item flex-between">
+		<view class="first">配送费：</view>
+		<view class="last color-888">{{util._getFixedMoney(orderDetail.knightAmt)}}</view>
+	</view>
+
+	<view class="order-detail-item flex-between">
+		<view class="first">优惠：</view>
+		<view class="last color-888">{{util._getFixedMoney(orderDetail.subtractionAmt)}}</view>
+	</view>
+	<view class="order-detail-item flex-between">
+		<view class="first">实付金额：</view>
+		<view class="last color-888">{{util._getFixedMoney(orderDetail.finalAmt)}}</view>
+	</view>
+	<view class="order-detail-item flex-between express" wx:if="{{orderDetail.expressNumber!='null'&&orderDetail.expressNumber}}">
+		<view class="first">快递单号：</view>
+		<view class="last color-888" bindtap="_copy" data-value="{{orderDetail.expressNumber}}">{{orderDetail.expressNumber}}</view>
+	</view>
+	<view class="order-detail-item flex-between">
+		<view class="first">商家电话：</view>
+		<view class="last color-888" bindtap="_makePhoneCall" data-phone="{{orderDetail.shop.phone}}">{{orderDetail.shop.phone}}</view>
+	</view>
+	<view class="order-detail-item flex-between">
+		<view class="first">备注：</view>
+		<view class="last color-888">{{orderDetail.remark && orderDetail.remark!='null'?orderDetail.remark:''}}</view>
+	</view>
+</view>
+<view>
+	<block wx:if="{{orderDetail.orderState=='08'}}">
+		<van-submit-bar price="{{util._getFixedMoney(orderDetail.finalAmt)*100}}" button-text="立即支付" bind:submit="_toPay" data-id="{{orderDetail.id}}" button-class="submit-btn" price-class="card-item-price">
+			<view class="order-cancel" bindtap="_cancelOrder">取消订单</view>
+		</van-submit-bar>
+	</block>
+	<block wx:if="{{orderDetail.orderState=='09'}}">
+		<van-submit-bar button-class="submit-btn" button-text="确认收货" bind:submit="_toTake">
+		</van-submit-bar>
+	</block>
+</view>

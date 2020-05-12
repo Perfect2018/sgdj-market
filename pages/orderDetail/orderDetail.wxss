@@ -1,0 +1,109 @@
+/* pages/orderDetail/orderDetail.wxss */
+
+page {
+  font-size: 28rpx;
+  padding: 0 20rpx 150rpx;
+  box-sizing: border-box;
+}
+
+.order-detail-address {
+  background-color: #f80;
+  color: #fff;
+  margin: 20rpx 0;
+  border-radius: 5rpx;
+  overflow: hidden;
+  padding: 10rpx 20rpx;
+}
+
+.item .first {
+  min-width: max-content;
+  white-space: nowrap;
+}
+
+.item .steps-first {
+  width: 100%;
+  font-weight: bold;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.item .steps-last {
+  /* width: 75%; */
+  margin: auto;
+}
+
+/* .steps-last .van-step__wrapper .van-step{
+  text-align: center;
+} */
+
+.shop {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  align-items: center;
+}
+
+.shop-name {
+  font-weight: bold;
+  padding-bottom: 20rpx;
+}
+
+.shop-btn {
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  background-color: #f80;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.order-item {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.order-detail-item {
+  padding: 20rpx 0;
+  /* border-bottom: 1rpx solid #eee; */
+}
+
+.submit-btn {
+  background-color: #f80 !important;
+  border-color: #f80 !important;
+  color: #fff !important;
+}
+
+.card-item-price {
+  color: #f80 !important;
+  display: inline-block;
+}
+
+.order-cancel {
+  display: flex;
+  align-items: center;
+  color: #f80;
+  height: 100%;
+  background-color: #fff;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  font-size: 28rpx;
+  padding: 0 40rpx;
+}
+
+.refund-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+}
+
+.refund-btn .item {
+  padding: 10rpx 20rpx;
+  color: #aaa;
+  border: 1rpx solid #aaa;
+  border-radius: 20rpx;
+}
+
+.express{
+  font-weight: bold;
+}

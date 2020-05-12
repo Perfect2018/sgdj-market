@@ -1,0 +1,313 @@
+/* pages/goodsDetail/goodsDetail.wxss */
+
+/* 拼单 start */
+
+.bg-fight-list {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 101;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.bg-fight-list .fight-list {
+  width: 75vw;
+  height: 55vh;
+  background-color: #fff;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bg-fight-list .header {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 75vw;
+  border-top-right-radius: 10rpx;
+  border-top-left-radius: 10rpx;
+  font-size: 30rpx;
+}
+
+.fight-all {
+  border-top: 10rpx solid #eee;
+  border-bottom: 10rpx solid #eee;
+}
+
+.fight-list::-webkit-scrollbar {
+  display: none;
+}
+
+.fight-header {
+  font-size: 28rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+}
+
+.fight-list {
+  height: 200rpx;
+  padding: 0 20rpx;
+}
+
+.fight-item {
+  border-top: 1rpx solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 0;
+  height: 100rpx;
+  box-sizing: border-box;
+}
+
+.fight-left {
+  width: 100%;
+  height: 100rpx;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.fight-left .left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.fight-left .left .img {
+  width: 70rpx;
+  min-width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.fight-left .right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: right;
+  font-size: 24rpx;
+}
+
+.fight-right {
+  margin-left: 20rpx;
+  min-width: 120rpx;
+  color: #fff;
+  font-size: 24rpx;
+  text-align: center;
+  padding: 10rpx;
+  border-radius: 6%;
+  background-color: #f80;
+}
+
+.submit-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  user-select: none;
+  display: flex;
+  background-color: #fff;
+}
+
+.submit-btn {
+  display: flex;
+  width: 50%;
+  height: 100rpx;
+  font-size: 28rpx;
+  background-color: #f80;
+  color: #fff;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.submit-btn-o {
+  background-color: #ffb866;
+}
+
+.submit-price {
+  color: #fff;
+  font-size: 12px;
+  font-weight: initial;
+}
+
+/* 拼单 end */
+
+.goods-more-header {
+  padding: 10rpx 0;
+  text-align: center;
+}
+
+.goods-detail-image {
+  font-size: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #eee;
+}
+
+/* .detail-item-image {} */
+
+.goods-detail {
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #eee;
+  padding: 10rpx;
+}
+
+.goods-detail-title {
+  font-size: 32rpx;
+  padding-bottom: 5rpx;
+}
+
+.detail-item {
+  font-size: 28rpx;
+  padding: 5rpx 0;
+}
+
+/* .detail-item-left {} */
+
+.detail-item-right {
+  width: 80%;
+}
+
+.shop {
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #eee;
+  padding: 10rpx;
+}
+
+.shop-detail-left {
+  width: 70%;
+}
+
+.shop-detail-right {
+  font-size: 28rpx;
+  background-color: #f80;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+}
+
+.shop-logo-image {
+  width: 100rpx;
+  min-width: 100rpx;
+  margin-right: 20rpx;
+}
+
+.shop-image {
+  width: 100rpx;
+  height: 100rpx;
+  border: 4rpx solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.shop-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.goods-fun-detail {
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #eee;
+  padding: 10rpx 0;
+}
+
+.goods-fun-left {
+  width: 100%;
+}
+
+.goods-fun-right .img {
+  min-width: 120rpx;
+  min-height: 120rpx;
+}
+
+.goods-fun-item {
+  width: 100%;
+  align-items: baseline;
+  padding: 5rpx 10rpx;
+  box-sizing: border-box;
+}
+
+.goods-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  padding-right: 30rpx;
+}
+
+.goods-title .gwc {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.goods-collect {
+  min-width: 80rpx;
+  font-size: 24rpx;
+  padding: 10rpx 15rpx 10rpx 20rpx;
+  background-color: #f80;
+  border-radius: 10rpx;
+}
+
+.goods-price {
+  font-size: 40rpx;
+  padding-right: 20rpx;
+}
+
+.goods-discountPrice {
+  font-size: 24rpx;
+  text-decoration: line-through;
+}
+
+.creative {
+  padding: 20rpx 0;
+  margin: 20rpx 0 0;
+}
+
+.creative-item {
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  color: #666;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+
+.addCart {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #f80;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: bold;
+  text-align: center;
+  line-height: 100rpx;
+  height: 100rpx;
+}

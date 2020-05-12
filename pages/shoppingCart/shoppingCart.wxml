@@ -1,0 +1,116 @@
+<!--pages/shoppingCart/shoppingCart.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="{{shopOff?'shop-off':''}}">
+	<!-- 收货地址 -->
+	<view class="address">
+		<block wx:if="{{address}}">
+			<view class="item w-100 flex-start">
+				<view class="first">收货人：</view>
+				<view class="last">{{address.receiverName}}</view>
+			</view>
+			<view class="item w-100 flex-start">
+				<view class="first">联系电话：</view>
+				<view class="last">{{address.receiverTel1}}</view>
+			</view>
+			<view class="item w-100 flex-start">
+				<view class="first">收货地址：</view>
+				<view class="last">{{util._isNotNull(address.receiverProvince+address.receiverCity+address.receiverCounty+address.receiverTown+address.receiverAddress)}}</view>
+			</view>
+			<view class="item w-100 flex-end">
+				<view class="edit-address" bindtap="_toView" data-navigate="shoppingAddress">修改地址</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="add-address" bindtap="_toView" data-navigate="shoppingAddress" data-params="type=add">添加地址</view>
+		</block>
+	</view>
+	<!-- 商品列表 -->
+	<view class="card">
+		<view class="flex-between items-center">
+			<view class="card-title">{{goodsList[0].shop.shopName}}</view>
+			<view wx:if="{{goodsList.length}}" class="card-del" bindtap="_delMoreGoods">批量删除</view>
+		</view>
+		<view class="card-body">
+			<block wx:for="{{goodsList}}" wx:key="index">
+				<view class="card-item">
+					<van-swipe-cell right-width="100">
+						<view catchtap="_checkedChange" data-index="{{index}}">
+							<van-checkbox value="{{item.checked}}" checked-color="#f80" label-class="w-100">
+								<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(全球臻选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="">
+									<view slot="desc" class="flex-between">
+										<text class="card-item-price">￥{{item.couponRate}}</text>
+										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.maxBuy}}"/>
+									</view>
+								</van-card>
+							</van-checkbox>
+						</view>
+						<view slot="right" class="card-item-del" bindtap="_delGoods" data-id="{{item.id}}">删 除</view>
+					</van-swipe-cell>
+				</view>
+			</block>
+		</view>
+	</view>
+	<!-- 订单详情 -->
+	<view>
+		<view class="detail-item flex-between h-39">
+			<view class="first">配送方式：</view>
+			<block wx:if="{{!hasGlobalGoodsAll}}">
+				<radio-group class="item-input" bindchange="_distributionType">
+					<label>
+						<radio color="#f80" value="1" checked="{{distributionType}}">
+							<text class="fs-38">商户配送</text>
+						</radio>
+						<radio color="#f80" value="0" checked="{{!distributionType}}">
+							<text class="fs-38">上门自取</text>
+						</radio>
+					</label>
+				</radio-group>
+			</block>
+			<block wx:else>
+				<view class="last color-888">物流配送</view>
+			</block>
+		</view>
+		<view class="detail-item flex-between">
+			<view class="first">商品金额：</view>
+			<view class="last color-f80">￥{{util._getFixedMoney(totalAmt)}}</view>
+		</view>
+
+		<view class="detail-item flex-between">
+			<view class="first">平台配送费：</view>
+			<view class="last color-f80">￥{{util._getFixedMoney(useMoney.shippingFee)}}</view>
+		</view>
+		<!-- <view class="detail-item flex-between">
+    <view class="first">满减：</view>
+    <view class="last color-f80">￥{{util._getFixedMoney(useMoney.originalAmt)}}</view>
+  </view> -->
+		<view class="detail-item flex-between" wx:if="{{!!useCustCoupons.couponAmt}}">
+			<view class="first">优惠券抵扣：</view>
+			<view class="last color-f80">-￥{{util._getFixedMoney(useCustCoupons.couponAmt)}}</view>
+		</view>
+		<view class="detail-item flex-between">
+			<view class="first">现金券抵扣：</view>
+			<view class="last color-f80">-￥{{util._getFixedMoney(useMoney.cashRollMoney)}}</view>
+		</view>
+		<view class="detail-item flex-between">
+			<view class="first">余额抵扣：</view>
+			<view class="last color-f80">-￥{{util._getFixedMoney(useMoney.pocketMoney)}}</view>
+		</view>
+		<view wx:if="{{goodsList[0].isWholesale == '01'}}" class="detail-item flex-between">
+			<view class="first">期望送达时间：</view>
+			<picker mode="selector" bindchange="_hopeTimeChange" value="{{hopeTimeIndex}}" range="{{hopeTimeArray}}">
+				<view class="{{hopeTime?'':'color-888'}}">{{hopeTime?hopeTime:'请选择期望送达时间'}}</view>
+			</picker>
+		</view>
+		<view class="detail-item flex-between">
+			<view class="first">备注：</view>
+			<textarea class="item-input-notice" value="{{remark}}" bindinput="_remark" placeholder="请输入备注信息" />
+			</view>
+  </view>
+  <view>
+    <van-submit-bar disabled="{{!hasGlobalGoodsAll && distributionType && util._showOnDestributionPrice(totalAmt,onDestributionPrice)}}" price="{{util._getFixedMoney(finalAmt)*100}}" button-text="立即支付" bind:submit="_submitOrder" button-class="submit-btn"
+      price-class="card-item-price">
+      <van-checkbox value="{{isAllChecked}}" custom-class="ml-20" checked-color="#f80" bind:change="_checkedChange" data-index="all">全选</van-checkbox>
+      <view wx:if="{{!hasGlobalGoodsAll && distributionType && util._showOnDestributionPrice(totalAmt,onDestributionPrice)}}" slot="tip">本店满{{onDestributionPrice}}元起送（不包含配送费）</view>
+    </van-submit-bar>
+  </view>
+</view>

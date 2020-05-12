@@ -1,0 +1,17 @@
+<!--pages/packLIst/packlist.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="top">
+	<view class="btn">
+		<view class="back" bindtap="back">返回首页</view>
+	</view>
+	<view class="detail">{{number}}个红包共{{sumMoney}}元，剩余{{surplus}}个红包</view>
+</view>
+<scroll-view class="envelopes" scroll-y="true">
+	<view wx:for="{{list}}" wx:key="index" class="item">
+		<view class="img">
+			<image src="{{item.headImageUrl}}"></image>
+			<view class="time">{{util._formatTime(item.lastUpdateDate)}}</view>
+		</view>
+		<view class="receiveAmt">{{item.receiveAmt}}元</view>
+	</view>
+</scroll-view>

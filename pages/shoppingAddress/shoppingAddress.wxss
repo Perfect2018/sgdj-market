@@ -1,0 +1,144 @@
+/* pages/shippingAddress/shippingAddress.wxss */
+
+page {
+  height: 100%;
+  background-color: #f3f1f2;
+}
+
+.search-address {
+  position: absolute;
+  margin-top: -25rpx;
+  z-index: 999;
+  background-color: #fff;
+  width: 60%;
+  padding: 0 20rpx;
+  left: 190rpx;
+  height: 600rpx;
+  overflow-x: scroll;
+}
+
+.search-address-item {
+  font-size: 28rpx;
+  padding: 30rpx 0 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.save-btn {
+  width: 95%;
+  margin: 40rpx auto 0;
+  background-color: #f80;
+  color: #fff;
+}
+
+.receiverSex {
+  display: flex;
+  font-size: 28rpx;
+  line-height: 88rpx;
+  height: 88rpx;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.receiverSex-left {
+  min-width: 210rpx;
+}
+
+.receiverSex-left::before {
+  display: inline-block;
+  padding-left: 15rpx;
+  padding-right: 2rpx;
+  font-size: 28rpx;
+  color: #f80;
+  content: "*";
+}
+
+.receiverSex-right {
+  display: flex;
+}
+
+.receiverSex-item {
+  margin-right: 40rpx;
+}
+
+.address-add-btn::before {
+  content: "+";
+  display: block;
+  font-size: 70rpx;
+}
+
+.address-add-btn {
+  font-size: 0;
+  background-color: #f80;
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  right: 0;
+  left: 0;
+  margin: auto;
+  bottom: 120rpx;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.address-card-title {
+  font-size: 32rpx;
+  padding: 10rpx 0;
+  font-weight: bold;
+  border-bottom: 1rpx solid #888;
+}
+
+.address-card-list {
+  width: 100%;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.card {
+  margin: 20rpx;
+  padding: 10rpx 20rpx;
+  font-size: 24rpx;
+  border-radius: 30rpx;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.card-body {
+  width: 100%;
+}
+
+.card-footer {
+  border-top: 1rpx solid #eee;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10rpx;
+  padding-top: 10rpx;
+}
+
+.address-default {
+  font-size: 24rpx;
+  color: #f80;
+  border: 1rpx solid #f80;
+  border-radius: 10rpx;
+  padding: 10rpx 20rpx;
+  margin: 5rpx 10rpx;
+  display: inline-block;
+}
+
+.address-edit {
+  color: #888;
+  border-color: #888;
+}
+
+.address-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 10rpx 0;
+}
+
+.address-content {
+  color: #888;
+}

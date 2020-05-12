@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "退款/售后",
+  "usingComponents": {
+    "van-field": "/miniprogram_npm/vant-weapp/field/index",
+    "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index"
+  }
+}

@@ -1,0 +1,43 @@
+<!--pages/components/orderList/index.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class='orderList'>
+  <block wx:for="{{orderList}}" wx:key="index">
+    <view class='item'>
+      <view bindtap="_toView" data-navigate="orderDetail" data-id="{{item.id}}">
+        <view class='between orderNum'>
+          <text class="first">商户名称：{{item.shopName}}</text>
+          <text class="last">订单金额:￥{{util._getFixedMoney(item.originalAmt+(item.knightAmt))}}</text>
+        </view>
+        <view class='between'>
+          <text class="first">创建时间：{{util._getYMD(item.createDate)}}</text>
+          <text class="last">配送方式：{{item.distributionType=="01"?'平台配送':(item.distributionType=="02"?"客户自提":(item.distributionType=="03"?"物流快递":"商户配送"))}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<!-- <view>
+  <block wx:for="{{orderList}}" wx:key="index">
+    <view class="card">
+      <view class="card-header">
+        {{item.shopName}}
+      </view>
+      <view class="card-body">
+        <block wx:for="{{item.list}}" wx:key="index">
+          <view class="card-item">
+            <van-card centered="{{true}}" num="{{item.goodsCount}}" price="{{item.couponRate}}" desc="{{item.goodsNote}}" title="{{item.goodsName}}" thumb="{{util._getImageUrl(item.goodsImg1)}}" price-class="card-item-price" custom-class="card-item-body" />
+          </view>
+        </block>
+      </view>
+      <view class="card-footer">
+        <block wx:if="{{orderType=='02'}}">
+          <text class="card-item-price">￥{{util._toFixed(item.originalAmt,2)}}</text>
+        </block>
+        <block wx:else>
+          <text class="card-btn">取消订单</text>
+          <text class="card-btn card-buy">去支付</text>
+        </block>
+      </view>
+    </view>
+  </block>
+</view> -->

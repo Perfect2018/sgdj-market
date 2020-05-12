@@ -1,0 +1,12 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "van-notice-bar": "/miniprogram_npm/vant-weapp/notice-bar/index",
+    "van-search": "/miniprogram_npm/vant-weapp/search/index",
+    "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index",
+    "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
+    "goods-list": "../components/goodsList/index",
+    "shop-list": "../components/shopList/index"
+  }
+}

@@ -1,0 +1,45 @@
+<!--pages/components/shopList.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="shop-list">
+  <block wx:for="{{shopList}}" wx:key="index">
+    <view class="shop-item {{item.shopState==='01' ?'':'shop-off'}}" bindtap="_toView" data-navigate="shop" data-id="{{item.id}}">
+      <view class="item-left">
+        <image lazy-load class="item-image" src="{{util._getImageUrl(item.shopLogo)}}" mode="scaleToFill"></image>
+        <view wx:if="{{item.shopState!=='01'}}" class="state">已打烊</view>
+      </view>
+      <view class="item-right">
+        <view class="item-title">
+          {{item.shopName}}
+        </view>
+        <view class="item-pub">
+          <view class="color-666">销量：{{item.salesSum?item.salesSum:0}}份</view>
+        </view>
+        <view class="item-pub flex-between">
+          <view class="color-666 tip">￥{{item.onDestributionPrice}}
+            元起送
+            <view wx:if="{{item.fullReduction}}">满减</view>  
+          </view>
+          
+          <view class="items-center">
+            <image lazy-load class="icon-location" src="{{iconLocation}}" mode="scaleToFill"></image>
+            <text class="color-666">{{util._getKm(item.distances)}}km</text>
+          </view>
+        </view>
+        <view class="item-pub flex-start">
+          <view class="color-666 inline-block">
+            <van-icon name="checked" color="#f80" size="12px" class="align-middle" />
+            <text decode="{{true}}">企业认证&nbsp;&nbsp;</text>
+          </view>
+          <view class="color-666 inline-block">
+            <van-icon name="checked" color="#f80" size="12px" class="align-middle" />
+            <text decode="{{true}}">担保交易&nbsp;&nbsp;</text>
+          </view>
+          <view class="color-666 inline-block">
+            <van-icon name="checked" color="#f80" size="12px" class="align-middle" />
+            <text>收货后结算</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

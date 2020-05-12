@@ -1,0 +1,21 @@
+/* pages/orderRefund/orderRefund.wxss */
+.btns {
+  margin-top: 60rpx;
+}
+
+.btns .item {
+  margin: auto;
+  width: 50vw;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 34rpx;
+  background-color: #fff;
+  color: #f80;
+
+}
+
+.btns .select {
+  color: #fff;
+  background-color: #f80;
+}

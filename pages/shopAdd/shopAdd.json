@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "基本信息  ",
+  "usingComponents": {
+    "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index",
+    "van-radio-group": "/miniprogram_npm/vant-weapp/radio-group/index",
+    "van-radio": "/miniprogram_npm/vant-weapp/radio/index",
+    "van-checkbox": "/miniprogram_npm/vant-weapp/checkbox/index",
+    "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index",
+    "van-field": "/miniprogram_npm/vant-weapp/field/index"
+  }
+}
