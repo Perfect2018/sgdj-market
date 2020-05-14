@@ -11,8 +11,12 @@
         <view class="item-title">
           {{item.shopName}}
         </view>
-        <view class="item-pub">
-          <view class="color-666">销量：{{item.salesSum?item.salesSum:0}}份</view>
+        <view class="item-pub sale">
+          <view class="color-666 sale-item">销量：{{item.salesSum?item.salesSum:0}}份</view>
+          <view class="browse">
+            <image src="../../images/bll.png"></image>
+            <text>{{item.shopViews ? item.shopViews:0}}</text>
+          </view>
         </view>
         <view class="item-pub flex-between">
           <view class="color-666 tip">￥{{item.onDestributionPrice}}

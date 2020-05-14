@@ -39,7 +39,7 @@
 								<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(全球臻选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="">
 									<view slot="desc" class="flex-between">
 										<text class="card-item-price">￥{{item.couponRate}}</text>
-										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.maxBuy}}"/>
+										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.goodsId}}"/>
 									</view>
 								</van-card>
 							</van-checkbox>
@@ -86,6 +86,10 @@
 		<view class="detail-item flex-between" wx:if="{{!!useCustCoupons.couponAmt}}">
 			<view class="first">优惠券抵扣：</view>
 			<view class="last color-f80">-￥{{util._getFixedMoney(useCustCoupons.couponAmt)}}</view>
+		</view>
+		<view class="detail-item flex-between" wx:if="{{useMoney.cashMoney}}">
+			<view class="first">零钱抵扣：</view>
+			<view class="last color-f80">-￥{{util._getFixedMoney(useMoney.cashMoney)}}</view>
 		</view>
 		<view class="detail-item flex-between">
 			<view class="first">现金券抵扣：</view>

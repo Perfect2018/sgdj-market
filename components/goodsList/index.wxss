@@ -198,3 +198,25 @@
   margin-top: 13rpx;
   box-sizing: border-box;
 }
+
+.sale{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.sale>text{
+  width: 150rpx;
+}
+
+.browse{
+  width: 100rpx;
+  color: #666;
+  margin-left: 6rpx;
+  box-sizing: border-box;
+}
+
+.browse image{
+  width: 22rpx;
+  height: 20rpx;
+  margin-right: 6rpx;
+}

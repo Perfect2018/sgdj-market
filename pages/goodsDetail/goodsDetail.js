@@ -264,13 +264,13 @@ Page({
         }
       } else {
         let location = app.globalData.location || "";
-        console.log(this.data.goodsDetail.shopId)
+        // console.log(this.data.goodsDetail.shopId)
         if (location != "") {
           api._post('/goods/selectShopGoods', {
             shopId: this.data.goodsDetail.shopId,
             pageNum: this.staticData.pageNum
           }).then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.success && res.data.list.length > 0) {
               let goodsMoreList = this.data.goodsMoreList;
               ++this.staticData.pageNum
@@ -291,6 +291,7 @@ Page({
     api._post('/goods/get_goods_detail', {
       id: goodsId
     }).then(res => {
+      console.log(res)
       if (res.success) {
         let temp = res.dataDto;
         if (temp && temp.note) {

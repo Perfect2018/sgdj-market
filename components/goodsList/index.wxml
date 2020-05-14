@@ -6,7 +6,7 @@
 		<block wx:for="{{goodsLeftList}}" wx:key="index">
 
 			<view class="goods-item {{!showAdd ? (!item.shop.shopState || item.shop.shopState==='01' ?'':'shop-off'):(!item.shopState || item.shopState==='01' ?'':'shop-off')}}" bindtap="_toView" data-navigate="{{navigate}}" data-id="{{item.id}}">
-				
+
 				<view class="goods-item-image">
 					<image lazy-load class="goods-image" src="{{util._getImageUrl(item.img1)}}" mode="scaleToFill"></image>
 					<view wx:if="{{item.goodsTypes === '01'}}" class="max-buy">限购商品</view>
@@ -15,7 +15,13 @@
 				</view>
 				<view class="goods-pub goods-title">{{item.goodsName}}</view>
 				<view class="goods-pub flex-between">
-					<view class="goods-soldSize">销量{{item.soldSize?item.soldSize:0}}份</view>
+					<view class="goods-soldSize sale">
+						<text>销量{{item.soldSize?item.soldSize:0}}份</text>
+						<view class="browse">
+							<image src="../../images/bll.png"></image>
+							<text>{{item.goodsViews ? item.goodsViews:0}}</text>
+						</view>
+					</view>
 					<view class="goods-soldSize">{{item.yieldly}}</view>
 				</view>
 				<view class="goods-pub flex-between items-center">
@@ -32,7 +38,7 @@
 	<view class="goods-list-right">
 		<block wx:for="{{goodsRightList}}" wx:key="index">
 			<view class="goods-item {{!showAdd ? (!item.shop.shopState || item.shop.shopState==='01' ?'':'shop-off'):(!item.shopState || item.shopState==='01' ?'':'shop-off')}}" bindtap="_toView" data-navigate="{{navigate}}" data-id="{{item.id}}">
-			<!-- <view wx:if="{{item.maxBuy}}">限购{{item.maxBuy}}</view> -->
+				<!-- <view wx:if="{{item.maxBuy}}">限购{{item.maxBuy}}</view> -->
 				<view class="goods-item-image">
 					<image lazy-load class="goods-image" src="{{util._getImageUrl(item.img1)}}" mode="scaleToFill"></image>
 					<view wx:if="{{item.goodsTypes === '01'}}" class="max-buy">限购商品</view>
@@ -41,7 +47,13 @@
 				</view>
 				<view class="goods-pub goods-title">{{item.goodsName}}</view>
 				<view class="goods-pub flex-between">
-					<view class="goods-soldSize">销量{{item.soldSize?item.soldSize:0}}份</view>
+					<view class="goods-soldSize sale">
+						<text>销量{{item.soldSize?item.soldSize:0}}份</text>
+						<view class="browse">
+							<image src="../../images/bll.png"></image>
+							<text>{{item.goodsViews ? item.goodsViews:0}}</text>
+						</view>
+					</view>
 					<view class="goods-soldSize">{{item.yieldly}}</view>
 				</view>
 				<view class="goods-pub flex-between items-center">

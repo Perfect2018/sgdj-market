@@ -2,7 +2,6 @@
 
 .color-666 {
   color: #666;
-  
 }
 
 .tip{
@@ -102,4 +101,25 @@
 .flex-between {
   display: flex;
   justify-content: space-between;
+}
+
+.sale{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.sale-item{
+  width: 180rpx;
+}
+
+.browse{
+  width: 100rpx;
+  color: #666;
+}
+
+.browse image{
+  width: 22rpx;
+  height: 20rpx;
+  margin-right: 6rpx;
+  box-sizing: border-box;
 }

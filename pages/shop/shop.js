@@ -128,21 +128,9 @@ Page({
     if (app.globalData.isLogin) {
       let goods = e.detail.goods;
       console.log(goods)
-      if(goods.maxBuy && this.data.count>1){
-          util._toast('该商品限购一份')
-      }else{
-
-      
-      // this.setData({
-      //   goodId:goods.id
-      // },()=>{
-      //   if(this.data.goodId == this.data.goodId){
-      //     this.setData({
-      //       num:this.data.num+1
-      //     })
-      //     console.log(this.data.num)
-      //   }
-      // })
+      // if(goods.maxBuy && this.data.count>1){
+      //     util._toast('该商品限购一份')
+      // }else{
       api._post('/shoppingCart/insertShoppingCart/', {
         id: goods.id,
         shopId: goods.shopId,
@@ -170,7 +158,7 @@ Page({
           util._toast("添加失败");
         }
       })
-    }
+    // }
     } else {
       this.setData({
         loginMould: true
@@ -394,6 +382,7 @@ Page({
       pageNum: this.data.pageNum
     }).then(res => {
       let goodsList = this.data.goodsList;
+      // console.log(res.data)
       if (res.data.list.length) {
         this.setData({
           goodsList: goodsList.concat(res.data.list),

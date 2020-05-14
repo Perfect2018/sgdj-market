@@ -32,10 +32,12 @@ Page({
     totalAmt: 0, //商品金额
     shippingFee: 0, //运费
     pocketMoney: 0, //余额
+    cashMoney: 0, //零钱
     useMoney: {
       cashRollMoney: 0, //现金券金额
       shippingFee: 0, //运费
       pocketMoney: 0, //余额
+      cashMoney: 0, //零钱
     },
     finalAmt: 0, //最终支付
     remark: "" //备注
@@ -87,6 +89,7 @@ Page({
           freight: this.data.useMoney.shippingFee,
           pocketMoney: this.data.useMoney.pocketMoney,
           cashRollMoney: this.data.useMoney.cashRollMoney,
+          cashMoney: this.data.useMoney.cashMoney,
           distributionType: distributionType,
           remark: this.data.remark
         };
@@ -145,6 +148,18 @@ Page({
   _finalAmt(totalAmt) {
     let pocketMoney = Number(this.data.pocketMoney);
     let cashRollMoney = Number(this.data.cashRollMoney);
+    let cashMoney = Number(this.data.cashMoney)
+    // console.log(cashMoney)
+    
+    // 零钱
+    if(cashMoney && totalAmt > 0){
+      if((totalAmt - cashMoney) > 0){
+        totalAmt = Number(totalAmt - cashMoney).toFixed(2);
+      }else{
+        cashMoney = Number(totalAmt).toFixed(2);
+        totalAmt = 0
+      }
+    }
 
     // 现金券
     if (cashRollMoney && totalAmt > 0 && cashRollMoney > 0) {
@@ -169,6 +184,7 @@ Page({
 
     this.setData({
       'finalAmt': totalAmt,
+      'useMoney.cashMoney':cashMoney,
       'useMoney.cashRollMoney': cashRollMoney,
       'useMoney.pocketMoney': pocketMoney
     });
@@ -232,28 +248,34 @@ Page({
   },
   // 设置商品数量
   _setGoodsCount(e) {
-    console.log(e)
-    let maxbuy = e.currentTarget.dataset.maxbuy
+    // console.log(e)
+    // let maxbuy = e.currentTarget.dataset.maxbuy
     let count = e.detail;
-    if(maxbuy){
+    // if(maxbuy){
       if(count>1){
-        util._toast('该商品只能限购一份')
-        return
-      }else{
+      //   util._toast('该商品只能限购一份')
+      //   return
+      // }else{
         let id = e.currentTarget.dataset.id;
         let index = e.currentTarget.dataset.index;
         let goodsList = this.data.goodsList.concat([]);
+        let goodsId = e.currentTarget.dataset.maxbuy
         api._post('/shoppingCart/upShoppingCartGoodsCount', {
           id: id,
-          goodsCount: 1
+          goodsCount: 1,
+          goodsId
         }).then(res => {
           if (res.success) {
             goodsList[index].goodsCount = count;
             this._setGoodsList(goodsList);
+          }else{
+            util._toast(res.error.msg)
+            goodsList[index].goodsCount = 1;
+            this._setGoodsList(goodsList);
           }
         })
-      }
-    }else if (!maxbuy && count < 999) {
+      // }
+    }else if (count < 999) {
       let id = e.currentTarget.dataset.id;
       let index = e.currentTarget.dataset.index;
       let goodsList = this.data.goodsList.concat([]);
@@ -423,7 +445,8 @@ Page({
                 'useMoney.shippingFee': res.data.psf / 2,
                 'useMoney.pocketMoney': res.data.pocketMoney,
                 pocketMoney: res.data.pocketMoney,
-                cashRollMoney: res.data.cashRollMoney
+                cashRollMoney: res.data.cashRollMoney,
+                cashMoney:res.data.cashMoney
               });
             }
           });
@@ -443,7 +466,8 @@ Page({
             'useMoney.shippingFee': res.data.psf / 2,
             'useMoney.pocketMoney': res.data.pocketMoney,
             pocketMoney: res.data.pocketMoney,
-            cashRollMoney: res.data.cashRollMoney
+            cashRollMoney: res.data.cashRollMoney,
+            cashMoney:res.data.cashMoney
           });
         // }
       } else {
