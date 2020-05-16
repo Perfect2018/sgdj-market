@@ -1,7 +1,7 @@
 <!--pages/shop/shop.wxml-->
 <wxs src="../../wxs/util.wxs" module="util"></wxs>
 <view class="{{shopOff?'shop-off':''}}">
-	<view class="search" bindtap="search" data-id="{{shopId}}">
+	<view class="search" bindtap="search" data-id="{{shopId}}" data-count="{{count}}">
 		<view class="search-place">
 			<image src="../../images/ss.png"></image>搜索店铺里的商品
 		</view>

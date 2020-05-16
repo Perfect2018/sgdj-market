@@ -210,10 +210,48 @@ Page({
     }
   },
   // 添加购物车
+  // _addCart(e) {
+  //   if (app.globalData.isLogin) {
+  //     let id = e.currentTarget.dataset.id;
+  //     let goods = this.data.goodsDetail;
+  //     api._post('/shoppingCart/insertShoppingCart/', {
+  //       id: goods.id,
+  //       shopId: goods.shopId,
+  //       shopName: goods.shopName,
+  //       goodsName: goods.goodsName,
+  //       img1: goods.img1,
+  //       couponRate: goods.couponRate,
+  //       noeUnit: goods.noeUnit,
+  //       twoNuit: goods.twoNuit
+  //     }).then(res => {
+  //       if (res.success) {
+  //         let count = this.data.count;
+  //         this.setData({
+  //           count: ++count,
+  //           shakeOff: true
+  //         });
+  //         setTimeout(() => {
+  //           this.setData({
+  //             shakeOff: false
+  //           });
+  //         }, 1000);
+  //         util._toast("添加成功");
+  //       } else {
+  //         util._toast("添加失败");
+  //       }
+  //     })
+  //   } else {
+  //     this.setData({
+  //       loginMould: true
+  //     });
+  //     // util._toast('请登录')
+  //   }
+  // },
+
+  // 添加购物车
   _addCart(e) {
     if (app.globalData.isLogin) {
-      let id = e.currentTarget.dataset.id;
-      let goods = this.data.goodsDetail;
+      let goods = e.detail.goods;
       api._post('/shoppingCart/insertShoppingCart/', {
         id: goods.id,
         shopId: goods.shopId,
@@ -224,7 +262,9 @@ Page({
         noeUnit: goods.noeUnit,
         twoNuit: goods.twoNuit
       }).then(res => {
+        // console.log(res)   
         if (res.success) {
+          console.log(res)
           let count = this.data.count;
           this.setData({
             count: ++count,
@@ -237,16 +277,21 @@ Page({
           }, 1000);
           util._toast("添加成功");
         } else {
-          util._toast("添加失败");
+          if(res.error.msg){
+            util._toast(res.error.msg)
+          }else{
+            util._toast("添加失败");
+          }
+         
         }
       })
     } else {
       this.setData({
         loginMould: true
       });
-      // util._toast('请登录')
     }
   },
+
   // 更多商品
   _getGoodsMoreList() {
     let open = app.globalData.open;

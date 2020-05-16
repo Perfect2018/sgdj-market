@@ -121,6 +121,7 @@ App({
             lng: res.longitude,
             lat: res.latitude
           }
+          // console.log(res)
           wx.setStorageSync("location", location);
           this.globalData.location = location;
           resolve();

@@ -186,7 +186,6 @@ Page({
     if (!this.data.open) {
       this._switchPage();
     }
-
     if (!app.globalData.location) {
       app.getLocation().then(() => {
         this._getShopList();
@@ -312,6 +311,7 @@ Page({
         bmap.regeocoding({
           location: `${location.lat},${location.lng}`,
           success: (res) => {
+            // console.log(res)
             this.setData({
               searchHolder: res.wxMarkerData[0].address
             })

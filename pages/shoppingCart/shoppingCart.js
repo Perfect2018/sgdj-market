@@ -416,7 +416,7 @@ Page({
     api._post('/shoppingCart/getShoppingCartList', {
       shopId: shopId
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.success) {
         if (!res.data.shoppingCart.length && app.globalData.open) {
           wx.navigateBack();

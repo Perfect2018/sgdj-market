@@ -45,10 +45,11 @@ Page({
   // 搜索
   search(e){
     let id = e.currentTarget.dataset.id
-    // console.log(id)
+    let count = e.currentTarget.dataset.count
+    // console.log(e)
     // console.log(this.data.shopId)
     wx.navigateTo({
-      url: `../searchList/searchList`
+      url: `../searchList/searchList?id=`+ id + "&count="+count
     });
   },
   
@@ -127,10 +128,6 @@ Page({
   _addCart(e) {
     if (app.globalData.isLogin) {
       let goods = e.detail.goods;
-      console.log(goods)
-      // if(goods.maxBuy && this.data.count>1){
-      //     util._toast('该商品限购一份')
-      // }else{
       api._post('/shoppingCart/insertShoppingCart/', {
         id: goods.id,
         shopId: goods.shopId,
@@ -141,6 +138,7 @@ Page({
         noeUnit: goods.noeUnit,
         twoNuit: goods.twoNuit
       }).then(res => {
+        // console.log(res)   
         if (res.success) {
           console.log(res)
           let count = this.data.count;
@@ -155,10 +153,14 @@ Page({
           }, 1000);
           util._toast("添加成功");
         } else {
-          util._toast("添加失败");
+          if(res.error.msg){
+            util._toast(res.error.msg)
+          }else{
+            util._toast("添加失败");
+          }
+         
         }
       })
-    // }
     } else {
       this.setData({
         loginMould: true
@@ -172,12 +174,13 @@ Page({
       shopId:this.data.shopId,
       pageNum:this.data.discountNum
     }).then(res=>{
-      // let goodsList = this.data.goodsList
-      // console.log(res)
       if(res.data.size == '0'){
-        util._toast('暂无数据')
+        if(res.data.pageNum == '1'){
+          util._toast('该店暂无抢购商品，请稍后查看')
+        }else{
+          util._toast('暂无数据')
+        }
       }
-      // console.log(res.data.list.length)
       if(res.data.list.length){
         this.setData({
           goodsList:res.data.list,
@@ -195,8 +198,13 @@ Page({
       shopId:this.data.shopId,
       pageNum:this.data.groupNum
     }).then(res=>{
+
       if(res.data.size == '0'){
-        util._toast('暂无数据')
+        if(res.data.pageNum == '1'){
+          util._toast('该店暂无团购商品，请稍后查看')
+        }else{
+          util._toast('暂无数据')
+        }
       }
       if(res.data.list.length){
         this.setData({

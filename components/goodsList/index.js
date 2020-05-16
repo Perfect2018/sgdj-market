@@ -55,7 +55,7 @@ Component({
       let goods = this.properties.goodsList.filter(elem => {
         return elem.id == id ? elem : '';
       });
-      console.log(goods)
+      // console.log(goods)
       this.triggerEvent('_addCart', {
         goods: goods[0]
       });

@@ -37,9 +37,9 @@ page{
   color: #808080;
 }
 
-.envelopes{
+/* .envelopes{
   max-height: 800rpx;
-}
+} */
 
 view.item{
   width: 100%;
@@ -61,8 +61,8 @@ view.item{
 }
 
 .img image{
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
 }
 

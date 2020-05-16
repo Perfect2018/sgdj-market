@@ -205,7 +205,7 @@
 }
 
 .sale>text{
-  width: 150rpx;
+  width: 130rpx;
 }
 
 .browse{

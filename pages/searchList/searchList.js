@@ -1,6 +1,7 @@
 // pages/searchList/searchList.js
 const api = require('../../utils/api.js');
 const util = require('../../utils/util.js');
+const app = getApp();
 Page({
 
   /**
@@ -10,7 +11,12 @@ Page({
     kw: '',
     pageNum: 1,
     isGlobal: "02",
-    searchList: []
+    searchList: [],
+    count: 0,
+    shopId: '',
+    // 店铺是否关闭
+    shopOff: false,
+    loginMould: false,
   },
   // 搜索查询
   _getSearchList(kw = this.data.kw) {
@@ -51,11 +57,78 @@ Page({
       util._toast("请输入商品名");
     }
   },
+
+// 添加购物车
+_addCart(e) {
+  console.log(e)
+  console.log(this.data.shopId)
+  if (app.globalData.isLogin) {
+    let goods = e.detail.goods;
+    // console.log(goods)
+    // if(goods.maxBuy && this.data.count>1){
+    //     util._toast('该商品限购一份')
+    // }else{
+    api._post('/shoppingCart/insertShoppingCart/', {
+      id: goods.id,
+      shopId: goods.shopId,
+      shopName: goods.shopName,
+      goodsName: goods.goodsName,
+      img1: goods.img1,
+      couponRate: goods.couponRate,
+      noeUnit: goods.noeUnit,
+      twoNuit: goods.twoNuit
+    }).then(res => {
+      // console.log(res)   
+      if (res.success) {
+        console.log(res)
+        let count = this.data.count;
+        this.setData({
+          count: ++count,
+          shakeOff: true
+        });
+        setTimeout(() => {
+          this.setData({
+            shakeOff: false
+          });
+        }, 1000);
+        util._toast("添加成功");
+      } else {
+        if(res.error.msg){
+          util._toast(res.error.msg)
+        }else{
+          util._toast("添加失败");
+        }
+       
+      }
+    })
+  // }
+  } else {
+    this.setData({
+      loginMould: true
+    });
+  }
+},
+
+
+  _toView(e){
+    let navigatePath = e.currentTarget.dataset.navigate;
+    let id = e.currentTarget.dataset.id;
+    if (this.data.count) {
+      wx.navigateTo({
+        url: `../${navigatePath}/${navigatePath}?id=${id}`
+      });
+    } else {
+      util._toast("请添加商品");
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // console.log(options)
     this.setData({
+      shopId:options.id,
+      count:options.count,
       isGlobal: options.isGlobal == '01' ? options.isGlobal : "02"
     }, () => {
       this._getSearchList();
