@@ -161,6 +161,7 @@ Page({
       ak: app.globalData.ak
     });
     this._switchPage();
+  
   },
   // 获取商品
   _getGoods() {
@@ -171,7 +172,6 @@ Page({
       goodsList: indexData
     });
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -302,6 +302,7 @@ Page({
   getLocationRegeo(location = app.globalData.location || "") {
     wx.getLocation({
       success: (res) => {
+        // console.log(res)
         location = {
           lng: res.longitude,
           lat: res.latitude

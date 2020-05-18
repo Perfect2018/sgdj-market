@@ -52,8 +52,8 @@ page{
 }
 
 .list .left{
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 
 image{
@@ -92,8 +92,8 @@ image{
   overflow: hidden;
   color: #8D898A;
   font-size: 20rpx;
-  height: 50rpx;
-  line-height: 50rpx;
+  height: 40rpx;
+  line-height: 40rpx;
 }
 
 .list .right{

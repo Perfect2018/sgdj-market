@@ -27,7 +27,7 @@ Page({
         pageNum: this.data.pageNum
       }).then(res => {
         let searchList = this.data.searchList;
-        console.log(res)
+        // console.log(res)
         if (res.data.list.length) {
           this.setData({
             searchList: searchList.concat(res.data.list),
@@ -60,8 +60,8 @@ Page({
 
 // 添加购物车
 _addCart(e) {
-  console.log(e)
-  console.log(this.data.shopId)
+  // console.log(e)
+  // console.log(this.data.shopId)
   if (app.globalData.isLogin) {
     let goods = e.detail.goods;
     // console.log(goods)
@@ -80,7 +80,7 @@ _addCart(e) {
     }).then(res => {
       // console.log(res)   
       if (res.success) {
-        console.log(res)
+        // console.log(res)
         let count = this.data.count;
         this.setData({
           count: ++count,
