@@ -27,6 +27,7 @@
 
 .inline-block {
   display: inline-block;
+  /* vertical-align: middle; */
 }
 
 .shop-list {
@@ -122,4 +123,9 @@
   height: 20rpx;
   margin-right: 6rpx;
   box-sizing: border-box;
+}
+
+.item-pub-left{
+  display: flex;
+  justify-content: space-between;
 }

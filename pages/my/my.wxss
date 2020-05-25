@@ -53,6 +53,7 @@ page {
 
 .card-item {
   width: 25%;
+  /* height: 85rpx; */
   padding: 20rpx 20rpx 10rpx 20rpx;
   box-sizing: border-box;
 }

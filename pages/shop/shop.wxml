@@ -18,7 +18,6 @@
 					<view class="shop-name">
 						{{shop.shopName}}
 					</view>
-
 				</view>
 			</view>
 			<view class="shop-detail-right">

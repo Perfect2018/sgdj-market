@@ -18,6 +18,7 @@ Page({
       lng: location.lng,
       categoryId: categoryId,
     }).then(res => {
+      // console.log(res.data)
       if (res.success) {
         let shopList = this.data.shopList.concat(res.data);
         this.setData({
@@ -26,12 +27,36 @@ Page({
       }
     })
   },
+
+  dispatching(){
+    let location = app.globalData.location
+    api._post('/shopstate/getIsWholesaleShopBylatAndLng', {
+      lat: location.lat,
+      lng: location.lng,
+    }).then(res => {
+      // console.log(res.data)
+      if (res.success) {
+        let shopList = this.data.shopList.concat(res.data);
+        this.setData({
+          shopList: shopList
+        });
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // console.log(typeof(options.id))
+    
     let categoryId = options.id;
-    this._getShopList(categoryId);
+    if(categoryId){
+      this._getShopList(categoryId);
+    }else{
+      this.dispatching()
+    }
+    
   },
 
   /**

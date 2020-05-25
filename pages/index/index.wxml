@@ -29,7 +29,7 @@
 		<!-- 热门商铺 -->
 		<view class="hotShop">
 			<block wx:for="{{hotShopList}}" wx:key="index">
-				<view class="hotShop-item" bindtap="_toView" data-navigate="shop" data-id="{{item.id}}">
+				<view class="hotShop-item" bindtap="_goView" data-navigate="shop" data-id="{{item.id}}">
 					<image lazy-load class="hotShop-image" src="{{item.imgUrl}}"></image>
 				</view>
 			</block>

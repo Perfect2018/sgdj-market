@@ -22,6 +22,7 @@ Page({
       id: '2b0757c8be8e43a59ad6ce1b23eced82',
       imgUrl: "/images/sgdj_hot1.jpg"
     }, {
+      id:'',
       imgUrl: "/images/sgdj_hot2.jpg"
     }],
     shopList: [],
@@ -43,7 +44,7 @@ Page({
         this._getSwiperImageList();
         this._getCategoryList();
         this._getShopList();
-        this._getShopId();
+        // this._getShopId();
       } else {
         this._getGoods();
       }
@@ -63,6 +64,7 @@ Page({
   },
   // 页面跳转
   _toView(e) {
+    // console.log(e)
     let navigatePath = e.currentTarget.dataset.navigate;
     let id = e.currentTarget.dataset.id;
     if (navigatePath == "shopList" || navigatePath == "shop") {
@@ -82,6 +84,26 @@ Page({
       wx.navigateTo({
         url: `../${navigatePath}/${navigatePath}?id=${id}`
       });
+    }
+  },
+
+  _goView(e){
+    // console.log(e)
+    let navigatePath = e.currentTarget.dataset.navigate;
+    let id = e.currentTarget.dataset.id;
+    console.log(id)
+    if (app.globalData.location) {
+      if (id == '2b0757c8be8e43a59ad6ce1b23eced82') {
+        wx.navigateTo({
+          url: `../${navigatePath}/${navigatePath}?id=${id}`
+        });
+      } else {
+        wx.navigateTo({
+          url: '../shopList/shopList',
+        })
+      }
+    } else {
+      app.getLocation();
     }
   },
 
@@ -114,21 +136,21 @@ Page({
     });
   },
   // 获取批发配送店铺
-  _getShopId() {
-    let location = app.globalData.location || "";
-    if (location != "") {
-      api._post('/shopstate/getIsWholesaleShopBylatAndLng', {
-        lat: location.lat,
-        lng: location.lng
-      }).then(res => {
-        let temp = this.data.hotShopList.concat([]);
-        temp[1].id = res;
-        this.setData({
-          hotShopList: temp
-        });
-      });
-    }
-  },
+  // _getShopId() {
+  //   let location = app.globalData.location || "";
+  //   if (location != "") {
+  //     api._post('/shopstate/getIsWholesaleShopBylatAndLng', {
+  //       lat: location.lat,
+  //       lng: location.lng
+  //     }).then(res => {
+  //       let temp = this.data.hotShopList.concat([]);
+  //       temp[1].id = res;
+  //       this.setData({
+  //         hotShopList: temp
+  //       });
+  //     });
+  //   }
+  // },
 
   // 获取明星店铺
   _getShopList() {
@@ -189,7 +211,7 @@ Page({
     if (!app.globalData.location) {
       app.getLocation().then(() => {
         this._getShopList();
-        this._getShopId();
+        // this._getShopId();
         this.getLocationRegeo();
         locationTimer = setInterval(this.getLocationRegeo, 60000);
       });

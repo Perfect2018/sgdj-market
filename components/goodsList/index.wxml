@@ -57,7 +57,7 @@
 					<view class="goods-soldSize">{{item.yieldly}}</view>
 				</view>
 				<view class="goods-pub flex-between items-center">
-					<view class="goods-price">￥{{util._getFixedMoney(item.discountPrice || item.discountPrice!='null'?item.couponRate:'0.00')}}/
+					<view class="goods-price">￥{{util._getFixedMoney(item.discountPrice || item.discountPrice!='null'?item.couponRate:'0.00')}}
 						<text class="goods-noeUnit">{{item.noeUnit}}{{item.twoNuit}}</text>
 					</view>
 					<view wx:if="{{showAdd}}" class="fs-50" catchtap="_addCart" data-id="{{item.id}}">

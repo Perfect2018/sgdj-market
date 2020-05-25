@@ -38,6 +38,7 @@ Page({
       posterImage: ''
     },
     fightList: [],
+    price:''
   },
   // 设置拼单
   _setFightFlag() {
@@ -315,7 +316,6 @@ Page({
             shopId: this.data.goodsDetail.shopId,
             pageNum: this.staticData.pageNum
           }).then(res => {
-            // console.log(res)
             if (res.success && res.data.list.length > 0) {
               let goodsMoreList = this.data.goodsMoreList;
               ++this.staticData.pageNum
@@ -346,6 +346,7 @@ Page({
         }
         this.setData({
           goodsDetail: temp,
+          price:temp.couponRate,
           shopOff: temp.shop.shopState === "01" ? false : true
         }, () => {
           this._getFightList();
@@ -360,7 +361,6 @@ Page({
   _toView(e) {
     let navigatePath = e.currentTarget.dataset.navigate;
     let id = e.currentTarget.dataset.id;
-
     if (navigatePath === "shoppingCart" || navigatePath === "fightGoodsPay") {
       if (app.globalData.isLogin) {
         if (this.data.count || navigatePath === "fightGoodsPay") {
@@ -479,7 +479,7 @@ Page({
    */
   onShareAppMessage: function() {
     return {
-      title: this.data.goodsDetail.goodsName
+      title: this.data.goodsDetail.goodsName +'  ￥'+ this.data.price + '元'
     }
   },
   // 取消登录
