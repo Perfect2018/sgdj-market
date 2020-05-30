@@ -33,11 +33,13 @@ Page({
     shippingFee: 0, //运费
     pocketMoney: 0, //余额
     cashMoney: 0, //零钱
+    globalFreight:'0',//全球臻选商品运费
     useMoney: {
       cashRollMoney: 0, //现金券金额
       shippingFee: 0, //运费
       pocketMoney: 0, //余额
       cashMoney: 0, //零钱
+      globalFreight:'0',//全球臻选商品运费
     },
     finalAmt: 0, //最终支付
     remark: "" //备注
@@ -191,7 +193,9 @@ Page({
   },
   // 配送费（折扣）判断
   _shippingFee(selectGoodsList) {
+    // console.log(selectGoodsList)
     let shippingFee = this.data.shippingFee;
+    // let globalFee = this.data.globalFreight
     //商户配送
     if (this.data.distributionType) {
       let flag = selectGoodsList.reduce((prev, elem) => {
@@ -206,22 +210,30 @@ Page({
       }
     } else {
       //上门自取
-      shippingFee = 0;
+      shippingFee = 0
+      // globalFee =this.data.globalFreight;
     }
+    //  console.log(shippingFee)
     // 全球甄选
     if (this.data.hasGlobalGoodsAll) {
-      shippingFee = 0;
+      shippingFee =0
+      // globalFee = this.data.globalFreight;
     }
+    // console.log(shippingFee)
     this.setData({
       'useMoney.shippingFee': shippingFee
     });
-    return shippingFee;
+    // return shippingFee
+    return shippingFee+this.data.globalFreight;
+    // console.log(shippingFee)
   },
   // 计算商品金额
   _totalAmt(selectGoodsList = this.staticData.selectGoodsList) {
+    // console.log(this.data.globalFreight)
     let totalAmt = selectGoodsList.reduce((prev, elem) => {
       return elem ? prev + (elem.goodsCount * elem.couponRate) : prev;
     }, 0);
+    // console.log(totalAmt)
     this.setData({
       totalAmt: Number(totalAmt).toFixed(2),
     }, () => {
@@ -338,6 +350,15 @@ Page({
   },
   // 选中切换
   _checkedChange(e) {
+    let checked = e.currentTarget.dataset.checked
+    let freight = Number(e.currentTarget.dataset.freight)
+    console.log(e)
+    if(checked){
+      this.data.globalFreight -= freight
+    }else{
+      this.data.globalFreight += freight
+    }
+    
     if (e.detail.x > 130) {
       return;
     }
@@ -360,9 +381,11 @@ Page({
     this.setData({
       isAllChecked: isAllChecked
     });
+    // this._getGoodsList()
   },
   // 选中删除
-  _delMoreGoods() {
+  _delMoreGoods(e) {
+    // console.log()
     let goodsList = this.data.goodsList;
     if (goodsList.length) {
       let ids = this.data.goodsList.map(elem => {
@@ -376,6 +399,7 @@ Page({
           goodsList = goodsList.filter(elem => {
             return elem.checked ? '' : elem;
           });
+          console.log(goodsList)
           this._setGoodsList(goodsList);
           util._toast("删除成功");
         } else {
@@ -388,6 +412,9 @@ Page({
   //  删除单个商品
   _delGoods(e) {
     let id = e.currentTarget.dataset.id;
+    let freight = Number(e.currentTarget.dataset.freight);
+    // let globalFreight = this.data.globalFreight
+    console.log(e)
     api._post('/shoppingCart/deleteShoppingCartGoods', {
       goodsCartId: id
     }).then(res => {
@@ -395,6 +422,10 @@ Page({
         let goodsList = this.data.goodsList.filter(elem => {
           return elem.id == id ? '' : elem;
         })
+        this.data.globalFreight -= freight
+        // this._shippingFee(selectGoodsList)
+        this.onShow()
+        console.log(this.data.globalFreight)
         this._setGoodsList(goodsList);
         util._toast("删除成功");
       } else {
@@ -456,7 +487,17 @@ Page({
             elem.checked = true;
             return elem;
           });
+          // console.log(goodsList)
           this._setGoodsList(goodsList);
+          // console.log(res.data.shoppingCart)
+          let item = res.data.shoppingCart.map(elem=>{
+            return elem.freight ? Number(elem.freight):0
+          }) 
+          let sum = item.reduce((pre,next)=>{
+            return pre+next
+          },0)
+          // console.log(item)
+          // console.log(sum)
           this.setData({
             custCoupons: res.data.custCoupons || [],
             shopOff: goodsList[0] && goodsList[0].shop.shopState === "01" ? false : true,
@@ -467,8 +508,10 @@ Page({
             'useMoney.pocketMoney': res.data.pocketMoney,
             pocketMoney: res.data.pocketMoney,
             cashRollMoney: res.data.cashRollMoney,
-            cashMoney:res.data.cashMoney
+            cashMoney:res.data.cashMoney,
+            globalFreight:sum
           });
+          console.log(this.data.globalFreight)
         // }
       } else {
         util._toast("未知错误");

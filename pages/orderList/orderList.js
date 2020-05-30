@@ -59,7 +59,7 @@ Page({
         orderState = elem.state
       }
     });
-    console.log(orderState)
+    // console.log(orderState)
     api._post('/order/getOrderList', {
       orderState: orderState,
       pageNum: pageNum

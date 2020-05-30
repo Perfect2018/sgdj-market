@@ -9,7 +9,7 @@
           <text class="last">订单金额:￥{{util._getFixedMoney(item.originalAmt+(item.knightAmt))}}</text>
         </view>
         <view class='between'>
-          <text class="first">创建时间：{{util._getYMD(item.createDate)}}</text>
+          <text class="first">创建时间：{{util._formatTime(item.createDate)}}</text>
           <text class="last">配送方式：{{item.distributionType=="01"?'平台配送':(item.distributionType=="02"?"客户自提":(item.distributionType=="03"?"物流快递":"商户配送"))}}</text>
         </view>
       </view>

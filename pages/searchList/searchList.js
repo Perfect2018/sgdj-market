@@ -20,11 +20,17 @@ Page({
   },
   // 搜索查询
   _getSearchList(kw = this.data.kw) {
+    let shopId = this.data.shopId
+    if(!shopId){
+      shopId=''
+    }
+    // console.log(shopId)
     if (kw) {
       api._post("/goods/fuzzySearchGoods", {
         goodsName: kw,
         isGlobalGoods: this.data.isGlobal,
-        pageNum: this.data.pageNum
+        pageNum: this.data.pageNum,
+        shopId
       }).then(res => {
         let searchList = this.data.searchList;
         // console.log(res)

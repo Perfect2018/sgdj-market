@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    adImage: '5d7f5315635dce1af9610d83',
+    adImage: '5ed0acda635dce7e462e832b',
     shopList: []
   },
   // 获取店铺列表
