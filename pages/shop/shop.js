@@ -140,7 +140,7 @@ Page({
       }).then(res => {
         // console.log(res)   
         if (res.success) {
-          console.log(res)
+          // console.log(res)
           let count = this.data.count;
           this.setData({
             count: ++count,

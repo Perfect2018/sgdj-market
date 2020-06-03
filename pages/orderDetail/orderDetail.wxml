@@ -11,7 +11,7 @@
 	</view>
 	<view class="item flex-start">
 		<view class="first">收货地址：</view>
-		<view class="last">{{util._isNotNull(orderDetail.receiver.receiverProvince+''+orderDetail.receiver.receiverCity+''+orderDetail.receiver.receiverCounty+''+orderDetail.receiver.receiverAddress)}}
+		<view class="last">{{util._isNotNull(orderDetail.receiver.receiverProvince+''+orderDetail.receiver.receiverCity+''+orderDetail.receiver.receiverCounty+''+orderDetail.receiver.receiverTown+''+orderDetail.receiver.receiverAddress)}}
 		</view>
 	</view>
 </view>

@@ -32,18 +32,32 @@
 		</view>
 		<view class="card-body">
 			<block wx:for="{{goodsList}}" wx:key="index">
-				<view class="card-item">
+				<view class="card-item swipe-cell1">
+					<view class="van-checkbox1">
+							<van-checkbox value="{{item.checked}}" checked-color="#f80" label-class="w-5" catchtap="_checkedChange"  data-index="{{index}}" data-freight="{{item.freight}}" data-checked="{{item.checked}}" data-count="{{item.goodsCount}}">
+								
+							</van-checkbox>
+						</view>
 					<van-swipe-cell right-width="100">
-						<view catchtap="_checkedChange" data-index="{{index}}" data-freight="{{item.freight}}" data-checked="{{item.checked}}">
+						<!-- <view catchtap="_checkedChange" data-index="{{index}}" data-freight="{{item.freight}}" data-checked="{{item.checked}}">
 							<van-checkbox value="{{item.checked}}" checked-color="#f80" label-class="w-100">
 								<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(全球臻选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="">
 									<view slot="desc" class="flex-between">
 										<text class="card-item-price">￥{{item.couponRate}}</text>
-										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.goodsId}}"/>
+										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.goodsId}}" />
 									</view>
 								</van-card>
 							</van-checkbox>
-						</view>
+						</view> -->
+						<!-- <view> -->
+					
+							<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(全球臻选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="">
+									<view slot="desc" class="flex-between">
+										<text class="card-item-price">￥{{item.couponRate}}</text>
+										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.goodsId}}" data-freight="{{item.freight}}"/>
+									</view>
+								</van-card>
+						<!-- </view> -->
 						<view slot="right" class="card-item-del" bindtap="_delGoods" data-id="{{item.id}}" data-freight="{{item.freight}}">删 除</view>
 					</van-swipe-cell>
 				</view>

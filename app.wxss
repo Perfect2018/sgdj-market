@@ -112,6 +112,10 @@ image {
   width: 100%;
 }
 
+.w-5{
+  width: 5%;
+}
+
 .pl-30 {
   padding-left: 30rpx;
 }

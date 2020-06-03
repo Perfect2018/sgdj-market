@@ -106,6 +106,7 @@ page {
 
 .card-item-custom {
   padding: 0 !important;
+  width: 660rpx;
 }
 
 .card-item-del {
@@ -162,4 +163,16 @@ page {
   border: 1rpx solid rgb(37, 32, 32);
   border-radius: 10rpx;
   margin: 20rpx 0;
+}
+
+.van-checkbox1{
+  width: 40rpx !important;
+  height: 40rpx !important;
+}
+
+.swipe-cell1{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
 }

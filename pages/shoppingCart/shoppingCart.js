@@ -33,13 +33,13 @@ Page({
     shippingFee: 0, //运费
     pocketMoney: 0, //余额
     cashMoney: 0, //零钱
-    globalFreight:'0',//全球臻选商品运费
+    globalFreight: '0', //全球臻选商品运费
     useMoney: {
       cashRollMoney: 0, //现金券金额
       shippingFee: 0, //运费
       pocketMoney: 0, //余额
       cashMoney: 0, //零钱
-      globalFreight:'0',//全球臻选商品运费
+      globalFreight: '0', //全球臻选商品运费
     },
     finalAmt: 0, //最终支付
     remark: "" //备注
@@ -88,7 +88,7 @@ Page({
         let params = {
           goodsList: goodsList,
           receiverId: this.data.address.id,
-          freight: this.data.useMoney.shippingFee,
+          freight: this.data.useMoney.shippingFee ? this.data.useMoney.shippingFee:this.data.globalFreight,
           pocketMoney: this.data.useMoney.pocketMoney,
           cashRollMoney: this.data.useMoney.cashRollMoney,
           cashMoney: this.data.useMoney.cashMoney,
@@ -125,14 +125,14 @@ Page({
             });
           }
         });
-        
+
       } else {
         util._toast("全球臻选和即时送不可同时购买");
-       
+
       }
     } else {
       util._toast("请选择商品");
-     
+
     }
   },
   // 切换配送方式
@@ -152,12 +152,12 @@ Page({
     let cashRollMoney = Number(this.data.cashRollMoney);
     let cashMoney = Number(this.data.cashMoney)
     // console.log(cashMoney)
-    
+
     // 零钱
-    if(cashMoney && totalAmt > 0){
-      if((totalAmt - cashMoney) > 0){
+    if (cashMoney && totalAmt > 0) {
+      if ((totalAmt - cashMoney) > 0) {
         totalAmt = Number(totalAmt - cashMoney).toFixed(2);
-      }else{
+      } else {
         cashMoney = Number(totalAmt).toFixed(2);
         totalAmt = 0
       }
@@ -186,7 +186,7 @@ Page({
 
     this.setData({
       'finalAmt': totalAmt,
-      'useMoney.cashMoney':cashMoney,
+      'useMoney.cashMoney': cashMoney,
       'useMoney.cashRollMoney': cashRollMoney,
       'useMoney.pocketMoney': pocketMoney
     });
@@ -216,7 +216,7 @@ Page({
     //  console.log(shippingFee)
     // 全球甄选
     if (this.data.hasGlobalGoodsAll) {
-      shippingFee =0
+      shippingFee = 0
       // globalFee = this.data.globalFreight;
     }
     // console.log(shippingFee)
@@ -224,7 +224,7 @@ Page({
       'useMoney.shippingFee': shippingFee
     });
     // return shippingFee
-    return shippingFee+this.data.globalFreight;
+    return shippingFee + this.data.globalFreight;
     // console.log(shippingFee)
   },
   // 计算商品金额
@@ -263,41 +263,57 @@ Page({
     // console.log(e)
     // let maxbuy = e.currentTarget.dataset.maxbuy
     let count = e.detail;
+    // let freight = Number(e.currentTarget.dataset.freight)
     // if(maxbuy){
-      if(count>1){
+    if (count > 1) {
+      // console.log(count)
       //   util._toast('该商品只能限购一份')
       //   return
       // }else{
-        let id = e.currentTarget.dataset.id;
-        let index = e.currentTarget.dataset.index;
-        let goodsList = this.data.goodsList.concat([]);
-        let goodsId = e.currentTarget.dataset.maxbuy
-        api._post('/shoppingCart/upShoppingCartGoodsCount', {
-          id: id,
-          goodsCount: 1,
-          goodsId
-        }).then(res => {
-          if (res.success) {
-            goodsList[index].goodsCount = count;
-            this._setGoodsList(goodsList);
-          }else{
-            util._toast(res.error.msg)
-            goodsList[index].goodsCount = 1;
-            this._setGoodsList(goodsList);
-          }
-        })
-      // }
-    }else if (count < 999) {
       let id = e.currentTarget.dataset.id;
       let index = e.currentTarget.dataset.index;
       let goodsList = this.data.goodsList.concat([]);
+      let goodsId = e.currentTarget.dataset.maxbuy
       api._post('/shoppingCart/upShoppingCartGoodsCount', {
         id: id,
-        goodsCount: count
+        goodsCount: 1,
+        goodsId
       }).then(res => {
+        // console.log(res)
         if (res.success) {
           goodsList[index].goodsCount = count;
+          // console.log(goodsList)
           this._setGoodsList(goodsList);
+          // this.setData({
+          //   globalFreight:count*freight
+          //   // globalFreight:this.data.globalFreight+(count-1)*freight
+          // })
+        } else {
+          util._toast(res.error.msg)
+          goodsList[index].goodsCount = 1;
+          this._setGoodsList(goodsList);
+        }
+      })
+      // }
+    } else if (count < 999) {
+      // console.log(count)
+      let id = e.currentTarget.dataset.id;
+      let index = e.currentTarget.dataset.index;
+      let goodsList = this.data.goodsList.concat([]);
+      let goodsId = e.currentTarget.dataset.maxbuy
+      api._post('/shoppingCart/upShoppingCartGoodsCount', {
+        id: id,
+        goodsCount: count,
+        goodsId   //之前没有这个参数，有问题
+      }).then(res => {
+        // console.log(res)
+        if (res.success) {
+          goodsList[index].goodsCount = count;
+          console.log(goodsList)
+          this._setGoodsList(goodsList);
+          // this.setData({
+          //   globalFreight:count*freight
+          // })
         }
       })
     } else {
@@ -310,6 +326,16 @@ Page({
       wx.navigateBack();
       return;
     }
+    let item = goodsList.map(elem=>{
+      return elem.freight ? Number(elem.freight)*elem.goodsCount : 0
+    })
+    let sum = item.reduce((pre,next)=>{
+      return pre + next
+    },0)
+    this.setData({
+      globalFreight:sum
+    })
+    // console.log(item)
     this.setData({
       goodsList: goodsList
     }, () => {
@@ -351,14 +377,21 @@ Page({
   // 选中切换
   _checkedChange(e) {
     let checked = e.currentTarget.dataset.checked
-    let freight = Number(e.currentTarget.dataset.freight)
-    console.log(e)
-    if(checked){
-      this.data.globalFreight -= freight
-    }else{
-      this.data.globalFreight += freight
+    let count = e.currentTarget.dataset.count
+    let freight = Number(e.currentTarget.dataset.freight)*count
+    // console.log(e)
+    if (checked) {
+      // this.data.globalFreight -= freight
+      this.setData({ 
+        globalFreight: this.data.globalFreight - freight
+      })
+    } else {
+      // this.data.globalFreight += freight
+      this.setData({
+        globalFreight: this.data.globalFreight + freight
+      })
     }
-    
+   
     if (e.detail.x > 130) {
       return;
     }
@@ -399,9 +432,12 @@ Page({
           goodsList = goodsList.filter(elem => {
             return elem.checked ? '' : elem;
           });
-          console.log(goodsList)
+          // console.log(goodsList)
           this._setGoodsList(goodsList);
           util._toast("删除成功");
+          this.setData({
+            globalFreight:0
+          })
         } else {
           util._toast("删除失败");
         }
@@ -414,7 +450,7 @@ Page({
     let id = e.currentTarget.dataset.id;
     let freight = Number(e.currentTarget.dataset.freight);
     // let globalFreight = this.data.globalFreight
-    console.log(e)
+    // console.log(e)
     api._post('/shoppingCart/deleteShoppingCartGoods', {
       goodsCartId: id
     }).then(res => {
@@ -454,64 +490,64 @@ Page({
           return;
         }
         // if (app.globalData.open) {
-          api._post('/goods/get_goods_detail', {
-            id: this.data.openGid
-          }).then(result => {
-            if (result.success) {
-              // console.log(result)
-              let goodsList = [result.dataDto];
-              goodsList = goodsList.map(elem => {
-                elem.checked = true;
-                return elem;
-              });
-              goodsList[0].goodsCount = this.data.openNum;
-              this._setGoodsList(goodsList);
-              console.log(res.data.custCoupons)
-              this.setData({
-                custCoupons: res.data.custCoupons || [],
-                shopOff: goodsList[0] && goodsList[0].shop.shopState === "01" ? false : true,
-                address: res.data.address,
-                onDestributionPrice: goodsList[0] && goodsList[0].shop.onDestributionPrice ? goodsList[0].shop.onDestributionPrice.toFixed(2) : '20.00',
-                shippingFee: res.data.psf / 2,
-                'useMoney.shippingFee': res.data.psf / 2,
-                'useMoney.pocketMoney': res.data.pocketMoney,
-                pocketMoney: res.data.pocketMoney,
-                cashRollMoney: res.data.cashRollMoney,
-                cashMoney:res.data.cashMoney
-              });
-            }
-          });
+        api._post('/goods/get_goods_detail', {
+          id: this.data.openGid
+        }).then(result => {
+          if (result.success) {
+            // console.log(result)
+            let goodsList = [result.dataDto];
+            goodsList = goodsList.map(elem => {
+              elem.checked = true;
+              return elem;
+            });
+            goodsList[0].goodsCount = this.data.openNum;
+            this._setGoodsList(goodsList);
+            // console.log(res.data.custCoupons)
+            this.setData({
+              custCoupons: res.data.custCoupons || [],
+              shopOff: goodsList[0] && goodsList[0].shop.shopState === "01" ? false : true,
+              address: res.data.address,
+              onDestributionPrice: goodsList[0] && goodsList[0].shop.onDestributionPrice ? goodsList[0].shop.onDestributionPrice.toFixed(2) : '20.00',
+              shippingFee: res.data.psf / 2,
+              'useMoney.shippingFee': res.data.psf / 2,
+              'useMoney.pocketMoney': res.data.pocketMoney,
+              pocketMoney: res.data.pocketMoney,
+              cashRollMoney: res.data.cashRollMoney,
+              cashMoney: res.data.cashMoney
+            });
+          }
+        });
         // } else {
-          // console.log('我是else')
-          let goodsList = res.data.shoppingCart.map(elem => {
-            elem.checked = true;
-            return elem;
-          });
-          // console.log(goodsList)
-          this._setGoodsList(goodsList);
-          // console.log(res.data.shoppingCart)
-          let item = res.data.shoppingCart.map(elem=>{
-            return elem.freight ? Number(elem.freight):0
-          }) 
-          let sum = item.reduce((pre,next)=>{
-            return pre+next
-          },0)
-          // console.log(item)
-          // console.log(sum)
-          this.setData({
-            custCoupons: res.data.custCoupons || [],
-            shopOff: goodsList[0] && goodsList[0].shop.shopState === "01" ? false : true,
-            address: res.data.address,
-            onDestributionPrice: goodsList[0] && goodsList[0].shop.onDestributionPrice ? goodsList[0].shop.onDestributionPrice.toFixed(2) : '20.00',
-            shippingFee: res.data.psf / 2,
-            'useMoney.shippingFee': res.data.psf / 2,
-            'useMoney.pocketMoney': res.data.pocketMoney,
-            pocketMoney: res.data.pocketMoney,
-            cashRollMoney: res.data.cashRollMoney,
-            cashMoney:res.data.cashMoney,
-            globalFreight:sum
-          });
-          console.log(this.data.globalFreight)
+        // console.log('我是else')
+        let goodsList = res.data.shoppingCart.map(elem => {
+          elem.checked = true;
+          return elem;
+        });
+        // console.log(goodsList)
+        this._setGoodsList(goodsList);
+        // console.log(res.data.shoppingCart)
+        let item = res.data.shoppingCart.map(elem => {
+          return elem.freight ? Number(elem.freight)*elem.goodsCount : 0
+        })
+        let sum = item.reduce((pre, next) => {
+          return pre + next
+        }, 0)
+        // console.log(item)
+        // console.log(sum)
+        this.setData({
+          custCoupons: res.data.custCoupons || [],
+          shopOff: goodsList[0] && goodsList[0].shop.shopState === "01" ? false : true,
+          address: res.data.address,
+          onDestributionPrice: goodsList[0] && goodsList[0].shop.onDestributionPrice ? goodsList[0].shop.onDestributionPrice.toFixed(2) : '20.00',
+          shippingFee: res.data.psf / 2,
+          'useMoney.shippingFee': res.data.psf / 2,
+          'useMoney.pocketMoney': res.data.pocketMoney,
+          pocketMoney: res.data.pocketMoney,
+          cashRollMoney: res.data.cashRollMoney,
+          cashMoney: res.data.cashMoney,
+          globalFreight: sum
+        });
+        // console.log(this.data.globalFreight)
         // }
       } else {
         util._toast("未知错误");
@@ -527,7 +563,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     // console.log(options)
     this.setData({
       'shop.shopId': options.id,
@@ -539,14 +575,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
     if (!this.data.onShowFlag) {
       this._getGoodsList();
@@ -560,35 +596,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
