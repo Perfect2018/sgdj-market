@@ -51,7 +51,7 @@
 						</view> -->
 						<!-- <view> -->
 					
-							<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(全球臻选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="">
+							<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(本地优选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="">
 									<view slot="desc" class="flex-between">
 										<text class="card-item-price">￥{{item.couponRate}}</text>
 										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.goodsId}}" data-freight="{{item.freight}}"/>
@@ -95,7 +95,7 @@
 		</view>
 
 		<view class="detail-item flex-between" wx:if="{{globalFreight>0}}">
-			<view class="first">全球臻选商品运费：</view>
+			<view class="first">本地优选商品运费：</view>
 			<view class="last color-f80">￥{{util._getFixedMoney(globalFreight)}}</view>
 		</view>
 		<!-- <view class="detail-item flex-between">

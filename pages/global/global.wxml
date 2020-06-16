@@ -12,7 +12,7 @@
   <view class="global">
     <view class="global-header">
       <text class='global-embellish'></text>
-      <text class='global-title'>臻选商品</text>
+      <text class='global-title'>本地优选</text>
     </view>
     <view class="global-body">
       <goods-list goods-list="{{goodsList}}" show-add="{{false}}"></goods-list>

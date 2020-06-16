@@ -2,17 +2,23 @@
 <wxs src="../../wxs/util.wxs" module="util"></wxs>
 <view>
   <!-- 搜索 -->
-  <van-search value="{{kw}}" placeholder="请输入商品名" use-action-slot bind:search="_search" bind:change="_searchChange">
+  <van-search value="{{kw}}" placeholder="请输入店铺名" use-action-slot bind:search="_search" bind:change="_searchChange" wx:if="{{type=='00'}}">
+    <view slot="action" class="color-f80" bindtap="_search">搜索</view>
+  </van-search>
+  <van-search value="{{kw}}" placeholder="请输入商品名" use-action-slot bind:search="_search" bind:change="_searchChange" wx:else>
     <view slot="action" class="color-f80" bindtap="_search">搜索</view>
   </van-search>
   <!-- 商品列表 -->
-  <view>
+  <view wx:if="{{type=='01'}}">
     <block wx:if="{{shopId}}">
       <goods-list goods-list="{{searchList}}" bind:_addCart="_addCart"></goods-list>
     </block>
     <block wx:else>
       <goods-list goods-list="{{searchList}}" show-add="{{false}}"></goods-list>
     </block>
+  </view>
+  <view wx:else>
+    <shop-list shop-list="{{shopList}}"></shop-list>
   </view>
 </view>
 

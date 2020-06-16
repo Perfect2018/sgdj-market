@@ -3,6 +3,6 @@
   "navigationBarTitleText": "全球甄选",
   "usingComponents": {
     "van-search": "/miniprogram_npm/vant-weapp/search/index",
-    "goods-list": "../components/goodsList/index"
+    "goods-list": "../../components/goodsList/index"
   }
 }

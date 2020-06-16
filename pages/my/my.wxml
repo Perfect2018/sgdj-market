@@ -50,7 +50,7 @@
 					<view>待付款</view>
 				</view>
 				<view class="card-item-top" bindtap="_toView" data-navigate="orderList" data-type="1">
-					<van-icon name="logistics" class="fs-50 color-000" />
+					<van-icon name="orders-o" class="fs-50 color-000" />
 					<view>待接单</view>
 				</view>
 				<!-- <view class="card-item" bindtap="_toView" data-navigate="orderList" data-type="1">

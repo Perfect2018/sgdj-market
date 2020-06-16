@@ -57,7 +57,7 @@
         "pagePath": "pages/global/global",
         "iconPath": "/images/icon_global02.jpg",
         "selectedIconPath": "/images/icon_global01.jpg",
-        "text": "全球臻选"
+        "text": "本地优选"
       },
       {
         "pagePath": "pages/my/my",

@@ -13,6 +13,7 @@
 				<view class="shop-logo-image">
 					<image lazy-load class="shop-image" src="{{util._getImageUrl(shop.shopLogo)}}"></image>
 					<view wx:if="{{shopOff}}" class="state">已打烊</view>
+					<view class="sign">品牌店</view>
 				</view>
 				<view class="detail-right">
 					<view class="shop-name">
@@ -100,7 +101,7 @@
 						<goods-list goods-list="{{goodsList}}" bind:_addCart="_addCart"></goods-list>
 					</view>
 				</van-tab>
-				<van-tab title="全球臻选" wx:if="{{isGlobal==='03'}}">
+				<van-tab title="本地优选" wx:if="{{isGlobal==='03'}}">
 					<!-- <view class="goods-category">
 						<view class="goods-category-list-view {{toFixed?'goods-category-list-fixed':''}}">
 							<view class="goods-category-list">

@@ -431,3 +431,19 @@
   margin-top: 13rpx;
   box-sizing: border-box;
 }
+
+.sign{
+  width: 100%;
+  /* height: 40rpx; */
+  color: #fff;
+  /* color: #f80; */
+  font-size: 20rpx;
+  text-align: center;
+  /* line-height: 40rpx; */
+  background-color: #f80;
+  position: absolute;
+  top: 0rpx;
+  /* right: -10rpx; */
+  /* transform: rotate(45deg); */
+  /* border-radius: 20rpx; */
+}

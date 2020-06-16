@@ -3,6 +3,6 @@
   "usingComponents": {
     "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
     "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index",
-    "goods-list": "../components/goodsList/index"
+    "goods-list": "../../components/goodsList/index"
   }
 }

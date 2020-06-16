@@ -12,17 +12,19 @@ Page({
     pageNum: 1,
     isGlobal: "02",
     searchList: [],
+    shopList: [],
     count: 0,
     shopId: '',
     // 店铺是否关闭
     shopOff: false,
     loginMould: false,
+    type: ''
   },
   // 搜索查询
   _getSearchList(kw = this.data.kw) {
     let shopId = this.data.shopId
-    if(!shopId){
-      shopId=''
+    if (!shopId) {
+      shopId = ''
     }
     // console.log(shopId)
     if (kw) {
@@ -48,6 +50,28 @@ Page({
     }
 
   },
+  searchShopList(kw = this.data.kw) {
+    if (kw) {
+      api._post("/shopstate/fuzzySearchShop", {
+        shopName: kw
+      }).then(res => {
+        // console.log(res)
+        if(res.success){
+          if (res.data.length) {
+            this.setData({
+              shopList: res.data
+            })
+          } else {
+            util._toast('暂无数据');
+          }
+        }else{
+          util._toast("查询失败")
+        }
+      })
+    } else {
+      util._toast("请输入店铺名称")
+    }
+  },
   // 搜索监听
   _searchChange(e) {
     this.setData({
@@ -57,66 +81,80 @@ Page({
   // 搜索
   _search() {
     let kw = this.data.kw;
-    if (kw) {
-      this._getSearchList();
-    } else {
-      util._toast("请输入商品名");
+    let type = this.data.type
+    // if (kw) {
+    //   this._getSearchList();
+    // } else {
+    //   util._toast("请输入商品名");
+    // }
+    // if(type=="00"){
+    //   this.searchShopList
+    // }
+    switch (type) {
+      case '00':
+        this.searchShopList()
+        break;
+      case '01':
+        this._getSearchList()
+        break;
+      default:
+        break;
     }
   },
 
-// 添加购物车
-_addCart(e) {
-  // console.log(e)
-  // console.log(this.data.shopId)
-  if (app.globalData.isLogin) {
-    let goods = e.detail.goods;
-    // console.log(goods)
-    // if(goods.maxBuy && this.data.count>1){
-    //     util._toast('该商品限购一份')
-    // }else{
-    api._post('/shoppingCart/insertShoppingCart/', {
-      id: goods.id,
-      shopId: goods.shopId,
-      shopName: goods.shopName,
-      goodsName: goods.goodsName,
-      img1: goods.img1,
-      couponRate: goods.couponRate,
-      noeUnit: goods.noeUnit,
-      twoNuit: goods.twoNuit
-    }).then(res => {
-      // console.log(res)   
-      if (res.success) {
-        // console.log(res)
-        let count = this.data.count;
-        this.setData({
-          count: ++count,
-          shakeOff: true
-        });
-        setTimeout(() => {
+  // 添加购物车
+  _addCart(e) {
+    // console.log(e)
+    // console.log(this.data.shopId)
+    if (app.globalData.isLogin) {
+      let goods = e.detail.goods;
+      // console.log(goods)
+      // if(goods.maxBuy && this.data.count>1){
+      //     util._toast('该商品限购一份')
+      // }else{
+      api._post('/shoppingCart/insertShoppingCart/', {
+        id: goods.id,
+        shopId: goods.shopId,
+        shopName: goods.shopName,
+        goodsName: goods.goodsName,
+        img1: goods.img1,
+        couponRate: goods.couponRate,
+        noeUnit: goods.noeUnit,
+        twoNuit: goods.twoNuit
+      }).then(res => {
+        // console.log(res)   
+        if (res.success) {
+          // console.log(res)
+          let count = this.data.count;
           this.setData({
-            shakeOff: false
+            count: ++count,
+            shakeOff: true
           });
-        }, 1000);
-        util._toast("添加成功");
-      } else {
-        if(res.error.msg){
-          util._toast(res.error.msg)
-        }else{
-          util._toast("添加失败");
+          setTimeout(() => {
+            this.setData({
+              shakeOff: false
+            });
+          }, 1000);
+          util._toast("添加成功");
+        } else {
+          if (res.error.msg) {
+            util._toast(res.error.msg)
+          } else {
+            util._toast("添加失败");
+          }
+
         }
-       
-      }
-    })
-  // }
-  } else {
-    this.setData({
-      loginMould: true
-    });
-  }
-},
+      })
+      // }
+    } else {
+      this.setData({
+        loginMould: true
+      });
+    }
+  },
 
 
-  _toView(e){
+  _toView(e) {
     let navigatePath = e.currentTarget.dataset.navigate;
     let id = e.currentTarget.dataset.id;
     if (this.data.count) {
@@ -130,63 +168,64 @@ _addCart(e) {
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     // console.log(options)
     this.setData({
-      shopId:options.id,
-      count:options.count,
+      type: options.type,
+      shopId: options.id,
+      count: options.count,
       isGlobal: options.isGlobal == '01' ? options.isGlobal : "02"
     }, () => {
-      this._getSearchList();
+      this._search();
     });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

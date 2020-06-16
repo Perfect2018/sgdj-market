@@ -2,7 +2,8 @@
   "navigationBarTitleText": "搜索",
   "usingComponents": {
     "van-search": "/miniprogram_npm/vant-weapp/search/index",
-    "goods-list": "../components/goodsList/index",
-    "van-icon": "/miniprogram_npm/vant-weapp/icon/index"
+    "goods-list": "../../components/goodsList/index",
+    "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
+    "shop-list": "../../components/shopList/index"
   }
 }

@@ -8,7 +8,7 @@
 
 .search {
   padding: 0 20rpx;
-  width: 90%;
+  /* width: 90%; */
   border-radius: 5rpx;
   margin: 20rpx auto;
   text-align: center;
@@ -17,6 +17,8 @@
   background-color: #eee;
   overflow: hidden;
   line-height: 60rpx;
+  display: flex;
+  justify-content: space-between;
 }
 
 .starShop {
@@ -121,4 +123,13 @@
   position: fixed;
   left: 640rpx;
   bottom: 50rpx;
+}
+
+.search-shop,.search-good{
+  width: 100rpx;
+  height: 60rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
 }

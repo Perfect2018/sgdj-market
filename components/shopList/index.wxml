@@ -6,6 +6,7 @@
 			<view class="item-left">
 				<image lazy-load class="item-image" src="{{util._getImageUrl(item.shopLogo)}}" mode="scaleToFill"></image>
 				<view wx:if="{{item.shopState!=='01'}}" class="state">已打烊</view>
+				<view class="sign">品牌店</view>
 			</view>
 			<view class="item-right">
 				<view class="item-title">
@@ -43,7 +44,7 @@
 							<text>收货后结算</text>
 						</view>
 					</view>
-					<view class="inline-block">
+					<view class="inline-block" wx:if="{{item.distances}}">
 						<image lazy-load class="icon-location" src="{{iconLocation}}" mode="scaleToFill"></image>
 						<text class="color-666">{{util._getKm(item.distances)}}km</text>
 					</view>

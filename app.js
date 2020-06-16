@@ -40,10 +40,12 @@ App({
                         encryptedData,
                         iv
                       }).then(res => {
+                        // console.log(res)
                         if (res.success && res.data) {
                           this.globalData.isLogin = true;
                           api.setCustID(res.data['CUST-ID']);
                         }
+                        // console.log(this.globalData.open)
                       });
                     }
                     // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回

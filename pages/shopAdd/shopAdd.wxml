@@ -1,41 +1,62 @@
 <!--pages/shopAdd/shopAdd.wxml-->
 <wxs src="../../wxs/util.wxs" module="util"></wxs>
 <view wx:if="{{isShow}}">
-  <view class="shop-add">
-    <van-cell-group>
-      <van-field value="{{shopForm.shopName}}" type="text" label="商铺名称" placeholder="请输入商铺名称" required bind:input="_setParam" data-param="shopName" />
-      <van-field value="{{shopForm.operateName}}" type="text" label="法人姓名" placeholder="请输入法人姓名" required bind:input="_setParam" data-param="operateName" />
-      <van-field value="{{shopForm.operateIdcardCode}}" required label="法人身份证" type="text" placeholder="请输入法人身份证" bind:input="_setParam" data-param="operateIdcardCode" />
-      <van-field value="{{shopForm.phone}}" type="number" label="联系电话" placeholder="请输入联系电话" required bind:input="_setParam" data-param="phone" />
-      <van-field value="{{shopForm.phoneBack}}" type="number" label="备用手机号码" placeholder="请输入备用手机号码" bind:input="_setParam" data-param="phoneBack" />
-      <van-field value="{{shopForm.shopStreet}}" required label="店铺地址" type="textarea" placeholder="请输入店铺地址" autosize bind:input="_setSearchList" />
-      <van-field value="{{shopForm.onDestributionPrice}}" required label="起送价格" type="text" placeholder="最低20元" bind:input="_setParam" data-param="onDestributionPrice" />
-      <view wx:if="{{searchResult.length}}" class="search-shop">
-        <block wx:for="{{searchResult}}" wx:key="index">
-          <view class="search-shop-item" bindtap="_pitchOnShop" data-uid="{{item.uid}}">{{item.name}}
-            <text class="color-888 fs-24">{{item.city}}-{{item.district}}</text>
-          </view>
-        </block>
-      </view>
-      <!-- <van-field value="{{shopForm.aptitudeValidDate}}" required label="资质有效期" type="text" placeholder="请输入资质有效期" bind:input="_setParam" data-param="aptitudeValidDate" /> -->
-      <van-field value="{{shopForm.password}}" required label="登录密码" type="password" placeholder="请输入登录密码" autosize bind:input="_setParam" data-param="password" />
-      <!-- <van-field value="{{shopForm.state}}" label="申请状态" disabled/> -->
-      <van-field value="{{shopForm.shopSourceName}}" type="text" label="客户经理姓名" placeholder="请输入客户经理名称" bind:input="_setParam" data-param="shopSourceName" />
-      <van-field value="{{shopForm.shopSourcePhone}}" type="number" label="客户经理电话" placeholder="请输入联系电话" bind:input="_setParam" data-param="shopSourcePhone" />
-    </van-cell-group>
-    <van-checkbox value="{{isConsent}}" custom-class="pl-30 fs-28" icon-class="fs-24" checked-color="#f80" bind:change="_isConsent">阅读并同意
-      <text class="fw-bold" catchtap="_toView" data-navigate="settlementContract">《蔬果到家入驻合同》</text>
-    </van-checkbox>
-    <view class="pl-30 pt-20 color-f80 fs-28">注：请确认以上信息正确后点击“支付并提交”</view>
-    <button wx:if="{{shopForm.state=='00'}}" class="save-btn" bindtap="_setShowSHCode">进入管理后台</button>
-    <button wx:elif="{{shopForm.state=='01'}}" class="save-btn">审核中</button>
-    <button wx:elif="{{shopForm.state=='02'}}" class="save-btn" bindtap="_saveShop">重新支付并提交</button>
-    <button wx:else class="save-btn" bindtap="_saveShop">支付并提交</button>
-  </view>
-  <view class="ht-code">
-    <image class="img" bindtap='_previewImage' bindlongpress="_saveQRImage" data-img="{{util._getImageUrl('5e0d8f630147fd3f985b75d4.png')}}"  src="../../images/sgdj_shb_ewm.png" ></image>
-    <view class="fs-24">长按保存</view>
-  </view>
+	<view class="shop-add">
+		<van-cell-group>
+			<van-field value="{{shopForm.shopName}}" type="text" label="商铺名称" placeholder="请输入商铺名称" required bind:input="_setParam" data-param="shopName" />
+			<van-field value="{{shopForm.operateName}}" type="text" label="法人姓名" placeholder="请输入法人姓名" required bind:input="_setParam" data-param="operateName" />
+			<van-field value="{{shopForm.operateIdcardCode}}" required label="法人身份证" type="text" placeholder="请输入法人身份证" bind:input="_setParam" data-param="operateIdcardCode" />
+			<van-field value="{{shopForm.phone}}" type="number" label="联系电话" placeholder="请输入联系电话" required bind:input="_setParam" data-param="phone" />
+			<van-field value="{{shopForm.phoneBack}}" type="number" label="备用手机号码" placeholder="请输入备用手机号码" bind:input="_setParam" data-param="phoneBack" />
+			<view class="shop-type">
+				<view>
+          <text>*</text>店铺类型
+        </view>
+				<picker bindchange="bindPickerChange" value="{{index}}" range="{{shopArray}}">
+					<view class="picker">
+            <text>{{shopArray[index] ? shopArray[index]:'请选择▼'}}</text>
+					<!-- {{shopArray[index]}} -->
+					</view>
+				</picker>
+			</view>
+			<view class="promise">
+				<view class="look">特別约定</view>
+				<view bindtap="lookClick">{{isLook ? '点击查看▲':'点击查看▼'}}</view>
+			</view>
+			<view class="promise-detail" wx:if="{{isLook}}">
+				<view>1.供应商类门店展示区域为“批发配送”板块，小型门店和品牌店展示在明星店铺列表，品牌店按距离优先展示。</view>
+				<view>2.费用标准：终端小店：365元/年/佣金5%，中型店：1680元/年/佣金3%，供应商：3680元/年/佣金1.5%。</view>
+				<view>3.门店费后期从销售额中扣除。</view>
+				<view>4.合作期满，自动延期。</view>
+			</view>
+			<van-field value="{{shopForm.shopStreet}}" required label="店铺地址" type="textarea" placeholder="请输入店铺地址" autosize bind:input="_setSearchList" />
+			<van-field value="{{shopForm.onDestributionPrice}}" required label="起送价格" type="text" placeholder="最低20元" bind:input="_setParam" data-param="onDestributionPrice" />
+			<view wx:if="{{searchResult.length}}" class="search-shop">
+				<block wx:for="{{searchResult}}" wx:key="index">
+					<view class="search-shop-item" bindtap="_pitchOnShop" data-uid="{{item.uid}}">{{item.name}}
+						<text class="color-888 fs-24">{{item.city}}-{{item.district}}</text>
+					</view>
+				</block>
+			</view>
+			<!-- <van-field value="{{shopForm.aptitudeValidDate}}" required label="资质有效期" type="text" placeholder="请输入资质有效期" bind:input="_setParam" data-param="aptitudeValidDate" /> -->
+			<van-field value="{{shopForm.password}}" required label="登录密码" type="password" placeholder="请输入登录密码" autosize bind:input="_setParam" data-param="password" />
+			<!-- <van-field value="{{shopForm.state}}" label="申请状态" disabled/> -->
+			<van-field value="{{shopForm.shopSourceName}}" type="text" label="客户经理姓名" placeholder="请输入客户经理名称" bind:input="_setParam" data-param="shopSourceName" />
+			<van-field value="{{shopForm.shopSourcePhone}}" type="number" label="客户经理电话" placeholder="请输入联系电话" bind:input="_setParam" data-param="shopSourcePhone" />
+		</van-cell-group>
+		<van-checkbox value="{{isConsent}}" custom-class="pl-30 fs-28" icon-class="fs-24" checked-color="#f80" bind:change="_isConsent">阅读并同意
+			<text class="fw-bold" catchtap="_toView" data-navigate="settlementContract">《蔬果到家入驻合同》</text>
+		</van-checkbox>
+		<view class="pl-30 pt-20 color-f80 fs-28">注：请确认以上信息正确后点击“支付并提交”</view>
+		<button wx:if="{{shopForm.state=='00'}}" class="save-btn" bindtap="_setShowSHCode">进入管理后台</button>
+		<button wx:elif="{{shopForm.state=='01'}}" class="save-btn">审核中</button>
+		<button wx:elif="{{shopForm.state=='02'}}" class="save-btn" bindtap="_saveShop">重新支付并提交</button>
+		<button wx:else class="save-btn" bindtap="_saveShop">支付并提交</button>
+	</view>
+	<view class="ht-code">
+		<image class="img" bindtap='_previewImage' bindlongpress="_saveQRImage" data-img="{{util._getImageUrl('5e0d8f630147fd3f985b75d4.png')}}" src="../../images/sgdj_shb_ewm.png"></image>
+		<view class="fs-24">长按保存</view>
+	</view>
 </view>
 <van-dialog title="提示" message="登录后即可添加商品" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#ff8800"></van-dialog>
 

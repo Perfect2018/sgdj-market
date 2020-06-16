@@ -3,10 +3,20 @@
 <block wx:if="{{open}}">
 	<view>
 		<!-- 搜索 -->
-		<view class="search" bindtap="_searchFocus">
-			{{searchHolder}}
-			<van-icon custom-class="search-icon align-middle " name="search" color="#ccc" size="24px" />
+		<view class="search">
+			<view bindtap="_searchFocus">
+				{{searchHolder}}
+				<van-icon custom-class="search-icon align-middle " name="search" color="#ccc" size="24px" />
+			</view>
+			<!-- <view> -->
+			
+			<view bindtap="searchShop" class="search-shop" data-type="00">店铺搜索</view>
+			<view bindtap="searchGood" class="search-good" data-type="01">商品搜索</view>
+			<!-- </view> -->
+			<!-- <van-button icon="search" type="info" size="small">店铺搜索</van-button>
+			<van-button icon="search">商品搜索</van-button> -->
 		</view>
+
 		<!-- <van-search value="{{searchHolder}}" input-align="center" disabled bind:focus="_searchFocus" /> -->
 		<!-- 轮播 -->
 		<swiper class="slide" indicator-dots indicator-active-color="#f80" autoplay circular>
@@ -45,7 +55,7 @@
 					明星商铺
 				</view>
 				<view class="starShop-openShop color-fff" bindtap="_openShop" wx:if="{{open}}">
-					我要开店
+					免费开店
 				</view>
 			</view>
 			<view class="starShop-body">

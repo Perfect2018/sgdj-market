@@ -131,9 +131,22 @@ Page({
   },
   // 搜索聚焦监听
   _searchFocus(e) {
+    // wx.navigateTo({
+    //   url: `../searchList/searchList`
+    // });
+    this.searchGood()
+  },
+  searchShop(e){
+    // let type = e.currentTarget.dataset.type
     wx.navigateTo({
-      url: `../searchList/searchList`
-    });
+      url: '../searchList/searchList?type=00',
+    })
+  },
+  searchGood(e){
+    // let type = e.currentTarget.dataset.type
+    wx.navigateTo({
+      url: '../searchList/searchList?type=01',
+    })
   },
   // 获取批发配送店铺
   // _getShopId() {
@@ -178,6 +191,7 @@ Page({
     this.setData({
       open:app.globalData.open
     })
+    // console.log(this.data.open)
     // 实例化百度地图API核心类
     bmap = new BMap.BMapWX({
       ak: app.globalData.ak

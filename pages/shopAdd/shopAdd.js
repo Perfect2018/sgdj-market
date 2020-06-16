@@ -15,7 +15,13 @@ Page({
     isSuggestion: true, //判断是否为选中地址
     isConsent: false, //入驻合同
     searchResult: [], //搜索列表
-    isShow:true,
+    isShow: true,
+    isLook: false,
+    shopArray: ['小型终端店', '品牌/连锁/中型店', '供应/批发/生产商'],
+    isStarShop: '', //小型
+    isBrandShop: '', //品牌
+    isWholesaleShop: '', //批发
+    index: '',
     shopForm: {
       // shopName: '1213456',
       // operateName: '都是发鬼地方个',
@@ -40,9 +46,9 @@ Page({
       onDestributionPrice: '20',
       aptitudeValidDate: '',
       password: '',
-      shopSourceName:'',
-      shopSourcePhone:'',
-      shopTownCode:'小程序',
+      shopSourceName: '',
+      shopSourcePhone: '',
+      shopTownCode: '小程序',
       state: ''
     },
     deleteImg: '/images/delete_img.png',
@@ -153,11 +159,18 @@ Page({
     if (!this.data.isConsent) {
       return '请阅读并同意入驻合同';
     }
+
+    if(!this.data.isStarShop || !this.data.isBrandShop || !this.data.isWholesaleShop){
+      return '请选择店铺类型'
+    }
     return false
   },
   // 保存商铺
   _saveShop() {
     let shopForm = this.data.shopForm;
+    let isStarShop = this.data.isStarShop
+    let isBrandShop = this.data.isBrandShop
+    let isWholesaleShop = this.data.isWholesaleShop
     let msg = this._validateShopForm(shopForm);
     if (msg) {
       util._toast(msg);
@@ -176,8 +189,11 @@ Page({
           shopSourcePhone: shopForm.shopSourcePhone,
           operateIdcardCode: shopForm.operateIdcardCode,
           onDestributionPrice: shopForm.onDestributionPrice,
-          shopTownCode:this.data.shopForm.shopTownCode,
-          password: api._getEncrypt(shopForm.password)
+          shopTownCode: this.data.shopForm.shopTownCode,
+          password: api._getEncrypt(shopForm.password),
+          isStarShop,
+          isBrandShop,
+          isWholesaleShop,
         }).then(res => {
           console.log(res)
           if (res.success) {
@@ -245,13 +261,17 @@ Page({
           'shopForm.onDestributionPrice': res.data.onDestributionPrice,
           // 'shopForm.shopSourceName': res.data.shopSource.split(',', 2)[0],
           // 'shopForm.shopSourcePhone': res.data.shopSource.split(',', 2)[1],
-          'shopForm.shopSourceName':res.data.shopSourceName,
-          'shopForm.shopSourcePhone':res.data.shopSourcePhone,
+          'shopForm.shopSourceName': res.data.shopSourceName,
+          'shopForm.shopSourcePhone': res.data.shopSourcePhone,
           'shopForm.password': res.data.password,
           'shopForm.state': res.data.state,
+          index:res.data.isStarShop == '01' ? 0 : res.data.isBrandShop == '01' ? 1 : 2,
+          // isStarShop:res.data.isStarShop,
+          // isBrandShop:res.data.isBrandShop,
+          // isWholesaleShop:res.data.isWholesaleShop,
           isConsent: true
         });
-        if(res.data.shopSource){
+        if (res.data.shopSource) {
           this.setData({
             'shopForm.shopSourceName': res.data.shopSource.split(',', 2)[0],
             'shopForm.shopSourcePhone': res.data.shopSource.split(',', 2)[1],
@@ -277,7 +297,7 @@ Page({
     });
   },
   // suggestion检索--模糊查询
-  
+
   _setSearchList(e) {
     let kw = e.detail;
     if (this.data.isSuggestion) {
@@ -326,14 +346,56 @@ Page({
       url: `../${navigatePath}/${navigatePath}`
     });
   },
+  // 查看特别约定
+  lookClick() {
+    this.setData({
+      isLook: !this.data.isLook
+    })
+  },
+  // 选择店铺类型
+  bindPickerChange(e) {
+    let index = Number(e.detail.value)
+    // console.log(index)
+    switch (index) {
+      case 0:
+        this.setData({
+          index,
+          isStarShop:'01',
+          isBrandShop:"",
+          isWholesaleShop:""
+        })
+        break;
+      case 1:
+        this.setData({
+          index,
+          isBrandShop:'01',
+          isStarShop:"",
+          isWholesaleShop:""
+        })
+        break;
+      case 2:
+        this.setData({
+          index,
+          isStarShop:'',
+          isBrandShop:"",
+          isWholesaleShop:'01'
+        })
+        break;
+      default:
+        break;
+    }
+    // console.log(this.data.isStarShop)
+    // console.log(this.data.isBrandShop)
+    // console.log(this.data.isWholesaleShop)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     bmap = new BMap.BMapWX({
       ak: app.globalData.ak
     });
-   
+
     if (!app.globalData.isLogin) {
       this.setData({
         loginMould: true
@@ -350,14 +412,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-   
+  onReady: function () {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     // 检测入驻合同
     let flag = wx.getStorageSync('settlementContractFlag') || false;
     if (flag) {
@@ -371,35 +433,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
   // 取消登录

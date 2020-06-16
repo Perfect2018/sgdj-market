@@ -159,3 +159,37 @@
   height: 200rpx;
   width: 200rpx;
 }
+
+.shop-type{
+  font-size: 14px;
+  padding: 10px 8px;
+  color: #333;
+  display: flex;
+}
+
+.shop-type>view{
+  width: 190rpx;
+}
+
+.shop-type>view text{
+  color: #f80;
+  margin-right: 2rpx;
+}
+
+.promise{
+  font-size: 14px;
+  padding: 10px 15px;
+  color: #333;
+  display: flex;
+}
+
+.look{
+  width: 180rpx;
+}
+
+.promise-detail{
+  font-size: 28rpx;
+  padding: 5rpx 30rpx;
+  letter-spacing: 2rpx;
+  color: #888;
+}

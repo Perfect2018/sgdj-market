@@ -129,3 +129,18 @@
   display: flex;
   justify-content: space-between;
 }
+
+.sign{
+  width: 80rpx;
+  height: 40rpx;
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+  line-height: 40rpx;
+  background-color: #f80;
+  position: absolute;
+  top: 10rpx;
+  left: -10rpx;
+  transform: rotate(-45deg);
+  /* border-radius: 20rpx; */
+}
