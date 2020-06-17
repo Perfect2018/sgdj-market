@@ -433,7 +433,7 @@
 }
 
 .sign{
-  width: 100%;
+  width: 80rpx;
   /* height: 40rpx; */
   color: #fff;
   /* color: #f80; */
@@ -442,7 +442,9 @@
   /* line-height: 40rpx; */
   background-color: #f80;
   position: absolute;
-  top: 0rpx;
+  top: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  border-top-right-radius: 10rpx;
   /* right: -10rpx; */
   /* transform: rotate(45deg); */
   /* border-radius: 20rpx; */
