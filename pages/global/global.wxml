@@ -15,7 +15,7 @@
       <text class='global-title'>本地优选</text>
     </view>
     <view class="global-body">
-      <goods-list goods-list="{{goodsList}}" show-add="{{false}}"></goods-list>
+      <goods-list goods-list="{{goodsList}}" show-add="{{false}}" is-global="{{true}}"></goods-list>
     </view>
   </view>
 </view>

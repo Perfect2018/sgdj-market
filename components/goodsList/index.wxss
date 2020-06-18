@@ -220,3 +220,14 @@
   height: 20rpx;
   margin-right: 6rpx;
 }
+
+.freight{
+  width: 60rpx;
+  height: 36rpx;
+  background-color: #f80;
+  color: #fff;
+  line-height: 36rpx;
+  font-size: 24rpx;
+  text-align: center;
+  border-radius: 8rpx;
+}

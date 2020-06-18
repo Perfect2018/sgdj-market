@@ -309,7 +309,7 @@ Page({
         // console.log(res)
         if (res.success) {
           goodsList[index].goodsCount = count;
-          console.log(goodsList)
+          // console.log(goodsList)
           this._setGoodsList(goodsList);
           // this.setData({
           //   globalFreight:count*freight

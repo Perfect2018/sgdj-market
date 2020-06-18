@@ -7,7 +7,7 @@
 }
 
 .search {
-  padding: 0 20rpx;
+  padding: 0 0 0 10rpx;
   /* width: 90%; */
   border-radius: 5rpx;
   margin: 20rpx auto;
@@ -18,7 +18,12 @@
   overflow: hidden;
   line-height: 60rpx;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.searchFocus{
+  width: 550rpx;
+  text-align: center;
 }
 
 .starShop {
@@ -127,9 +132,11 @@
 
 .search-shop,.search-good{
   width: 100rpx;
-  height: 60rpx;
+  height: 50rpx;
   text-align: center;
   border-radius: 10rpx;
-  line-height: 60rpx;
+  line-height: 50rpx;
   font-size: 24rpx;
+  background-color: #f80;
+  color: #fff;
 }

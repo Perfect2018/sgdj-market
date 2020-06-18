@@ -20,6 +20,10 @@ Component({
     showAdd: {
       type: Boolean,
       value: true
+    },
+    isGlobal:{
+      type: Boolean,
+      value: false
     }
   },
   observers: {
