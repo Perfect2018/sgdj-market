@@ -91,7 +91,7 @@ Page({
     // console.log(e)
     let navigatePath = e.currentTarget.dataset.navigate;
     let id = e.currentTarget.dataset.id;
-    console.log(id)
+    // console.log(id)
     if (app.globalData.location) {
       if (id == '2b0757c8be8e43a59ad6ce1b23eced82') {
         wx.navigateTo({

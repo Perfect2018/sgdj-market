@@ -25,7 +25,10 @@
     "pages/orderRefund/orderRefund",
     "pages/map/map",
     "pages/envelopes/envelopes",
-    "pages/packLIst/packlist"
+    "pages/packLIst/packlist",
+    "pages/discountGroup/group",
+    "pages/groupDetail/groupDetail",
+    "pages/discount/discount"
   ],
   "window": {
     "backgroundColor": "#fff",

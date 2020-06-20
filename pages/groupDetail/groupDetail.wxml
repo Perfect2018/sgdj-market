@@ -1,0 +1,41 @@
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="img">
+	<image src="{{util._getImageUrl(goodsDetail.img1)}}" lazy-load="true"></image>
+</view>
+<!-- 商品名称/价格 -->
+<view class="goods">
+  <view class="left">
+    <view class="goodsName">{{goodsDetail.goodsName}}</view>
+    <view class="goods-price">
+      <text class="price">原价：{{goodsDetail.price}}</text>
+      <text class="couponRate">现价：{{goodsDetail.couponRate}}</text>
+    </view>
+  </view>
+  <view>
+    <view class="add" bindtap="_addCart" data-goods="{{goodsDetail}}">立即抢购</view>
+  </view>
+</view>
+<!-- 描述 -->
+<view class="describe">
+  <view class="title">商品描述</view>
+  <view class="goods-nuit">
+    <text>规格：{{goodsDetail.noeUnit}}{{goodsDetail.twoNuit}}</text>
+    <text>产地：{{goodsDetail.yieldly}}</text>
+  </view>
+  <view class="goods-describe">描述信息：{{goodsDetail.goodsDescribe ? goodsDetail.goodsDescribe:'该商品暂无描述信息'}}</view>
+</view>
+<!-- 图片 -->
+ <view class="goods-detail-image">
+    <block wx:for="{{5}}" wx:key="index">
+      <view wx:if="{{goodsDetail['img'+(index+1)]}}" class="img">
+        <image lazy-load="true" src="{{util._getImageUrl(goodsDetail['img'+(index+1)])}}"></image>
+      </view>
+    </block>
+  </view>
+<!-- 提示 -->
+<view class="prompt">
+  <view>1.下单：每天下单时间为00:00-23:59</view>
+  <view>2.提货：次日16:00凭提货码到团长处提货</view>
+  <view>3.售后：若您购买的商品有任何问题，请直接到团长处处理</view>
+  <view>4.平台服务热线：029-81115971</view>
+</view>

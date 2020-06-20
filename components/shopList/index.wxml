@@ -6,7 +6,9 @@
 			<view class="item-left">
 				<image lazy-load class="item-image" src="{{util._getImageUrl(item.shopLogo)}}" mode="scaleToFill"></image>
 				<view wx:if="{{item.shopState!=='01'}}" class="state">已打烊</view>
-				<view class="sign">品牌店</view>
+				<block wx:if="{{item.isBrandShop == '01' || item.isWholesaleShop == '01'}}">
+					<view class="sign">{{item.isBrandShop =='01' ? '品牌店' : item.isWholesaleShop == '01' ? '批发商' : ''}}</view>
+				</block>
 			</view>
 			<view class="item-right">
 				<view class="item-title">

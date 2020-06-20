@@ -160,7 +160,7 @@ Page({
       return '请阅读并同意入驻合同';
     }
 
-    if(!this.data.isStarShop || !this.data.isBrandShop || !this.data.isWholesaleShop){
+    if(!this.data.isStarShop && !this.data.isBrandShop && !this.data.isWholesaleShop){
       return '请选择店铺类型'
     }
     return false
@@ -171,6 +171,9 @@ Page({
     let isStarShop = this.data.isStarShop
     let isBrandShop = this.data.isBrandShop
     let isWholesaleShop = this.data.isWholesaleShop
+    // console.log(isStarShop)
+    // console.log(isBrandShop)
+    // console.log(isWholesaleShop)
     let msg = this._validateShopForm(shopForm);
     if (msg) {
       util._toast(msg);
@@ -197,7 +200,7 @@ Page({
         }).then(res => {
           console.log(res)
           if (res.success) {
-            console.log(res)
+            // console.log(res)
             api._post('/order/toPayTheOpenShop', {
               goodId: 'd8f4646c6c7a4c03a584923ba705eec0',
               userName: shopForm.operateName,
@@ -265,7 +268,7 @@ Page({
           'shopForm.shopSourcePhone': res.data.shopSourcePhone,
           'shopForm.password': res.data.password,
           'shopForm.state': res.data.state,
-          index:res.data.isStarShop == '01' ? 0 : res.data.isBrandShop == '01' ? 1 : 2,
+          index:res.data.isStarShop == '01' ? 0 : res.data.isBrandShop == '01' ? 1 : res.data.isWholesaleShop == '01' ? 1 : '0',
           // isStarShop:res.data.isStarShop,
           // isBrandShop:res.data.isBrandShop,
           // isWholesaleShop:res.data.isWholesaleShop,

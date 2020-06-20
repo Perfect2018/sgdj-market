@@ -13,7 +13,9 @@
 				<view class="shop-logo-image">
 					<image lazy-load class="shop-image" src="{{util._getImageUrl(shop.shopLogo)}}"></image>
 					<view wx:if="{{shopOff}}" class="state">已打烊</view>
-					<view class="sign">品牌店</view>
+					<block wx:if="{{shop.isBrandShop == '01' || shop.isWholesaleShop == '01'}}">
+						<view class="sign">{{shop.isBrandShop =='01' ? '品牌店' : shop.isWholesaleShop == '01' ? '批发商' : ''}}</view>
+					</block>
 				</view>
 				<view class="detail-right">
 					<view class="shop-name">
@@ -40,6 +42,7 @@
 			</view>
 		</view> -->
 		<!-- 店铺功能 -->
+		<!-- <block></block> -->
 		<van-tabs active="{{shopActive}}" color="#f80" bind:change="_shopActiveChange">
 			<block>
 				<!-- 公告 -->
@@ -64,21 +67,21 @@
 			<block wx:if="{{isGlobal==='03'}}">
 				<van-tab title="即时送">
 					<!-- 优惠券 -->
-				<view wx:if="{{couponList.length}}" class="shop-discount">
-					<block wx:for="{{couponList}}" wx:key="index">
-						<!-- <image src="../../images/discount.png"></image> -->
-						<view class="item" bindtap="_receiveCoupon" data-id="{{item.id}}">
-							<view class="left">
-								<text>￥</text>
-								<view class="top">{{item.totalAmt}}</view>
+					<view wx:if="{{couponList.length}}" class="shop-discount">
+						<block wx:for="{{couponList}}" wx:key="index">
+							<!-- <image src="../../images/discount.png"></image> -->
+							<view class="item" bindtap="_receiveCoupon" data-id="{{item.id}}">
+								<view class="left">
+									<text>￥</text>
+									<view class="top">{{item.totalAmt}}</view>
+								</view>
+								<view class="right">
+									<view class="bottom">满{{item.fullAmtToUse}}可用</view>
+									<view class="btn">领取</view>
+								</view>
 							</view>
-							<view class="right">
-								<view class="bottom">满{{item.fullAmtToUse}}可用</view>
-								<view class="btn">领取</view>
-							</view>
-						</view>
-					</block>
-				</view>
+						</block>
+					</view>
 					<!-- 限价抢购---社区团购 -->
 					<view class="goods-list-type">
 						<image src="../../images/1.png" bindtap="discount"></image>

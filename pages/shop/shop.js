@@ -170,51 +170,59 @@ Page({
 
   // 限价抢购
   discount(){
-    api._post('/goods/queryNotGlobalRobGoods',{
-      shopId:this.data.shopId,
-      pageNum:this.data.discountNum
-    }).then(res=>{
-      if(res.data.size == '0'){
-        if(res.data.pageNum == '1'){
-          util._toast('该店暂无抢购商品，请稍后查看')
-        }else{
-          util._toast('暂无数据')
-        }
-      }
-      if(res.data.list.length){
-        this.setData({
-          goodsList:res.data.list,
-          discountNum:++this.data.discountNum,
-          isDiscount:true,
-          groupNum:1
-        })
-      }
+    let shop = JSON.stringify(this.data.shop)
+    wx.navigateTo({
+      url: '../discount/discount?shopId='+this.data.shopId+'&shopInfo='+shop+'&count='+this.data.count+'&type='+'01',
     })
+    // api._post('/goods/queryNotGlobalRobGoods',{
+    //   shopId:this.data.shopId,
+    //   pageNum:this.data.discountNum
+    // }).then(res=>{
+    //   if(res.data.size == '0'){
+    //     if(res.data.pageNum == '1'){
+    //       util._toast('该店暂无抢购商品，请稍后查看')
+    //     }else{
+    //       util._toast('暂无数据')
+    //     }
+    //   }
+    //   if(res.data.list.length){
+    //     this.setData({
+    //       goodsList:res.data.list,
+    //       discountNum:++this.data.discountNum,
+    //       isDiscount:true,
+    //       groupNum:1
+    //     })
+    //   }
+    // })
   },
 
   // 社区团购
   group(){
-    api._post('/goods/queryNotGlobalGroupGoods',{
-      shopId:this.data.shopId,
-      pageNum:this.data.groupNum
-    }).then(res=>{
-
-      if(res.data.size == '0'){
-        if(res.data.pageNum == '1'){
-          util._toast('该店暂无团购商品，请稍后查看')
-        }else{
-          util._toast('暂无数据')
-        }
-      }
-      if(res.data.list.length){
-        this.setData({
-          goodsList:res.data.list,
-          groupNum:++this.data.groupNum,
-          isGroup:true,
-          discountNum:1
-        })
-      }
+    let shop = JSON.stringify(this.data.shop)
+    wx.navigateTo({
+      url: '../discountGroup/group?shopId='+this.data.shopId+'&shopInfo='+shop+'&count='+this.data.count+'&type='+'02',
     })
+    // api._post('/goods/queryNotGlobalGroupGoods',{
+    //   shopId:this.data.shopId,
+    //   pageNum:this.data.groupNum
+    // }).then(res=>{
+
+    //   if(res.data.size == '0'){
+    //     if(res.data.pageNum == '1'){
+    //       util._toast('该店暂无团购商品，请稍后查看')
+    //     }else{
+    //       util._toast('暂无数据')
+    //     }
+    //   }
+    //   if(res.data.list.length){
+    //     this.setData({
+    //       goodsList:res.data.list,
+    //       groupNum:++this.data.groupNum,
+    //       isGroup:true,
+    //       discountNum:1
+    //     })
+    //   }
+    // })
   },
 
   // 领取优惠券

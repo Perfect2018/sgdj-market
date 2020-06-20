@@ -1,0 +1,58 @@
+<!--pages/discount/discount.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="{{shopOff?'shop-off':''}}">
+	<view class="search" bindtap="search" data-id="{{shopId}}" data-count="{{count}}">
+		<view class="search-place">
+			<image src="../../images/ss.png"></image>搜索店铺里的商品
+		</view>
+	</view>
+	<!-- 店铺 -->
+	<view class="shop flex-between items-center">
+		<view class="shop-detail-left flex-start">
+			<view class="shop-logo-image">
+				<image lazy-load class="shop-image" src="{{util._getImageUrl(shop.shopLogo)}}"></image>
+				<view wx:if="{{shopOff}}" class="state">已打烊</view>
+				<block wx:if="{{shop.isBrandShop == '01' || shop.isWholesaleShop == '01'}}">
+					<view class="sign">{{shop.isBrandShop =='01' ? '品牌店' : shop.isWholesaleShop == '01' ? '批发商' : ''}}</view>
+				</block>
+			</view>
+			<view class="detail-right">
+				<view class="shop-name">
+					{{shop.shopName}}
+				</view>
+			</view>
+		</view>
+		<view class="shop-detail-right">
+			<view class="shop-qualification-image">
+				<image lazy-load class="img" src="{{util._getImageUrl(shop.aptitudeImgId)}}" bindtap='_previewImage' data-img="{{util._getImageUrl(shop.aptitudeImgId)}}"></image>
+			</view>
+		</view>
+	</view>
+	<!-- 商品 -->
+	<view class="goods" wx:for="{{goodsList}}" wx:key="index">
+		<view class="img">
+			<image src="{{util._getImageUrl(item.img1)}}" lazy-load=""></image>
+			<view class="look" bindtap="_toView" data-navigate="groupDetail" data-id="{{item.id}}">点击查看详情</view>
+		</view>
+		<view class="item">
+			<view class="item-left">
+				<view class="good-name">{{item.goodsName}}/{{item.twoNuit}}</view>
+				<view class="time">限购一份</view>
+				<view class="item-price">
+					<text class="price">￥：{{item.price}}</text>
+					<text class="couponRate">抢购价：{{item.couponRate}}</text>
+				</view>
+			</view>
+			<view class="item-right">
+				<view class="stockSize">限量：{{item.stockSize}}</view>
+				<view class="soldSize">已售：{{item.soldSize}}</view>
+				<view class="add" bindtap="_addCart" data-goods="{{item}}">立即抢购</view>
+			</view>
+		</view>
+	</view>
+</view>
+<movable-area class="cart-view">
+	<movable-view direction="all" inertia class="cart-icon {{shopOff?'shop-off':''}} {{shakeOff?'shake':''}}" bindtap="_toView" data-navigate="shoppingCart" data-id="{{shopId}}">
+		<van-icon name="cart-o" class="color-f80" info="{{count<100?count:'99'}}" />
+	</movable-view>
+</movable-area>

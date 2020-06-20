@@ -18,7 +18,7 @@ Page({
     // 店铺是否关闭
     shopOff: false,
     loginMould: false,
-    type: ''
+    type: '01'
   },
   // 搜索查询
   _getSearchList(kw = this.data.kw) {
@@ -26,7 +26,7 @@ Page({
     if (!shopId) {
       shopId = ''
     }
-    // console.log(shopId)
+    console.log(shopId)
     if (kw) {
       api._post("/goods/fuzzySearchGoods", {
         goodsName: kw,

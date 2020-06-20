@@ -52,7 +52,7 @@ Page({
         api._post('/goods/getGlobalGoodsList', {
           pageNum: pageNum
         }).then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.success && res.data.list.length > 0) {
             let goodsList = this.data.goodsList;
             goodsList = goodsList.concat(res.data.list)
