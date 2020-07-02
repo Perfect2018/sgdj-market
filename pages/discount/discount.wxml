@@ -30,22 +30,22 @@
 	</view>
 	<!-- 商品 -->
 	<view class="goods" wx:for="{{goodsList}}" wx:key="index">
-		<view class="img">
+		<view class="img" bindtap="_toView" data-navigate="groupDetail" data-id="{{item.id}}">
 			<image src="{{util._getImageUrl(item.img1)}}" lazy-load=""></image>
 			<view class="look" bindtap="_toView" data-navigate="groupDetail" data-id="{{item.id}}">点击查看详情</view>
 		</view>
 		<view class="item">
 			<view class="item-left">
-				<view class="good-name">{{item.goodsName}}/{{item.twoNuit}}</view>
+				<view class="good-name">{{item.goodsName}}</view>
 				<view class="time">限购一份</view>
 				<view class="item-price">
-					<text class="price">￥：{{item.price}}</text>
-					<text class="couponRate">抢购价：{{item.couponRate}}</text>
+					<text class="price">￥:{{item.price}}</text>
+					<text class="couponRate">抢购价:{{item.couponRate}}</text>
 				</view>
 			</view>
 			<view class="item-right">
-				<view class="stockSize">限量：{{item.stockSize}}</view>
-				<view class="soldSize">已售：{{item.soldSize}}</view>
+				<view class="stockSize">限量:{{item.stockSize}}份</view>
+				<view class="soldSize">已售:{{item.soldSize}}份</view>
 				<view class="add" bindtap="_addCart" data-goods="{{item}}">立即抢购</view>
 			</view>
 		</view>

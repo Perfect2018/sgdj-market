@@ -38,7 +38,7 @@ Page({
       // console.log(res)
       if(res.data.size == '0'){
         if(res.data.pageNum == '1'){
-          util._toast('该店暂无团购商品，请稍后查看')
+          util._toast('该店暂无抢购商品，请稍后查看')
         }else{
           util._toast('暂无数据')
         }
@@ -116,6 +116,7 @@ Page({
     }
   },
 
+  // 限价抢购
   _toView(e) {
     let navigatePath = e.currentTarget.dataset.navigate;
     let id = e.currentTarget.dataset.id;
@@ -201,6 +202,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return{
+      title:''
+    }
   }
 })

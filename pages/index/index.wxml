@@ -5,8 +5,8 @@
 		<!-- 搜索 -->
 		<view class="search">
 			<view bindtap="_searchFocus" class="searchFocus">
-				{{searchHolder}}
 				<van-icon custom-class="search-icon align-middle " name="search" color="#ccc" size="24px" />
+				{{searchHolder}}
 			</view>
 			<!-- <view> -->
 			

@@ -28,7 +28,8 @@
     "pages/packLIst/packlist",
     "pages/discountGroup/group",
     "pages/groupDetail/groupDetail",
-    "pages/discount/discount"
+    "pages/discount/discount",
+    "components/discountGroup/group"
   ],
   "window": {
     "backgroundColor": "#fff",

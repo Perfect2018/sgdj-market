@@ -345,6 +345,7 @@ Page({
         }
         wx.setStorageSync("location", location);
         app.globalData.location = location;
+        // console.log(app.globalData.location)
         bmap.regeocoding({
           location: `${location.lat},${location.lng}`,
           success: (res) => {

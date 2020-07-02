@@ -6,10 +6,18 @@
 <view class="goods">
   <view class="left">
     <view class="goodsName">{{goodsDetail.goodsName}}</view>
-    <view class="goods-price">
-      <text class="price">原价：{{goodsDetail.price}}</text>
-      <text class="couponRate">现价：{{goodsDetail.couponRate}}</text>
-    </view>
+    <block wx:if="{{type == '01'}}">
+      <view class="goods-price">
+        <text class="price">￥:{{goodsDetail.price}}</text>
+        <text class="couponRate">抢购价:{{goodsDetail.couponRate}}</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="goods-price">
+        <text class="price">原价:{{goodsDetail.price}}</text>
+        <text class="couponRate">现价:{{goodsDetail.couponRate}}</text>
+      </view>
+    </block>
   </view>
   <view>
     <view class="add" bindtap="_addCart" data-goods="{{goodsDetail}}">立即抢购</view>
@@ -19,23 +27,31 @@
 <view class="describe">
   <view class="title">商品描述</view>
   <view class="goods-nuit">
-    <text>规格：{{goodsDetail.noeUnit}}{{goodsDetail.twoNuit}}</text>
-    <text>产地：{{goodsDetail.yieldly}}</text>
+    <text>规格:{{goodsDetail.noeUnit}}{{goodsDetail.twoNuit}}</text>
+    <text>产地:{{goodsDetail.yieldly}}</text>
   </view>
-  <view class="goods-describe">描述信息：{{goodsDetail.goodsDescribe ? goodsDetail.goodsDescribe:'该商品暂无描述信息'}}</view>
+  <view class="goods-describe">{{goodsDetail.goodsDescribe ? goodsDetail.goodsDescribe:'该商品暂无描述信息'}}</view>
+  
 </view>
 <!-- 图片 -->
  <view class="goods-detail-image">
     <block wx:for="{{5}}" wx:key="index">
-      <view wx:if="{{goodsDetail['img'+(index+1)]}}" class="img">
-        <image lazy-load="true" src="{{util._getImageUrl(goodsDetail['img'+(index+1)])}}"></image>
+      <view wx:if="{{goodsDetail['img'+(index+2)]}}" class="img">
+        <image lazy-load="true" src="{{util._getImageUrl(goodsDetail['img'+(index+2)])}}"></image>
       </view>
     </block>
   </view>
 <!-- 提示 -->
-<view class="prompt">
-  <view>1.下单：每天下单时间为00:00-23:59</view>
-  <view>2.提货：次日16:00凭提货码到团长处提货</view>
-  <view>3.售后：若您购买的商品有任何问题，请直接到团长处处理</view>
-  <view>4.平台服务热线：029-81115971</view>
-</view>
+<block wx:if="{{type!=='01'}}">
+  <view class="prompt">
+    <view>1.下单：下单时间截止提货日凌晨12:00</view>
+    <view>2.提货：提货日凭提货码到团长处提货</view>
+    <view>3.售后：若您购买商品有任何问题请找团长售后</view>
+    <view>4.团购咨询电话：{{goodsDetail.shop.phone}}</view>
+  </view>
+</block>
+<movable-area class="cart-view">
+	<movable-view direction="all" inertia class="cart-icon {{shopOff?'shop-off':''}} {{shakeOff?'shake':''}}" bindtap="_toView" data-navigate="shoppingCart" data-id="{{goodsDetail.shopId}}">
+		<van-icon name="cart-o" class="color-f80" info="{{count<100?count:'99'}}" />
+	</movable-view>
+</movable-area>

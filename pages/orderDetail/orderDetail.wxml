@@ -43,6 +43,13 @@
 		<view class="first">订单编号：</view>
 		<view class="last color-888">{{orderDetail.orderNo}}</view>
 	</view>
+	<block wx:if="{{code}}">
+		<view class="order-detail-item flex-between verification" data-key="{{orderDetail.verification}}" bindlongtap="copy">
+			<view class="first">核销码：</view>
+			<view class="last color-888" wx:if="{{orderDetail.orderState=='10'}}">已使用</view>
+			<view class="last color-888" wx:else>{{code}}</view>
+		</view>
+	</block>
 	<view class="order-detail-item flex-between">
 		<view class="first">商品金额：</view>
 		<view class="last color-888">{{util._getFixedMoney(orderDetail.originalAmt)}}</view>

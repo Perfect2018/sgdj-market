@@ -14,14 +14,14 @@
         </view>
 				<picker bindchange="bindPickerChange" value="{{index}}" range="{{shopArray}}">
 					<view class="picker">
-            <text>{{shopArray[index] ? shopArray[index]:'请选择▼'}}</text>
+            <text>{{shopArray[index] ? shopArray[index]:'请选择店铺类型  ▼'}}</text>
 					<!-- {{shopArray[index]}} -->
 					</view>
 				</picker>
 			</view>
 			<view class="promise">
 				<view class="look">特別约定</view>
-				<view bindtap="lookClick">{{isLook ? '点击查看▲':'点击查看▼'}}</view>
+				<view bindtap="lookClick">{{isLook ? '点击查看  ▲':'点击查看  ▼'}}</view>
 			</view>
 			<view class="promise-detail" wx:if="{{isLook}}">
 				<view>1.供应商类门店展示区域为“批发配送”板块，小型门店和品牌店展示在明星店铺列表，品牌店按距离优先展示。</view>
@@ -30,6 +30,7 @@
 				<view>4.合作期满，自动延期。</view>
 			</view>
 			<van-field value="{{shopForm.shopStreet}}" required label="店铺地址" type="textarea" placeholder="请输入店铺地址" autosize bind:input="_setSearchList" />
+			<van-field value="{{shopForm.address}}" type="text" label="详细地址" placeholder="请输入详细地址" required bind:input="_setParam" data-param="address" />
 			<van-field value="{{shopForm.onDestributionPrice}}" required label="起送价格" type="text" placeholder="最低20元" bind:input="_setParam" data-param="onDestributionPrice" />
 			<view wx:if="{{searchResult.length}}" class="search-shop">
 				<block wx:for="{{searchResult}}" wx:key="index">

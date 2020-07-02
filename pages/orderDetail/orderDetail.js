@@ -26,7 +26,8 @@ Page({
       }
     ],
     stepsAction: 0,
-    orderDetail: {}
+    orderDetail: {},
+    code:''
   },
     // 拨打电话
     _makePhoneCall(e) {
@@ -152,6 +153,21 @@ Page({
       this.setData(data);
     });
   },
+
+  // 获取订单核销码
+  getCode(){
+    api._post('/order/selectShopCode',{
+      orderId:this.data.orderId
+    }).then(res=>{
+      if(res.success){
+        this.setData({
+          code:res.data
+        })
+      }else{
+        util._toast('操作异常')
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -160,6 +176,7 @@ Page({
       orderId: options.id
     }, () => {
       this._getOrderDetail();
+      this.getCode()
     });
   },
 
@@ -209,6 +226,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return{
+      title:this.data.orderDetail.shopName
+    }
   }
 })

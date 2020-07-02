@@ -49,7 +49,8 @@ Page({
       shopSourceName: '',
       shopSourcePhone: '',
       shopTownCode: '小程序',
-      state: ''
+      state: '',
+      address:''
     },
     deleteImg: '/images/delete_img.png',
   },

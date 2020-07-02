@@ -39,7 +39,10 @@ Page({
     groupNum:1,
     discountNum:1,
     isDiscount:false,
-    isGroup:false
+    isGroup:false,
+    groupList:[],
+    // 是否为团购商户
+    isShow:false
   },
 
   // 搜索
@@ -127,7 +130,12 @@ Page({
   // 添加购物车
   _addCart(e) {
     if (app.globalData.isLogin) {
-      let goods = e.detail.goods;
+      // console.log(e)
+      if(this.data.isGroup){
+        var goods = e.currentTarget.dataset.goods
+      }else{
+        var goods = e.detail.goods;
+      }
       api._post('/shoppingCart/insertShoppingCart/', {
         id: goods.id,
         shopId: goods.shopId,
@@ -198,31 +206,31 @@ Page({
 
   // 社区团购
   group(){
-    let shop = JSON.stringify(this.data.shop)
-    wx.navigateTo({
-      url: '../discountGroup/group?shopId='+this.data.shopId+'&shopInfo='+shop+'&count='+this.data.count+'&type='+'02',
-    })
-    // api._post('/goods/queryNotGlobalGroupGoods',{
-    //   shopId:this.data.shopId,
-    //   pageNum:this.data.groupNum
-    // }).then(res=>{
-
-    //   if(res.data.size == '0'){
-    //     if(res.data.pageNum == '1'){
-    //       util._toast('该店暂无团购商品，请稍后查看')
-    //     }else{
-    //       util._toast('暂无数据')
-    //     }
-    //   }
-    //   if(res.data.list.length){
-    //     this.setData({
-    //       goodsList:res.data.list,
-    //       groupNum:++this.data.groupNum,
-    //       isGroup:true,
-    //       discountNum:1
-    //     })
-    //   }
+    // let shop = JSON.stringify(this.data.shop)
+    // wx.navigateTo({
+    //   url: '../discountGroup/group?shopId='+this.data.shopId+'&shopInfo='+shop+'&count='+this.data.count+'&type='+'02',
     // })
+    api._post('/goods/queryNotGlobalGroupGoods',{
+      shopId:this.data.shopId,
+      pageNum:this.data.groupNum
+    }).then(res=>{
+
+      if(res.data.size == '0'){
+        if(res.data.pageNum == '1'){
+          util._toast('该店暂无团购商品，请稍后查看')
+        }else{
+          util._toast('暂无数据')
+        }
+      }
+      if(res.data.list.length){
+        this.setData({
+          groupList:this.data.groupList.concat(res.data.list),
+          groupNum:++this.data.groupNum,
+          isGroup:true,
+          discountNum:1
+        })
+      }
+    })
   },
 
   // 领取优惠券
@@ -251,7 +259,7 @@ Page({
       // timer = setTimeout(() => {
         
       // }, 100)
-    }else if(e.detail.title === '全球臻选'){
+    }else if(e.detail.title === '本地优选'){
       this.setData({
         isGlobalActive:'01',
         pageNum: 1,
@@ -373,6 +381,9 @@ Page({
           // 生成店铺二维码
           this._getShopQR();
         });
+        if(res.data.shopInfo.type=='02'){
+          this.group()
+        }
       }
     });
   },
@@ -383,7 +394,8 @@ Page({
       this.setData({
         categoryActive: id,
         goodsList: [],
-        pageNum: 1
+        pageNum: 1,
+        groupNum:1
       }, () => {
         this._getGoodsList();
       });
@@ -463,7 +475,7 @@ Page({
       }
     } else {
       wx.navigateTo({
-        url: `../${navigatePath}/${navigatePath}?id=${id}`
+        url: `../${navigatePath}/${navigatePath}?id=${id}&count=${this.data.count}`
       });
     }
   },

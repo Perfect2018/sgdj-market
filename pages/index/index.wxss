@@ -2,7 +2,7 @@
 
 .search-icon {
   color: #ccc;
-  float: right;
+  /* float: right; */
   margin-top: 5rpx;
 }
 
@@ -132,11 +132,16 @@
 
 .search-shop,.search-good{
   width: 100rpx;
-  height: 50rpx;
+  height: 60rpx;
   text-align: center;
-  border-radius: 10rpx;
-  line-height: 50rpx;
+  border-radius: 50rpx;
+  line-height: 60rpx;
   font-size: 24rpx;
   background-color: #f80;
   color: #fff;
+  box-sizing: border-box;
+}
+
+.search-shop{
+  margin-right: 5rpx;
 }

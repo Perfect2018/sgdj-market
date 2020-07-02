@@ -21,6 +21,13 @@
 					<view class="shop-name">
 						{{shop.shopName}}
 					</view>
+					<block wx:if="{{isShow}}">
+						<view class="pickup">
+							<text>提货点:水果沙拉旗舰店旗舰店</text>
+							<text>电话:18897645321</text>
+						</view>
+						<view class="addr">地址:陕西省西安市雁塔区科技路科技路西口旗舰店旗舰店</view>
+					</block>
 				</view>
 			</view>
 			<view class="shop-detail-right">
@@ -99,8 +106,32 @@
 							<image class="right-icon-o" src="../../images/icon-cyc.png"></image>
 						</view>
 					</view>
+					<view wx:if="{{isGroup}}" class="group-list">
+						<view class="goods" wx:for="{{groupList}}" wx:key="index">
+							<view class="img">
+								<image src="{{util._getImageUrl(item.img1)}}" lazy-load="true" bindtap="_toView" data-navigate="groupDetail" data-id="{{item.id}}"></image>
+								<view class="look" bindtap="_toView" data-navigate="groupDetail" data-id="{{item.id}}">点击查看详情</view>
+							</view>
+							<view class="item">
+								<view class="item-left">
+									<view class="good-name">{{item.goodsName}}</view>
+									<!-- <view class="time">预售时间:{{util._getYMD(item.shelfDate)}}</view> -->
+									<view class="time">提货时间:{{util._getYMD(item.lowerDate)}}</view>
+									<view class="item-price">
+										<text class="price">原价:{{item.price}}</text>
+										<text class="couponRate">现价:{{item.couponRate}}</text>
+									</view>
+								</view>
+								<view class="item-right">
+									<view class="stockSize">限量:{{item.stockSize}}份</view>
+									<view class="soldSize">已售:{{item.soldSize}}份</view>
+									<view class="add" bindtap="_addCart" data-goods="{{item}}">立即抢购</view>
+								</view>
+							</view>
+						</view>
 
-					<view class="goods-list">
+					</view>
+					<view class="goods-list" wx:else>
 						<goods-list goods-list="{{goodsList}}" bind:_addCart="_addCart"></goods-list>
 					</view>
 				</van-tab>
@@ -144,7 +175,7 @@
 			</block>
 			<block wx:else>
 				<van-tab title="商品列表">
-					<view class="pt-20">
+					<view>
 						<!-- 优惠券 -->
 						<view wx:if="{{couponList.length}}" class="shop-discount">
 							<block wx:for="{{couponList}}" wx:key="index">
@@ -166,7 +197,6 @@
 							<image src="../../images/1.png" bindtap="discount"></image>
 							<image src="../../images/2.png" bindtap="group"></image>
 						</view>
-
 						<view class="goods-category">
 							<view class="goods-category-list-view {{toFixed?'goods-category-list-fixed':''}}">
 								<view class="goods-category-list">
@@ -179,7 +209,31 @@
 								<image class="right-icon-o" src="../../images/icon-cyc.png"></image>
 							</view>
 						</view>
-						<view class="goods-list">
+						<view class="group-list" wx:if="{{isGroup}}">
+							<view class="goods" wx:for="{{groupList}}" wx:key="index">
+							<view class="img">
+								<image src="{{util._getImageUrl(item.img1)}}" lazy-load="true" bindtap="_toView" data-navigate="groupDetail" data-id="{{item.id}}"></image>
+								<view class="look" bindtap="_toView" data-navigate="groupDetail" data-id="{{item.id}}">点击查看详情</view>
+							</view>
+							<view class="item">
+								<view class="item-left">
+									<view class="good-name">{{item.goodsName}}</view>
+									<!-- <view class="time">预售时间:{{util._getYMD(item.shelfDate)}}</view> -->
+									<view class="time">提货时间:{{util._getYMD(item.lowerDate)}}</view>
+									<view class="item-price">
+										<text class="price">原价:{{item.price}}</text>
+										<text class="couponRate">现价:{{item.couponRate}}</text>
+									</view>
+								</view>
+								<view class="item-right">
+									<view class="stockSize">限量:{{item.stockSize}}份</view>
+									<view class="soldSize">已售:{{item.soldSize}}份</view>
+									<view class="add" bindtap="_addCart" data-goods="{{item}}">立即抢购</view>
+								</view>
+							</view>
+						</view>
+						</view>
+						<view class="goods-list" wx:else>
 							<goods-list goods-list="{{goodsList}}" bind:_addCart="_addCart"></goods-list>
 						</view>
 					</view>
@@ -203,7 +257,7 @@
 							</block>
 							<block wx:else>
 								<van-panel title="电话" custom-class="store-phone">
-									<view class="right" bindtap="_setShowPhone">点击联系商铺</view>
+									<view class="right" bindtap="_setShowPhone">联系商家</view>
 								</van-panel>
 							</block>
 							<block wx:if="{{showTextarea}}">
@@ -227,7 +281,6 @@
 				</van-tab>
 			</block>
 		</van-tabs>
-
 	</scroll-view>
 </view>
 <movable-area class="cart-view">

@@ -115,6 +115,13 @@
 					"id": -1,
 					"name": "pages/settlementContract/settlementContract",
 					"pathName": "pages/settlementContract/settlementContract",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/welcome/welcome",
+					"pathName": "pages/welcome/welcome",
 					"scene": null
 				}
 			]

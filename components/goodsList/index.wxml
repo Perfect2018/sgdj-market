@@ -28,7 +28,7 @@
 					<view class="goods-price">￥{{util._getFixedMoney(item.discountPrice || item.discountPrice!='null'?item.couponRate:'0.00')}}/
 						<text class="goods-noeUnit">{{item.noeUnit}}{{item.twoNuit}}</text>
 					</view>
-					<view wx:if="{{!item.freight}}" class="freight">包邮</view>
+					<view wx:if="{{!item.freight && item.isGlobalGoods=='01'}}" class="freight">包邮</view>
 					<view wx:if="{{showAdd}}" class="fs-50" catchtap="_addCart" data-id="{{item.id}}">
 						<image lazy-load class="gwt-icon" src="{{gwcIcon}}"></image>
 					</view>
@@ -61,7 +61,7 @@
 					<view class="goods-price">￥{{util._getFixedMoney(item.discountPrice || item.discountPrice!='null'?item.couponRate:'0.00')}}/
 						<text class="goods-noeUnit">{{item.noeUnit}}{{item.twoNuit}}</text>
 					</view>
-					<view wx:if="{{!item.freight}}" class="freight">包邮</view>
+					<view wx:if="{{!item.freight && item.isGlobalGoods=='01'}}" class="freight">包邮</view>
 					<view wx:if="{{showAdd}}" class="fs-50" catchtap="_addCart" data-id="{{item.id}}">
 						<image lazy-load class="gwt-icon" src="{{gwcIcon}}"></image>
 					</view>

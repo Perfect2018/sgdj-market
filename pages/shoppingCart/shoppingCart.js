@@ -42,7 +42,8 @@ Page({
       globalFreight: '0', //全球臻选商品运费
     },
     finalAmt: 0, //最终支付
-    remark: "" //备注
+    remark: "", //备注
+    isGroup:''
   },
   // 提交订单
   _submitOrder() {
@@ -461,7 +462,7 @@ Page({
         this.data.globalFreight -= freight
         // this._shippingFee(selectGoodsList)
         this.onShow()
-        console.log(this.data.globalFreight)
+        // console.log(this.data.globalFreight)
         this._setGoodsList(goodsList);
         util._toast("删除成功");
       } else {
@@ -529,23 +530,40 @@ Page({
         let item = res.data.shoppingCart.map(elem => {
           return elem.freight ? Number(elem.freight)*elem.goodsCount : 0
         })
+
+        // 判断团购商品的配送放式
+        let goodsType = res.data.shoppingCart.map(elem=>{
+          return elem.goodsTypes ? elem.goodsTypes: ''
+        })
+        // console.log(goodsType)
         let sum = item.reduce((pre, next) => {
           return pre + next
         }, 0)
-        // console.log(item)
+        let isGroup = goodsType.indexOf('02')
+        if(isGroup!=-1){
+          this.setData({
+            shippingFee:0
+          })
+        }else{
+          this.setData({
+            shippingFee: res.data.psf / 2,
+          })
+        }
+        // console.log(isGroup)
         // console.log(sum)
         this.setData({
           custCoupons: res.data.custCoupons || [],
           shopOff: goodsList[0] && goodsList[0].shop.shopState === "01" ? false : true,
           address: res.data.address,
           onDestributionPrice: goodsList[0] && goodsList[0].shop.onDestributionPrice ? goodsList[0].shop.onDestributionPrice.toFixed(2) : '20.00',
-          shippingFee: res.data.psf / 2,
+          
           'useMoney.shippingFee': res.data.psf / 2,
           'useMoney.pocketMoney': res.data.pocketMoney,
           pocketMoney: res.data.pocketMoney,
           cashRollMoney: res.data.cashRollMoney,
           cashMoney: res.data.cashMoney,
-          globalFreight: sum
+          globalFreight: sum,
+          isGroup:isGroup
         });
         // console.log(this.data.globalFreight)
         // }

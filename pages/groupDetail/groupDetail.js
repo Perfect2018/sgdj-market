@@ -11,7 +11,11 @@ Page({
     goodsId:'',
     goodsDetail:{},
     price:'',
-    type:''
+    type:'',
+    shopId: '',
+    count: 0, //购物车数量
+    // 是否抖动
+    shakeOff: false,
   },
 
   // 获取商品详情
@@ -30,11 +34,28 @@ Page({
         this.setData({
           goodsDetail: temp,
           price:temp.couponRate,
+          shopId:temp.shopId
         });
+        this._getCount()
       }
     });
   },
 
+  // 获取购物车数量
+  _getCount(shopId=this.data.shopId) {
+    if (app.globalData.isLogin) {
+      api._post('/shoppingCart/queryCustGoodsCartCount/', {
+        shopId: shopId
+      }).then(res => {
+        if (res.success) {
+          // console.log(res.data)
+          this.setData({
+            count: res.data
+          });
+        }
+      })
+    }
+  },
 
    // 添加购物车
    _addCart(e) {
@@ -81,17 +102,45 @@ Page({
       });
     }
   },
+
+  _toView(e) {
+    let navigatePath = e.currentTarget.dataset.navigate;
+    let id = e.currentTarget.dataset.id;
+    let shopId = this.data.shopId
+    if (navigatePath == "shoppingCart") {
+      if (app.globalData.isLogin) {
+        if (this.data.count) {
+          wx.navigateTo({
+            url: `../${navigatePath}/${navigatePath}?id=${id}`
+          });
+        } else {
+          util._toast("请添加商品");
+        }
+      } else {
+        this.setData({
+          loginMould: true
+        })
+        // util._toast("请登录");
+      }
+    } else {
+      wx.navigateTo({
+        url: `../${navigatePath}/${navigatePath}?id=${id}&shopId=${shopId}`
+      });
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
     this.setData({
       goodsId:options.id,
-      type:options.type
-    },()=>{
-      this._getGoodsDetail(this.data.goodsId)
+      // shopId:options.shopId,
+      type:options.type,
+      count:options.count
     })
+    this._getGoodsDetail(this.data.goodsId)
+    // this._getCount(this.data.shopId)
     // console.log(this.data.goodsId)
   },
 
@@ -106,7 +155,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this._getCount()
   },
 
   /**
@@ -141,6 +190,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return{
+      title:this.data.goodsDetail.goodsName
+    }
   }
 })

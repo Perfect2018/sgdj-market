@@ -18,6 +18,18 @@ Page({
     loginMould: false,
   },
 
+   // 获取店铺初始数据
+   _getShop(shopId = this.data.shopId) {
+    api._post('/shopstate/getShopByShopId', {
+      shopId: shopId
+    }).then(res => {
+      if (res.success) {
+        this.setData({
+          shop: res.data.shopInfo,
+        });
+      }
+    });
+  },
 
   // 搜索
   search(e) {
@@ -120,6 +132,7 @@ Page({
   _toView(e) {
     let navigatePath = e.currentTarget.dataset.navigate;
     let id = e.currentTarget.dataset.id;
+    let shopId = this.data.shopId
     if (navigatePath == "shoppingCart") {
       if (app.globalData.isLogin) {
         if (this.data.count) {
@@ -137,7 +150,7 @@ Page({
       }
     } else {
       wx.navigateTo({
-        url: `../${navigatePath}/${navigatePath}?id=${id}`
+        url: `../${navigatePath}/${navigatePath}?id=${id}&shopId=${shopId}`
       });
     }
   },
@@ -148,9 +161,10 @@ Page({
     // console.log(options)
     this.setData({
       shopId: options.shopId,
-      shop: JSON.parse(options.shopInfo)
+      // shop: options.shopInfo ? JSON.parse(options.shopInfo):''
     },()=>{
       this.group()
+      this._getShop()
     })
     this._getCount()
   },
@@ -201,6 +215,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return{
+      title:' ',
+      path:'/pages/discountGroup/group'+'?shopId='+this.data.shopId
+    }
   }
 })

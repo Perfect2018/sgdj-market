@@ -13,7 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    welcomeUrl: '../../images/welcome.jpg',
+    welcomeUrl: '../../images/wel.jpg',
     counter: 3
   },
 
@@ -47,6 +47,7 @@ Page({
           counter: this.data.counter - 1
         });
       }
+      // console.log(this.data.counter)
     }, 1000);
   },
 

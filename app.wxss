@@ -41,6 +41,7 @@ image {
 
 .align-middle {
   vertical-align: middle;
+  margin-right: 10rpx;
 }
 
 .color-f80 {
@@ -123,6 +124,11 @@ image {
 .pt-20 {
   padding-top: 20rpx;
 }
+
+.pt-10{
+  padding-top: 10rpx;
+}
+
 
 .pb-200 {
   padding-bottom: 200rpx;

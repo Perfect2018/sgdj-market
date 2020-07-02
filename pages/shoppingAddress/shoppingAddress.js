@@ -190,6 +190,7 @@ Page({
   },
   // suggestion检索--模糊查询
   _setSearchList(e) {
+    console.log(e)
     let kw = e.detail;
     if (this.data.isSuggestion) {
       this.setData({
@@ -200,6 +201,7 @@ Page({
         clearTimeout(timer);
       }
       timer = setTimeout(() => {
+        console.log(kw)
         bmap.suggestion({
           query: kw,
           city_limit: false,
@@ -207,6 +209,7 @@ Page({
             this.setData({
               searchResult: res.result
             });
+            console.log(res)
           }
         });
       }, 300);
@@ -253,6 +256,7 @@ Page({
     bmap = new BMap.BMapWX({
       ak: app.globalData.ak
     });
+    // console.log(bmap)
     if (options.type === "add") {
       this.setData({
         type: options.type

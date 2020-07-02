@@ -51,7 +51,7 @@
 						</view> -->
 						<!-- <view> -->
 					
-							<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(本地优选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="">
+							<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(本地优选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="" thumb-class="thumb-class">
 									<view slot="desc" class="flex-between">
 										<text class="card-item-price">￥{{item.couponRate}}</text>
 										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.goodsId}}" data-freight="{{item.freight}}"/>
@@ -69,16 +69,21 @@
 		<view class="detail-item flex-between h-39">
 			<view class="first">配送方式：</view>
 			<block wx:if="{{!hasGlobalGoodsAll}}">
-				<radio-group class="item-input" bindchange="_distributionType">
-					<label>
-						<radio color="#f80" value="1" checked="{{distributionType}}">
-							<text class="fs-38">商户配送</text>
-						</radio>
-						<radio color="#f80" value="0" checked="{{!distributionType}}">
-							<text class="fs-38">上门自取</text>
-						</radio>
-					</label>
-				</radio-group>
+				<block wx:if="{{isGroup!=-1}}">
+					<view class="last color-888">上门自取</view>
+				</block>
+				<block wx:else>
+					<radio-group class="item-input" bindchange="_distributionType">
+						<label>
+							<radio color="#f80" value="1" checked="{{distributionType}}">
+								<text class="fs-38">商户配送</text>
+							</radio>
+							<radio color="#f80" value="0" checked="{{!distributionType}}">
+								<text class="fs-38">上门自取</text>
+							</radio>
+						</label>
+					</radio-group>
+				</block>
 			</block>
 			<block wx:else>
 				<view class="last color-888">物流配送</view>
@@ -91,7 +96,8 @@
 
 		<view class="detail-item flex-between">
 			<view class="first">平台配送费：</view>
-			<view class="last color-f80">￥{{util._getFixedMoney(useMoney.shippingFee)}}</view>
+			<view class="last color-f80" wx:if="{{isGroup==0}}">￥0.00</view>
+			<view class="last color-f80" wx:else>￥{{util._getFixedMoney(useMoney.shippingFee)}}</view>
 		</view>
 
 		<view class="detail-item flex-between" wx:if="{{globalFreight>0}}">
