@@ -2,7 +2,20 @@
 <wxs src="../../wxs/util.wxs" module="util"></wxs>
 <view class="{{shopOff?'shop-off':''}}">
 	<!-- 收货地址 -->
-	<view class="address">
+	<view wx:if="{{pickList}}" class="pick">
+		<text>请选择附近提货点</text>
+		<van-radio-group value="{{ radio }}" bind:change="onChange" name="{{radio}}">
+			<van-radio name="{{index}}" checked-color="#f80" wx:for="{{pickList}}" wx:key="index" label-class="van-radio" icon-class="icon-class" wx:if="{{item.distances<=3000}}">
+				<view class="radio-item">取货点名称:{{item.groupName}}</view>
+				<view class="radio-item">联系电话:{{item.groupTel}}</view>
+				<view class="radio-item">地址:{{util._isNotNull(item.groupAddress + item.address)}}</view>
+				
+			</van-radio>
+			<!-- <view wx:if="{{!item1}}">您附近三公里暂无提货点，抢占商机联系电话:{{phone}}</view> -->
+		</van-radio-group>
+		<!-- <view class="radio-btn" bindtap="radio">确定</view> -->
+	</view>
+	<view class="address" wx:else>
 		<block wx:if="{{address}}">
 			<view class="item w-100 flex-start">
 				<view class="first">收货人：</view>
@@ -34,10 +47,10 @@
 			<block wx:for="{{goodsList}}" wx:key="index">
 				<view class="card-item swipe-cell1">
 					<view class="van-checkbox1">
-							<van-checkbox value="{{item.checked}}" checked-color="#f80" label-class="w-5" catchtap="_checkedChange"  data-index="{{index}}" data-freight="{{item.freight}}" data-checked="{{item.checked}}" data-count="{{item.goodsCount}}">
-								
-							</van-checkbox>
-						</view>
+						<van-checkbox value="{{item.checked}}" checked-color="#f80" label-class="w-5" catchtap="_checkedChange" data-index="{{index}}" data-freight="{{item.freight}}" data-checked="{{item.checked}}" data-count="{{item.goodsCount}}">
+
+						</van-checkbox>
+					</view>
 					<van-swipe-cell right-width="100">
 						<!-- <view catchtap="_checkedChange" data-index="{{index}}" data-freight="{{item.freight}}" data-checked="{{item.checked}}">
 							<van-checkbox value="{{item.checked}}" checked-color="#f80" label-class="w-100">
@@ -50,13 +63,13 @@
 							</van-checkbox>
 						</view> -->
 						<!-- <view> -->
-					
-							<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(本地优选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="" thumb-class="thumb-class">
-									<view slot="desc" class="flex-between">
-										<text class="card-item-price">￥{{item.couponRate}}</text>
-										<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.goodsId}}" data-freight="{{item.freight}}"/>
-									</view>
-								</van-card>
+
+						<van-card centered="{{true}}" price="{{util._isNotNull(item.oneLevelUnit)+''+util._isNotNull(item.twoLevelUnit)}}{{item.isGlobalGoods=='01'?'(本地优选商品)':''}}" title="{{item.goodsName}}" thumb="{{item.goodsImgId?util._getImageUrl(item.goodsImgId):util._getImageUrl(item.img1)}}" price-class="card-item-unit" title-class="card-item-title" custom-class="card-item-custom" currency="" thumb-class="thumb-class">
+							<view slot="desc" class="flex-between">
+								<text class="card-item-price">￥{{item.couponRate}}</text>
+								<van-stepper min="1" max="999" input-width="60px" integer value="{{item.goodsCount}}" minus-class="stepper-btn" plus-class="stepper-btn" input-class="stepper-input" data-id="{{item.id}}" data-index="{{index}}" bind:change="_setGoodsCount" data-maxbuy="{{item.goodsId}}" data-freight="{{item.freight}}" />
+							</view>
+						</van-card>
 						<!-- </view> -->
 						<view slot="right" class="card-item-del" bindtap="_delGoods" data-id="{{item.id}}" data-freight="{{item.freight}}">删 除</view>
 					</van-swipe-cell>
@@ -136,10 +149,10 @@
 			</view>
   </view>
   <view>
-    <van-submit-bar disabled="{{!hasGlobalGoodsAll && distributionType && util._showOnDestributionPrice(totalAmt,onDestributionPrice)}}" price="{{util._getFixedMoney(finalAmt)*100}}" button-text="立即支付" bind:submit="_submitOrder" button-class="submit-btn"
+    <van-submit-bar disabled="{{!hasGlobalGoodsAll && distributionType && !pickList && util._showOnDestributionPrice(totalAmt,onDestributionPrice)}}" price="{{util._getFixedMoney(finalAmt)*100}}" button-text="立即支付" bind:submit="_submitOrder" button-class="submit-btn"
       price-class="card-item-price">
       <van-checkbox value="{{isAllChecked}}" custom-class="ml-20" checked-color="#f80" bind:change="_checkedChange" data-index="all">全选</van-checkbox>
-      <view wx:if="{{!hasGlobalGoodsAll && distributionType && util._showOnDestributionPrice(totalAmt,onDestributionPrice)}}" slot="tip">本店满{{onDestributionPrice}}元起送（不包含配送费）</view>
+      <view wx:if="{{!hasGlobalGoodsAll && distributionType && !pickList && util._showOnDestributionPrice(totalAmt,onDestributionPrice)}}" slot="tip">本店满{{onDestributionPrice}}元起送（不包含配送费）</view>
     </van-submit-bar>
   </view>
-</view>
+</view>  

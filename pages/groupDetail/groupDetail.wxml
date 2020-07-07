@@ -5,7 +5,7 @@
 <!-- 商品名称/价格 -->
 <view class="goods">
   <view class="left">
-    <view class="goodsName">{{goodsDetail.goodsName}}</view>
+    <view class="good-name">{{goodsDetail.goodsName}}</view>
     <block wx:if="{{type == '01'}}">
       <view class="goods-price">
         <text class="price">￥:{{goodsDetail.price}}</text>

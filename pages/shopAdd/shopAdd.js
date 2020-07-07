@@ -189,6 +189,7 @@ Page({
           shopStreet: shopForm.shopStreet,
           shopLong: shopForm.shopLong,
           shopLat: shopForm.shopLat,
+          address:shopForm.address,
           shopSourceName: shopForm.shopSourceName,
           shopSourcePhone: shopForm.shopSourcePhone,
           operateIdcardCode: shopForm.operateIdcardCode,
@@ -342,6 +343,7 @@ Page({
     this.setData({
       [path]: e.detail
     });
+    // console.log(this.data.shopForm.address)
   },
   // 页面跳转
   _toView(e) {

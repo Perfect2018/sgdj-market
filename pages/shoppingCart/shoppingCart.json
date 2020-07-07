@@ -5,6 +5,10 @@
     "van-swipe-cell": "/miniprogram_npm/vant-weapp/swipe-cell/index",
     "van-submit-bar": "/miniprogram_npm/vant-weapp/submit-bar/index",
     "van-stepper": "/miniprogram_npm/vant-weapp/stepper/index",
-    "van-card": "/miniprogram_npm/vant-weapp/card/index"
+    "van-card": "/miniprogram_npm/vant-weapp/card/index",
+    "van-radio": "/miniprogram_npm/vant-weapp/radio/index",
+    "van-radio-group": "/miniprogram_npm/vant-weapp/radio-group/index",
+    "van-dropdown-menu": "/miniprogram_npm/vant-weapp/collapse/index",
+    "van-dropdown-item": "/miniprogram_npm/vant-weapp/collapse-item/index"
   }
 }

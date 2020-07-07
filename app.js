@@ -80,6 +80,7 @@ App({
       let session_key = this.globalData.session_key;
       let encryptedData = e.detail.encryptedData;
       let iv = e.detail.iv;
+      // console.log(e)
       this.globalData.userInfo = e.detail.userInfo;
       if (session_key && encryptedData && iv) {
         util._loading('正在登陆...');

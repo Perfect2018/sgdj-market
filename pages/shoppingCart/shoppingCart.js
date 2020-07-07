@@ -43,15 +43,66 @@ Page({
     },
     finalAmt: 0, //最终支付
     remark: "", //备注
-    isGroup:''
+    isGroup:'',
+    // 提货点
+    pickList:[],
+    radio:'',
+    // 提货点ID
+    addressId:'',
+    pick:'',
+    phone:''//商家电话
+  },
+
+  // 选择提货地址
+  onChange(e){
+    // console.log(e)
+    let addressId = this.data.pickList[e.detail].id
+    this.setData({
+      radio:e.detail,
+      addressId:addressId
+    })
+    // console.log(this.data.addressId)
+  },
+
+  // 确定
+  radio(){
+    if(!this.data.radio){
+      util._toast('请选择提货地点')
+      return;
+    }
+    // console.log(this.data.radio)
+    this.setData({
+      address:this.data.address[this.data.radio]
+    })
   },
   // 提交订单
   _submitOrder() {
+    let pickList = this.data.pickList
     // 判断店铺开关状态
     if (this.data.shopOff) {
       util._toast("该店已打烊，暂不能下单");
       return;
     }
+    // 判断是否选择提货点
+    if(this.data.pickList.length){
+      let pList1 = pickList.filter(item=>{
+        return item.distances<=3000
+      })
+      if(pList1.length<1){
+        wx.showToast({
+          title: `抱歉:您附近三公里内暂无提货点,抢占团长联系电话:${this.data.phone}`,
+          icon:'none',
+          duration:10000
+        })
+        return
+      }
+      if(!this.data.radio){
+        util._toast('请选择提货点');
+        return;
+      }
+     
+    }
+    // console.log(this.data.pickList)
     let selectGoodsList = this.staticData.selectGoodsList;
     let flag = selectGoodsList.reduce((prev, elem) => {
       return prev || elem ? true : false;
@@ -79,7 +130,7 @@ Page({
           return prev;
         }, []);
         let distributionType = this.data.hasGlobalGoodsAll ? "03" : this.data.distributionType ? "04" : "02";
-        if (!this.data.address) {
+        if (!this.data.pickList && !this.data.address) {
           wx.navigateTo({
             url: `../shoppingAddress/shoppingAddress?type=add`
           });
@@ -88,7 +139,7 @@ Page({
         }
         let params = {
           goodsList: goodsList,
-          receiverId: this.data.address.id,
+          receiverId: this.data.pickList.length>=1 ? this.data.addressId:this.data.address.id,
           freight: this.data.useMoney.shippingFee ? this.data.useMoney.shippingFee:this.data.globalFreight,
           pocketMoney: this.data.useMoney.pocketMoney,
           cashRollMoney: this.data.useMoney.cashRollMoney,
@@ -480,9 +531,13 @@ Page({
   },
   // 获取商品数据
   _getGoodsList(shopId = this.data.shop.shopId) {
+    let lat = app.globalData.location.lat
+    let lng = app.globalData.location.lng
     // console.log(shopId)
     api._post('/shoppingCart/getShoppingCartList', {
-      shopId: shopId
+      shopId: shopId,
+      lat,
+      lng
     }).then(res => {
       // console.log(res)
       if (res.success) {
@@ -556,16 +611,18 @@ Page({
           shopOff: goodsList[0] && goodsList[0].shop.shopState === "01" ? false : true,
           address: res.data.address,
           onDestributionPrice: goodsList[0] && goodsList[0].shop.onDestributionPrice ? goodsList[0].shop.onDestributionPrice.toFixed(2) : '20.00',
-          
+          pickList:res.data.groupAddress ? res.data.groupAddress.sort((a,b)=>{return a.distances-b.distances}):'',
           'useMoney.shippingFee': res.data.psf / 2,
           'useMoney.pocketMoney': res.data.pocketMoney,
           pocketMoney: res.data.pocketMoney,
           cashRollMoney: res.data.cashRollMoney,
           cashMoney: res.data.cashMoney,
           globalFreight: sum,
-          isGroup:isGroup
+          isGroup:isGroup,
+          phone:res.data.shoppingCart[0].shop.phone
         });
-        // console.log(this.data.globalFreight)
+        // console.log(this.data.address)
+        // console.log(this.data.pickList)
         // }
       } else {
         util._toast("未知错误");

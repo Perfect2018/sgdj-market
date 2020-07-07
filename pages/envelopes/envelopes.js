@@ -41,6 +41,7 @@ Page({
             headImageUrl:image,
             name:name,
             remark:remark,
+            redisKey
           },()=>{
             util._toast('领取成功')
           })
@@ -58,6 +59,7 @@ Page({
     }
   },
 
+  // 获取红包列表
   selectPack(){
     api._post('/custRedPackage/queryRedPackageList').then(res=>{
       // console.log(res.data)
@@ -151,7 +153,10 @@ Page({
     wx.navigateBack()
   },
 
-  getMore(){
+  // 查看更多信息
+  getMore(e){
+    console.log(e)
+    console.log(this.data.redisKey)
     wx.navigateTo({
       url: '../packLIst/packlist?redisKey='+this.data.redisKey,
     })

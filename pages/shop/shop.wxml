@@ -21,12 +21,12 @@
 					<view class="shop-name">
 						{{shop.shopName}}
 					</view>
-					<block wx:if="{{isShow}}">
+					<block wx:if="{{shopAddress}}">
 						<view class="pickup">
-							<text>提货点:水果沙拉旗舰店旗舰店</text>
-							<text>电话:18897645321</text>
+							<text>提货点:{{shopAddress.groupName}}</text>
+							<text>电话:{{shopAddress.groupTel}}</text>
 						</view>
-						<view class="addr">地址:陕西省西安市雁塔区科技路科技路西口旗舰店旗舰店</view>
+						<view class="addr">地址:{{shopAddress.groupAddress + shopAddress.address}}</view>
 					</block>
 				</view>
 			</view>

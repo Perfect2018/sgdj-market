@@ -521,13 +521,14 @@ view.img>image{
 }
 
 .item-left,.item-right{
-  width: 50%;
+  width: 66%;
   height: 200rpx;
   padding: 0 10rpx;
   box-sizing: border-box;
 }
 
 .item-right{
+  width: 34%;
   text-align: center;
   display: flex;
   flex-wrap: wrap;

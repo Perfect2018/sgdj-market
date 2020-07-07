@@ -23,6 +23,7 @@ Page({
     is_set: false,
     shopId: '',
     shop: {},
+    shopAddress:{},
     shopNoticeImgList: [],
     isGlobal: '02',
     isGlobalActive: '02',
@@ -41,8 +42,6 @@ Page({
     isDiscount:false,
     isGroup:false,
     groupList:[],
-    // 是否为团购商户
-    isShow:false
   },
 
   // 搜索
@@ -287,6 +286,7 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
+    // console.log(app.globalData.location)
     let shopId;
     if (options.scene) {
       api._post("/wxpay/openAppSc").then(res => {
@@ -349,8 +349,12 @@ Page({
   },
   // 获取店铺初始数据
   _getShop(shopId = this.data.shopId) {
+    let lat = app.globalData.location.lat
+    let lng = app.globalData.location.lng
     api._post('/shopstate/getShopByShopId', {
-      shopId: shopId
+      shopId: shopId,
+      lat,
+      lng
     }).then(res => {
       if (res.success) {
         // console.log(res.data)
@@ -371,6 +375,7 @@ Page({
           shopOff: res.data.shopInfo.shopState === '01' ? false : true,
           pageNum: ++this.data.pageNum,
           shop: res.data.shopInfo,
+          shopAddress:res.data.groupReceiver,
           shopNoticeImgList: res.data.shopInfo.shopNoticeImgId ? res.data.shopInfo.shopNoticeImgId.split(",") : [],
           shopCategoryList: categoryList,
           categoryActive: categoryList[0].id,

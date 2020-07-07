@@ -45,7 +45,10 @@ view.img>image{
 } */
 
 .left{
-  width: 50%;
+  width: 60%;
+  /* height: 200rpx; */
+  padding: 0 10rpx;
+  box-sizing: border-box;
 }
 
 .good-name{
