@@ -19,7 +19,8 @@ Page({
     name:'',
     remark:'',
     redisKey:'',
-    mark:''
+    mark:'',
+    money:''
   },
 
   getPack(e){
@@ -41,7 +42,8 @@ Page({
             headImageUrl:image,
             name:name,
             remark:remark,
-            redisKey
+            redisKey,
+            money:res.data
           },()=>{
             util._toast('领取成功')
           })
@@ -119,9 +121,7 @@ Page({
               success: (res) => {
                 util._toast("支付成功");
                 // resolve();
-            
                   wx.navigateBack()
-                
               },
               fail: (res) => {
                 // console.log(res)
@@ -155,8 +155,8 @@ Page({
 
   // 查看更多信息
   getMore(e){
-    console.log(e)
-    console.log(this.data.redisKey)
+    // console.log(e)
+    // console.log(this.data.redisKey)
     wx.navigateTo({
       url: '../packLIst/packlist?redisKey='+this.data.redisKey,
     })

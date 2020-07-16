@@ -16,6 +16,7 @@ Page({
     count: 0, //购物车数量
     // 是否抖动
     shakeOff: false,
+    loginMould: false,
   },
 
   // 获取商品详情
@@ -128,6 +129,18 @@ Page({
       });
     }
   },
+   // 取消登录
+   _closeLoginMould() {
+    this.setData({
+      loginMould: false
+    });
+  },
+  // 登录
+  _login(e) {
+    app._login(e).then(res => {
+      this._getCount();
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -191,7 +204,7 @@ Page({
    */
   onShareAppMessage: function () {
     return{
-      title:this.data.goodsDetail.goodsName
+      title:this.data.goodsDetail.goodsName + ' ' + this.data.goodsDetail.couponRate
     }
   }
 })

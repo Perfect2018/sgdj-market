@@ -108,11 +108,17 @@ Page({
   },
 
   // 红包
-  _toEnvelopes(e){
-    // let navigatePath = e.currentTarget.dataset.navigate;
-    wx.navigateTo({
-      url: '../envelopes/envelopes',
-    })
+  _toEnvelopes(){
+    if (app.globalData.isLogin){
+      wx.navigateTo({
+        url: '../envelopes/envelopes',
+      })
+    }else{
+      this.setData({
+        loginMould:true
+      })
+    }
+  
   },
   _toApp(e){
     let id = e.currentTarget.dataset.item;

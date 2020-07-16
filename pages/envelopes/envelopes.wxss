@@ -327,10 +327,15 @@ image{
   width: 100%;
 }
 
+.tip-top1{
+  color: #FEBB57;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
 .tip-top{
   color: #FEBB57;
 }
-
 
 .getMore{
   font-size: 32rpx;

@@ -42,6 +42,9 @@ Page({
     isDiscount:false,
     isGroup:false,
     groupList:[],
+    isGroupShop:false,
+    lng:'',
+    lat:""
   },
 
   // 搜索
@@ -286,7 +289,15 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    // console.log(app.globalData.location)
+    wx.getLocation({
+      success:(res)=>{
+        // location = res
+        this.setData({
+          lat:res.latitude,
+          lng:res.longitude
+        })
+      }
+    })
     let shopId;
     if (options.scene) {
       api._post("/wxpay/openAppSc").then(res => {
@@ -294,20 +305,25 @@ Page({
         shopId = options.scene
         this.setData({
           shopId: shopId
-        }, () => {
-          this._getShop();
-          this._getCount();
         });
+        this._getShop(this.data.shopId);
+        this._getCount(this.data.shopId);
       });
     } else {
       shopId = options.id;
       this.setData({
-        shopId: shopId
-      }, () => {
-        this._getShop();
-        this._getCount();
+        shopId: shopId,
+        // lat:options.lat,
+        // lng:options.lng
       });
+      this._getShop(this.data.shopId);
+      this._getCount(this.data.shopId);
     }
+    // this.setData({
+    //   shopId:options.id
+    // })
+    // this._getShop(this.data.shopId);
+    // this._getCount(this.data.shopId);
   },
   // 生成店铺二维码
   _getShopQR() {
@@ -349,12 +365,10 @@ Page({
   },
   // 获取店铺初始数据
   _getShop(shopId = this.data.shopId) {
-    let lat = app.globalData.location.lat
-    let lng = app.globalData.location.lng
+    // let lat = app.globalData.location.lat
+    // let lng = app.globalData.location.lng
     api._post('/shopstate/getShopByShopId', {
       shopId: shopId,
-      lat,
-      lng
     }).then(res => {
       if (res.success) {
         // console.log(res.data)
@@ -375,13 +389,13 @@ Page({
           shopOff: res.data.shopInfo.shopState === '01' ? false : true,
           pageNum: ++this.data.pageNum,
           shop: res.data.shopInfo,
-          shopAddress:res.data.groupReceiver,
           shopNoticeImgList: res.data.shopInfo.shopNoticeImgId ? res.data.shopInfo.shopNoticeImgId.split(",") : [],
           shopCategoryList: categoryList,
           categoryActive: categoryList[0].id,
           goodsList: res.data.hotGoods,
           isGlobal: res.data.isGlobal || "02",
-          isGlobalActive: res.data.isGlobal == "01" ? "01" : "02"
+          isGlobalActive: res.data.isGlobal == "01" ? "01" : "02",
+          isGroupShop:res.data.isGroupShop
         }, () => {
           // 生成店铺二维码
           this._getShopQR();
@@ -467,7 +481,7 @@ Page({
       if (app.globalData.isLogin) {
         if (this.data.count) {
           wx.navigateTo({
-            url: `../${navigatePath}/${navigatePath}?id=${id}`
+            url: `../${navigatePath}/${navigatePath}?id=${id}&lat=${this.data.lat}&lng=${this.data.lng}`
           });
         } else {
           util._toast("请添加商品");
@@ -491,11 +505,30 @@ Page({
     });
   },
 
+  getAddress(){
+    // let lng = app.globalData.location.lng
+    // let lat = app.globalData.location.lat
+    api._post('/shopstate/getGroupReceiver',{
+      shopId:this.data.shopId,
+      lng:this.data.lng,
+      lat:this.data.lat
+    }).then(res=>{
+      if(res.success){
+        this.setData({
+          shopAddress:res.data,
+          isGroupShop:false
+        })
+      }
+      // console.log(this.data.shopAddress)
+    })
+  },
+
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
@@ -547,7 +580,7 @@ Page({
  
     return {
       title: this.data.shop.shopName,
-      // imageUrl:this.data.sharePicUrl
+      // path: '/pages/shop/shop?goodsList=' + JSON.stringify(this.data.goodsList),
       imageUrl:util._getImageUrl(this.data.shop.shopLogo),
       desc:'此店性价比超高，赶快去看看'
     }

@@ -34,7 +34,8 @@
 			<view class="name">来自{{name}}的红包</view>
 			<view class="remark">{{remark}}</view>
 			<view class="select">
-				<view class="tip-top">你已抢过该红包，点击查看红包列表</view>
+				<view class="tip-top1" wx:if="{{money}}">{{money+'元'}}</view>
+				<view wx:else class="tip-top">你已抢过该红包，点击查看红包列表</view>
 				<view>已存入账户余额</view>
 			</view>
 			<view class="getMore" bindtap="getMore">查看更多信息</view>

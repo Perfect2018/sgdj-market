@@ -50,7 +50,9 @@ Page({
     // 提货点ID
     addressId:'',
     pick:'',
-    phone:''//商家电话
+    phone:'',//商家电话
+    lng:"",
+    lat:""
   },
 
   // 选择提货地址
@@ -531,8 +533,8 @@ Page({
   },
   // 获取商品数据
   _getGoodsList(shopId = this.data.shop.shopId) {
-    let lat = app.globalData.location.lat
-    let lng = app.globalData.location.lng
+    let lat = this.data.lat
+    let lng = this.data.lng
     // console.log(shopId)
     api._post('/shoppingCart/getShoppingCartList', {
       shopId: shopId,
@@ -642,6 +644,8 @@ Page({
     // console.log(options)
     this.setData({
       'shop.shopId': options.id,
+      lat:options.lat,
+      lng:options.lng
       // openNum: options.openNum,
       // openGid: options.openGid
     });

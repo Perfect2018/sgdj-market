@@ -21,12 +21,16 @@
 					<view class="shop-name">
 						{{shop.shopName}}
 					</view>
-					<block wx:if="{{shopAddress}}">
+					<view bindtap="getAddress" wx:if="{{isGroupShop}}" class="getAddress">
+						点击查看附近提货点信息
+						<image src="../../images/click.png"></image>
+					</view>
+					<block wx:else>
 						<view class="pickup">
-							<text>提货点:{{shopAddress.groupName}}</text>
-							<text>电话:{{shopAddress.groupTel}}</text>
+							<text>{{shopAddress.groupName ? '提货点:'+shopAddress.groupName : ''}}</text>
+							<text>{{shopAddress.groupTel ? '电话:'+shopAddress.groupTel:''}}</text>
 						</view>
-						<view class="addr">地址:{{shopAddress.groupAddress + shopAddress.address}}</view>
+						<view class="addr">{{shopAddress.groupAddress ? '地址:'+shopAddress.groupAddress + shopAddress.address:''}}</view>
 					</block>
 				</view>
 			</view>
@@ -251,7 +255,7 @@
 					<view>
 						<van-cell-group>
 							<van-field value="{{shop.shopName}}" label="店铺名称" disabled />
-							<van-field value=" {{shop.openShopTime!='null'?shop.openShopTime+ '-'+shop.closeShopTime:''}}" label="营业时间 " disabled />
+							<van-field value=" {{shop.openShopTime && shop.openShopTime!='null' ? shop.openShopTime+ '-'+shop.closeShopTime:''}}" label="营业时间 " disabled />
 							<block wx:if="{{showPhone}}">
 								<van-field bindtap="_makePhoneCall" data-phone="{{shop.phone}}" value="{{shop.phone}}" label="电话" disabled />
 							</block>
@@ -260,9 +264,13 @@
 									<view class="right" bindtap="_setShowPhone">联系商家</view>
 								</van-panel>
 							</block>
-							<block wx:if="{{showTextarea}}">
-								<van-field value="{{shop.shopStreet}}" type="textarea" label="地址 " autosize disabled border="{{ false }}"></van-field>
-							</block>
+							<view class="shop-item">
+								<view class="shop-item-addr">地址</view>
+								<text>{{shop.shopStreet}}</text>
+							</view>
+							<!-- <block wx:if="{{showTextarea}}"> -->
+								<!-- <van-field value="{{shop.shopStreet}}" type="textarea" label="地址 " autosize disabled border="{{ false }}"></van-field> -->
+							<!-- </block> -->
 							<van-panel title="营业资质">
 								<view class="shop-detail-image-list">
 									<image wx:if="{{shop.operateImgId.length}}" lazy-load class="shop-detail-image" src="{{util._getImageUrl(shop.operateImgId)}}"></image>

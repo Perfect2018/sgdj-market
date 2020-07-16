@@ -609,3 +609,46 @@ view.img>image{
   margin-top: 20rpx;
   box-sizing: border-box;
 }
+
+.getAddress{
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  text-align: right;
+  font-size: 24rpx;
+  color: #f80;
+  position: relative;
+  font-weight: 600;
+  width: 350rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding-right: 20rpx;
+  box-sizing: border-box;
+}
+
+.getAddress image{
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  left: 8rpx;
+}
+
+.shop-item{
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.shop-item-addr{
+  width: 90px;
+}
+
+.shop-item text{
+  color: #999;
+  width: 240px;
+  /* padding-left: 20rpx; */
+  box-sizing: border-box;
+}

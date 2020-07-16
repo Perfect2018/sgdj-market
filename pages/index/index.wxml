@@ -55,7 +55,7 @@
 					明星商铺
 				</view>
 				<view class="starShop-openShop color-fff" bindtap="_openShop" wx:if="{{open}}">
-					免费开店
+					我要开店
 				</view>
 			</view>
 			<view class="starShop-body">

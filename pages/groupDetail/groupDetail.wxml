@@ -55,3 +55,4 @@
 		<van-icon name="cart-o" class="color-f80" info="{{count<100?count:'99'}}" />
 	</movable-view>
 </movable-area>
+<van-dialog title="提示" message="登录后即可添加商品" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#ff8800"></van-dialog>
