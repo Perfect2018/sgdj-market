@@ -1,0 +1,37 @@
+/* pages/moneyTree/moneytree.wxss */
+page{
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.asset,.contribution-tip{
+  font-size: 30rpx;
+  color: #f80;
+  letter-spacing: 1rpx;
+  font-weight: 600;
+}
+
+.apple{
+
+}
+
+.apple-item{
+  width: 80rpx;
+  height: 80rpx;
+  background-color: #f80;
+  border-radius: 10rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: black;
+  font-size: 20rpx;
+}
+
+.bottom{
+  display: flex;
+  justify-content: space-between;
+}
+
+.conversion,.get,.invite,view.contribution{
+  color: black;
+  font-size: 24rpx;
+  font-weight: 600;
+}

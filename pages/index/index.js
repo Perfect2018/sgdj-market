@@ -189,7 +189,14 @@ Page({
     }
   },
 
-
+  // 摇钱树
+  toTree(){
+    console.log("摇钱树")
+    wx.navigateTo({
+      url: '../moneyTree/moneytree',
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -214,6 +221,7 @@ Page({
       goodsList: indexData
     });
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -29,7 +29,9 @@
     "pages/discountGroup/group",
     "pages/groupDetail/groupDetail",
     "pages/discount/discount",
-    "components/discountGroup/group"
+    "components/discountGroup/group",
+    "pages/moneyTree/moneytree",
+    "pages/conversion/conversion"
   ],
   "window": {
     "backgroundColor": "#fff",

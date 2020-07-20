@@ -1,0 +1,156 @@
+/* pages/conversion/conversion.wxss */
+page{
+  background-color: rgba(0, 0, 0, .06);
+  padding: 0 20rpx;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+}
+
+.title{
+  font-size: 30rpx;
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.title-name,.trend,.conversion{
+  width: 100%;
+  background-color: #fff;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+
+.title-name{
+  height: 150rpx;
+  /* line-height: 200rpx; */
+  padding-left: 20rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.trend{
+  height: 550rpx;
+  margin-bottom: 20rpx;
+}
+
+.conversion{
+  height: 500rpx;
+}
+
+.left{
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 20rpx;
+  /* border: 1rpx solid #f00; */
+}
+
+.left image{
+  width: 100%;
+  height: 100%;
+}
+
+.right{
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.right view{
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.desc{
+  font-size: 26rpx;
+  font-weight: 600;
+  height: 60rpx;
+  line-height: 60rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.trend text{
+  width: 100rpx;
+  /* height: 20rpx; */
+  text-align: center;
+}
+
+.desc .date{
+  width: 178rpx;
+}
+
+.desc .percent{
+  width: 120rpx;
+}
+
+.data{
+  height: 60rpx;
+  line-height: 60rpx;
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+}
+
+.data .date{
+  width: 178rpx;
+}
+
+.data .percent{
+  width: 120rpx;
+  color: #f00;
+}
+
+.price{
+  color: #f00;
+}
+
+.data .less{
+  color: #32CD32;
+}
+
+.detail{
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.detail view{
+  height: 60rpx;
+  line-height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.detail text{
+  color: #f00;
+}
+
+.detail input{
+  width: 200rpx;
+  border: 1rpx solid #eee;
+  border-radius: 8rpx;
+  padding-left: 6rpx;
+  box-sizing: border-box;
+}
+
+.detail .tip{
+  font-size: 24rpx;
+}
+
+.bottom{
+  display: flex;
+  justify-content: center;
+  margin-top: 40rpx;
+  box-sizing: border-box;
+}
+
+.btn{
+  width: 200rpx;
+  height: 60rpx;
+  background-color: #f80;
+  border-radius: 8rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 600;
+}

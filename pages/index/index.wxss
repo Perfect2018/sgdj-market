@@ -59,6 +59,7 @@
   display: flex;
   justify-content: center;
   margin-top: 20rpx;
+  position: relative;
 }
 
 .hotShop-item {
@@ -68,6 +69,7 @@
   border-radius: 20rpx;
   overflow: hidden;
   height: 200rpx;
+  position: relative;
 }
 
 .hotShop-image {
@@ -144,4 +146,14 @@
 
 .search-shop{
   margin-right: 5rpx;
+}
+
+.tree{
+  width: 60rpx;
+  height: 60rpx;
+  font-size: 20rpx;
+  border: 1rpx solid #f00;
+  position: absolute;
+  left: 30rpx;
+  bottom: 30rpx;
 }

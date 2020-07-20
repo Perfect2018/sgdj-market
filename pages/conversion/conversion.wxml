@@ -1,0 +1,35 @@
+<view class="title-name">
+  <view class="left">
+    <image src="../../images/apple.png"></image>
+  </view>
+  <view class="right">
+    <view>蔬果到家</view>
+    <view>蔬果到家第12345为用户</view>
+  </view>
+</view>
+<view class="trend">
+  <view class="title">金币走势</view>
+  <view class="desc">
+    <text class="date">日期</text>
+    <text class="percent">涨跌幅</text>
+    <text>现价</text>
+    <text>兑换量</text>
+  </view>
+  <view class="data" wx:for="{{list}}" wx:key="index">
+    <text class="date">{{item.date}}</text>
+    <text class="percent {{item.percent>0 ? '':'less'}}">{{item.percent}}</text>
+    <text class="price {{item.percent>0 ? '':'less'}}">{{item.price}}</text>
+    <text class="total">{{item.total}}</text>
+  </view>
+</view>
+<view class="conversion">
+  <view class="title">金币兑换</view>
+  <view class="detail">
+    <view>现有金币：{{52.01212}}个</view>
+    <view>贡献值：{{735}}</view>
+    <view>今日价格：<text>{{3.55}}</text>元/个</view>
+    <view>兑换个数：<input bindinput="getNum"></input></view>
+    <view class="tip">注：兑换余额将储存到个人账户，可提现/购买商品抵扣使用</view>
+  </view>
+  <view class="bottom"><view class="btn" bindtap="commit">确认兑换</view></view>
+</view>
