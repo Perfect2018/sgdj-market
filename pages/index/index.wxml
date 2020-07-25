@@ -43,7 +43,9 @@
 					<image lazy-load class="hotShop-image" src="{{item.imgUrl}}"></image>
 				</view>
 			</block>
-			<view catchtap="toTree" class="tree">摇钱树</view>
+			<view catchtap="toTree" class="tree">
+				<image src="../../images/apple.png"></image>
+			</view>
 		</view>
 		<!-- 广告 -->
 		<view class="ad">

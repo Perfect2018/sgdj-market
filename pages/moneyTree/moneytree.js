@@ -1,32 +1,134 @@
 // pages/moneyTree/moneytree.js
+const api = require('../../utils/api.js');
+const util = require('../../utils/util.js');
+const app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
+    total:'',
+    contribution:'',
+    list:[],
+    show:false
+  },
 
+
+  click(e){ 
+    
+    let cowId = e.currentTarget.dataset.id;
+    let num = e.currentTarget.dataset.num;
+    let index = e.currentTarget.dataset.index;
+    api._post('/cashCow/reciveCustCow',{
+      cowId
+    }).then(res=>{
+      // console.log(res)
+      if(res.success){
+        this.data.list.splice(index,1)
+        this.setData({
+          list:this.data.list,
+          total:Number(this.data.total)+Number(num)
+        })
+      }else{
+        util._toast('请稍后重试')
+      }
+    })
+    
+  },
+
+  // 获取页面数据
+  getData(){
+    api._get('/cashCow/selectCustCashCowTime').then(res=>{
+      if(res.success){
+        this.setData({
+          total:res.data.custCow.totalAmt,
+          contribution:res.data.custCow.contributionAmt,
+          list:res.data.custCowTime,
+          isVip:res.data.custCow.isVip
+        })
+      }
+    })
   },
 
   // 提升贡献值
   contribution(){
+    this.setData({
+      show:true
+    })
+  },
+    
+  goIndex(){
+    wx.switchTab({
+      url: '../index/index',
+    })
+  },
 
+  onClose(){
+    // console.log("000")
+    this.setData({
+      show:false
+    })
   },
 
   // 邀请好友
-  invite(){},
+  // invite(){
+  //   var that = this
+  //   console.log('0000')
+  //   that.onShareAppMessage()
+  // },
 
   // 一键领取
-  get(){},
+  get(){
+    if(this.data.isVip=="NO"){
+      wx.showModal({
+        content:"支付1元可使用该功能",
+        confirmText:"去支付",
+        success(res){
+          if(res.confirm){
+            api._get("/cashCow/applyVip").then(res=>{
+              if(res){
+                api._prepay(res)
+              }
+            })
+            // api._prepay();
+          }else if(res.cancel){
+            util._toast('取消')
+          }
+        }
+      })
+    }else{
+      api._get('/cashCow/receiverAllCashCow').then(res=>{
+        if(res.success){
+          this.getData()
+          util._toast("领取成功")
+        }else{
+          util._toast('请稍后重试')
+        }
+      })
+    }
+    
+  },
 
   // 兑换商店
-  conversion(){},
+  conversion(){
+    wx.navigateTo({
+      url: '../conversion/conversion',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // this.getData()
+    getCurrentPages()
+    let custID = api.getCustID()
+    console.log(custID)
+    api._post("/cashCow/share",{
+      shareCustId:custID
+    }).then(res=>{
+       console.log(res)
+    })
   },
 
   /**
@@ -40,7 +142,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getData()
   },
 
   /**

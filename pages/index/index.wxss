@@ -149,11 +149,14 @@
 }
 
 .tree{
-  width: 60rpx;
-  height: 60rpx;
-  font-size: 20rpx;
-  border: 1rpx solid #f00;
-  position: absolute;
-  left: 30rpx;
-  bottom: 30rpx;
+  width: 80rpx;
+  height: 80rpx;
+  position: fixed;
+  left: 640rpx;
+  bottom: 170rpx;
+}
+
+.tree image{
+  width: 100%;
+  height: 100%;
 }

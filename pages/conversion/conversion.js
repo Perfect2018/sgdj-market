@@ -1,4 +1,6 @@
 // pages/conversion/conversion.js
+const api = require('../../utils/api.js');
+const util = require('../../utils/util.js');
 Page({
 
   /**
@@ -6,15 +8,10 @@ Page({
    */
   data: {
     num:'',
-    list:[
-      {date:'2020-07-10',percent:'+6.35%',price:2.95,total:10},
-      {date:'2020-07-11',percent:'+16.35%',price:6.95,total:10},
-      {date:'2020-07-12',percent:'+8.35%',price:4.95,total:10},
-      {date:'2020-07-13',percent:'-2.35%',price:3.95,total:10},
-      {date:'2020-07-14',percent:'-6.35%',price:3.95,total:10},
-      {date:'2020-07-15',percent:'+6.35%',price:8.95,total:10},
-      {date:'2020-07-16',percent:'+2.35%',price:7.95,total:10}
-    ]
+    No:"",
+    total:"",
+    contrbution:"",
+    list:[]
   },
 
   getNum(e){
@@ -26,13 +23,47 @@ Page({
 
 
   commit(){
-    console.log(this.data.num)
+    if(this.data.num>this.data.total){
+      util._toast('兑换数量不能大于现有金币数')
+      return;
+    }else if(this.data.total<1){
+      util._toast('金币数量不足，无法兑换')
+      return;
+    }
+    if(parseInt(this.data.num)!=this.data.num){
+      util._toast("兑换个数必须是整数");
+      return;
+    };
+    api._post("/cashCow/cashCowRecive",{
+      number:this.data.num
+    }).then(res=>{
+      if(res.success){
+        util._toast('兑换成功,请查看余额')
+        this.setData({
+          total:this.data.total-this.data.num
+        })
+      }
+      // console.log(res)
+    })
+  },
+
+  getData(){
+    api._get('/cashCow/cashCowChange').then(res=>{
+      if(res.success){
+        this.setData({
+          No:res.data.custCow.numbers,
+          total:res.data.custCow.totalAmt,
+          contrbution:res.data.custCow.contributionAmt,
+          list:res.data.changeCow
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.getData()
   },
 
   /**

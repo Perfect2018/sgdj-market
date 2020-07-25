@@ -1,11 +1,70 @@
-<view class="asset">总资产：20.00012</view>
-<view class="contribution-tip">贡献值：530</view>
+<view class="asset">总资产：{{total}}</view>
+<view class="contribution-tip">贡献值：{{contribution}}</view>
 <view class="apple">
-  <view class="apple-item" wx:for="{{15}}" wx:key="index">{{index+1}}</view>
+  <view class="apple-item apple-item0" bindtap="click" data-id="{{list[0].id}}" data-index="0" data-num="{{list[0].outputAmt}}" wx:if="{{list[0].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[0].outputAmt}}</text>
+  </view>
+  <view class="apple-item apple-item1" bindtap="click" data-id="{{list[1].id}}" data-index="1" data-num="{{list[1].outputAmt}}" wx:if="{{list[1].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[1].outputAmt}}</text>
+  </view>
+  <view class="apple-item apple-item2" bindtap="click" data-id="{{list[2].id}}" data-index="2" data-num="{{list[2].outputAmt}}" wx:if="{{list[2].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[2].outputAmt}}</text>
+  </view>
+   <view class="apple-item apple-item3" bindtap="click" data-id="{{list[3].id}}" data-index="3" data-num="{{list[3].outputAmt}}" wx:if="{{list[3].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[3].outputAmt}}</text>
+  </view>
+   <view class="apple-item apple-item4" bindtap="click" data-id="{{list[4].id}}" data-index="4" data-num="{{list[4].outputAmt}}" wx:if="{{list[4].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[4].outputAmt}}</text>
+  </view>
+   <view class="apple-item apple-item5" bindtap="click" data-id="{{list[5].id}}" data-index="5" data-num="{{list[5].outputAmt}}" wx:if="{{list[5].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[5].outputAmt}}</text>
+  </view>
+   <view class="apple-item apple-item6" bindtap="click" data-id="{{list[6].id}}" data-index="6" data-num="{{list[6].outputAmt}}" wx:if="{{list[6].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[6].outputAmt}}</text>
+  </view>
+   <view class="apple-item apple-item7" bindtap="click" data-id="{{list[7].id}}" data-index="7" data-num="{{list[7].outputAmt}}" wx:if="{{list[7].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[7].outputAmt}}</text>
+  </view>
+  <view class="apple-item apple-item8" bindtap="click" data-id="{{list[8].id}}" data-index="8" data-num="{{list[8].outputAmt}}" wx:if="{{list[8].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[8].outputAmt}}</text>
+  </view>
+  <view class="apple-item apple-item9" bindtap="click" data-id="{{list[9].id}}" data-index="9" data-num="{{list[9].outputAmt}}" wx:if="{{list[9].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[9].outputAmt}}</text>
+  </view>
 </view>
 <view class="bottom">
-  <view class="contribution" bindtap="contribution">提升贡献值</view>
-  <view class="invite" bindtap="invite">邀请好友</view>
-  <view class="get" bindtap="get">一键领取</view>
-  <view class="conversion" bindtap="conversion">兑换商店</view>
+
+  <view class="contribution"  bindtap="contribution">
+    <image src="../../images/contribution.png"></image>
+    <view>提升贡献值</view>
+  </view>
+  <view class="invite" bindtap="invite">
+    <button open-type="share" plain="true">
+       <image src="../../images/invite.png"></image>
+    <view>邀请好友</view>
+    </button>
+  </view>
+  <view class="get" bindtap="get">
+    <image src="../../images/get.png"></image>
+    <view>一键领取</view>
+  </view>
+  <view class="conversion" bindtap="conversion">
+    <image src="../../images/conversion.png"></image>
+    <view>兑换商店</view>
+  </view>
+ 
 </view>
+ <van-popup show="{{ show }}" bind:close="onClose" position="bottom" custom-style="height: 20%" custom-class="custom-class">
+  <button type="primary" plain="true" bindtap="goIndex">去购物</button>
+  <button open-type="share" type="primary" plain="true">邀请好友</button>
+ </van-popup>

@@ -191,11 +191,21 @@ Page({
 
   // 摇钱树
   toTree(){
-    console.log("摇钱树")
-    wx.navigateTo({
-      url: '../moneyTree/moneytree',
-    })
-    
+    if(app.globalData.isLogin){
+      api._get('/cashCow/selectCashCow').then(res=>{
+        if(res.success){
+          wx.navigateTo({
+            url: '../moneyTree/moneytree',
+          })
+        }else{
+          util._toast('请稍后重试')
+        }
+      })
+    }else{
+      this.setData({
+        loginMould: true
+      });
+    }
   },
   /**
    * 生命周期函数--监听页面加载
