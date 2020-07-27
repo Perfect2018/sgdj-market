@@ -12,6 +12,7 @@ Page({
     open: false,
     goodsList: [],
     pageNum: 1,
+    custID:"",
     // 动画实例
     animation: {},
     loginMould: false,
@@ -191,28 +192,28 @@ Page({
 
   // 摇钱树
   toTree(){
-    if(app.globalData.isLogin){
+    // if(app.globalData.isLogin){
       api._get('/cashCow/selectCashCow').then(res=>{
         if(res.success){
           wx.navigateTo({
-            url: '../moneyTree/moneytree',
-          })
+            url: `../moneyTree/moneytree?custID=${this.data.custID}`,
+          }) 
         }else{
           util._toast('请稍后重试')
         }
       })
-    }else{
-      this.setData({
-        loginMould: true
-      });
-    }
+    // }else{
+    //   this.setData({
+    //     loginMould: true
+    //   });
+    // }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     this.setData({
-      open:app.globalData.open
+      open:app.globalData.open,
     })
     // console.log(this.data.open)
     // 实例化百度地图API核心类
@@ -220,7 +221,7 @@ Page({
       ak: app.globalData.ak
     });
     this._switchPage();
-  
+    // console.log(custID)
   },
   // 获取商品
   _getGoods() {
@@ -243,6 +244,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    let custID = api.getCustID();
+    this.setData({
+      custID
+    })
     if (!this.data.open) {
       this._switchPage();
     }

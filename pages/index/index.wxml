@@ -9,7 +9,7 @@
 				{{searchHolder}}
 			</view>
 			<!-- <view> -->
-			
+
 			<view bindtap="searchShop" class="search-shop" data-type="00">店铺</view>
 			<view bindtap="searchGood" class="search-good" data-type="01">商品</view>
 			<!-- </view> -->
@@ -43,9 +43,6 @@
 					<image lazy-load class="hotShop-image" src="{{item.imgUrl}}"></image>
 				</view>
 			</block>
-			<view catchtap="toTree" class="tree">
-				<image src="../../images/apple.png"></image>
-			</view>
 		</view>
 		<!-- 广告 -->
 		<view class="ad">
@@ -76,4 +73,8 @@
 </block>
 <!-- 红包 -->
 <image src="../../images/rp.png" class="envelopes" bindtap="_toEnvelopes" animation="{{animation}}" data-navigate="envelopes"></image>
-<van-dialog title="提示" message="登录后即可进行开店" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#f80"></van-dialog>
+<!-- 金苹果 -->
+<view catchtap="toTree" class="tree">
+	<image src="../../images/apple.png"></image>
+</view>
+<van-dialog title="提示" message="登录后即可继续操作" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#f80"></van-dialog>

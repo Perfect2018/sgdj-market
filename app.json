@@ -31,7 +31,8 @@
     "pages/discount/discount",
     "components/discountGroup/group",
     "pages/moneyTree/moneytree",
-    "pages/conversion/conversion"
+    "pages/conversion/conversion",
+    "pages/info/info"
   ],
   "window": {
     "backgroundColor": "#fff",

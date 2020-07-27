@@ -154,6 +154,7 @@
   position: fixed;
   left: 640rpx;
   bottom: 170rpx;
+  z-index: 999;
 }
 
 .tree image{

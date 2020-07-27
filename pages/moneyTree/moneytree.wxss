@@ -20,13 +20,13 @@ page{
 
 .apple-item text{
   position: absolute;
-  left: 55rpx;
-  top: 55rpx;
+  left: 30rpx;
+  top: 75rpx;
 }
 
 .apple-item{
-  width: 110rpx;
-  height: 110rpx;
+  width: 150rpx;
+  height: 150rpx;
   text-align: center;
   color: black;
   font-size: 20rpx;
@@ -128,12 +128,12 @@ page{
 }
 
 view image{
-  width: 100rpx;
+  width: 80rpx;
   height: 80rpx;
 }
 
 .bottom view view{
-  width: 100%;
+  width: 90%;
   /* height: 40rpx;
   line-height: 40rpx; */
   /* padding: 0 10rpx; */

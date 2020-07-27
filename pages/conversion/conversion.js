@@ -30,17 +30,21 @@ Page({
       util._toast('金币数量不足，无法兑换')
       return;
     }
-    if(parseInt(this.data.num)!=this.data.num){
-      util._toast("兑换个数必须是整数");
+    if(this.data.num%10!=0){
+      util._toast("兑换数量必须为10的倍数")
       return;
-    };
+    }
+    // if(parseInt(this.data.num)!=this.data.num){
+    //   util._toast("兑换个数必须是整数");
+    //   return;
+    // };
     api._post("/cashCow/cashCowRecive",{
       number:this.data.num
     }).then(res=>{
       if(res.success){
         util._toast('兑换成功,请查看余额')
         this.setData({
-          total:this.data.total-this.data.num
+          total:res.data
         })
       }
       // console.log(res)

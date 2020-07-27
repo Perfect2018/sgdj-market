@@ -1,0 +1,24 @@
+<!--pages/info/info.wxml-->
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view>
+  <!-- search -->
+  <view class="search">
+    <van-search placeholder="请输入商品名称" placeholder-class="place" field-class="field" value="{{search}}" bind:change="getParams" bind:search="search" custom-class="custom-class" right-icon="search" input-class="input" use-action-slot>
+      <view slot="action" bind:tap="search">搜索</view>
+    </van-search>
+  </view>
+  <!-- advertising -->
+  <view class="advertising">
+    <image src=""></image>
+  </view>
+  <!-- list -->
+  <view class="content">
+    <!-- type -->
+    <view class="type">
+      <view bindtap="choose" data-type="01" class="{{typs == 01 ? active:''}}">供应</view>
+      <view bindtap="choose" data-type="02" class="{{typs == 02 ? active:''}}">需求</view>
+    </view>
+    <!-- list -->
+    <view class="list"></view>
+  </view>
+</view>

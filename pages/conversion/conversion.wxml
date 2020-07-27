@@ -5,7 +5,7 @@
   </view>
   <view class="right">
     <view>蔬果到家</view>
-    <view>蔬果到家第{{No}}为用户</view>
+    <view>蔬果到家第{{No}}位用户</view>
   </view>
 </view>
 <view class="trend">

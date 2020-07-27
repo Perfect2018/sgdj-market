@@ -10,14 +10,15 @@ Page({
     total:'',
     contribution:'',
     list:[],
-    show:false
+    show:false,
+    custID:"",
+    loginMould: false
   },
 
 
   click(e){ 
-    
     let cowId = e.currentTarget.dataset.id;
-    let num = e.currentTarget.dataset.num;
+    // let num = e.currentTarget.dataset.num;
     let index = e.currentTarget.dataset.index;
     api._post('/cashCow/reciveCustCow',{
       cowId
@@ -27,7 +28,7 @@ Page({
         this.data.list.splice(index,1)
         this.setData({
           list:this.data.list,
-          total:Number(this.data.total)+Number(num)
+          total:res.data
         })
       }else{
         util._toast('请稍后重试')
@@ -99,7 +100,10 @@ Page({
     }else{
       api._get('/cashCow/receiverAllCashCow').then(res=>{
         if(res.success){
-          this.getData()
+          // this.getData()
+          this.setData({
+            total:res.data
+          })
           util._toast("领取成功")
         }else{
           util._toast('请稍后重试')
@@ -116,19 +120,41 @@ Page({
     })
   },
 
+  share(custID = this.data.custID){
+    api._post("/cashCow/share",{
+      shareCustId:custID
+    }).then(res=>{
+       console.log(res)
+      //  util._toast(this.data.custID)
+    })
+  },
+
+  // 取消登录
+  _closeLoginMould() {
+    this.setData({
+      loginMould: false
+    });
+  },
+  // 登录
+  _login(e) {
+    app._login(e);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // this.getData()
-    getCurrentPages()
-    let custID = api.getCustID()
-    console.log(custID)
-    api._post("/cashCow/share",{
-      shareCustId:custID
-    }).then(res=>{
-       console.log(res)
-    })
+    if(app.globalData.isLogin){
+      this.setData({
+        custID:options.custID
+      })
+      util._toast(this.data.custID)
+      // this.share(this.data.custID)
+    }else{
+      this.setData({
+        loginMould:true
+      })
+    }
   },
 
   /**

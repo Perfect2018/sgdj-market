@@ -45,6 +45,10 @@ page {
   text-align: center;
 }
 
+.card-body1{
+  text-align: center;
+}
+
 .card-item-top {
   flex: 1;
   padding: 20rpx 0 10rpx 0;

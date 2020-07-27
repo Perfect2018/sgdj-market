@@ -46,7 +46,7 @@
 
   <view class="contribution"  bindtap="contribution">
     <image src="../../images/contribution.png"></image>
-    <view>提升贡献值</view>
+    <view>提升收益</view>
   </view>
   <view class="invite" bindtap="invite">
     <button open-type="share" plain="true">
@@ -68,3 +68,4 @@
   <button type="primary" plain="true" bindtap="goIndex">去购物</button>
   <button open-type="share" type="primary" plain="true">邀请好友</button>
  </van-popup>
+<van-dialog title="提示" message="登录后即可继续操作" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#f80"></van-dialog>
