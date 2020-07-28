@@ -10,6 +10,7 @@ Page({
   data: {
     search:"",
     list:[],
+    types:'01',
   },
 
   getInfo(){
@@ -41,7 +42,23 @@ Page({
 
   // 选择类型
   choose(e){
-    
+    this.setData({
+      types:e.currentTarget.dataset.type
+    })
+  },
+
+  toView(e){
+    let navigate = e.currentTarget.dataset.navigate
+    let id = e.currentTarget.dataset.id
+    if(navigate=='infoDetail'){
+      wx.navigateTo({
+        url: `../${navigate}/${navigate}?id=${id}`,
+      })
+    }else{
+      wx.navigateTo({
+        url: `../${navigate}/${navigate}`,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

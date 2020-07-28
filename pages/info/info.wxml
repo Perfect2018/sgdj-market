@@ -15,10 +15,27 @@
   <view class="content">
     <!-- type -->
     <view class="type">
-      <view bindtap="choose" data-type="01" class="{{typs == 01 ? active:''}}">供应</view>
-      <view bindtap="choose" data-type="02" class="{{typs == 02 ? active:''}}">需求</view>
+      <view bindtap="choose" data-type="01" class="{{types == 01 ? 'active':''}}">供应</view>
+      <view bindtap="choose" data-type="02" class="{{types == 02 ? 'active':''}}">需求</view>
     </view>
     <!-- list -->
-    <view class="list"></view>
+    <view class="list" wx:for="{{5}}" wx:key="index" data-navigate="infoDetail" data-id="" bindtap="toView">
+      <view>
+        <view class="title">陕西省西安市某公司需采购中秋节员工福利品月饼150份</view>
+        <view class="label">
+          <view class="left">
+            <text style="background:#FDC07F">需求</text>
+            <text style="background:#C6E2AF">西安市</text>
+          </view>
+          <view class="right"><van-icon name="underway-o" size="40rpx"/>2020-07-28</view>
+        </view>
+      </view>
+    </view>
   </view>
+</view>
+<view class="release-btn" bindtap="toView" data-navigate="release">
+  <view>
+    <van-icon name="plus" size="40rpx"/>
+  </view>
+  <text>发布</text>
 </view>

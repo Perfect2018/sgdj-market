@@ -22,16 +22,19 @@ Page({
   // 搜索
   _search() {
     let kw = this.data.kw;
-    if (kw) {
-      this.setData({
-        kw: ''
-      });
-      wx.navigateTo({
-        url: `../searchList/searchList?kw=${kw}&isGlobal=01`
-      });
-    } else {
-      util._toast("请输入商品名");
-    }
+    wx.navigateTo({
+      url: `../searchList/searchList?kw=${kw}&isGlobal=01`
+    });
+    // if (kw) {
+    //   this.setData({
+    //     kw: ''
+    //   });
+    //   wx.navigateTo({
+    //     url: `../searchList/searchList?kw=${kw}&isGlobal=01`
+    //   });
+    // } else {
+    //   util._toast("请输入商品名");
+    // }
   },
   // 获取商品
   _getGoodsList(pageNum = this.data.pageNum) {

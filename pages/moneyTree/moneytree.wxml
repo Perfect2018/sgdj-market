@@ -1,5 +1,17 @@
-<view class="asset">总资产：{{total}}</view>
-<view class="contribution-tip">贡献值：{{contribution}}</view>
+<view class="asset">
+  <text>总资产：{{total}}</text>
+  <view bindtap="rule"><van-icon name="info-o" size="40rpx"/>金苹果规则:</view>
+</view>
+<view class="contribution-tip">贡献值：{{contribution}}
+  <van-transition show="{{isShow}}">
+  <view class="rule" bindtap="rule">
+    <view>1.每日派送N个金苹果，每小时派发一次，每小时即:N/24。</view>
+    <view>2.单个金苹果价格为平台前一日交易额的一定比例。</view>
+    <view>3.可得金苹果份额为:(贡献值/所有用户贡献值)*N/24。</view>
+    <view>4.贡献值越高可获得金苹果越多，可通过购物或邀请好友提升贡献值和金币。</view>
+  </view>
+  </van-transition>
+</view>
 <view class="apple">
   <view class="apple-item apple-item0" bindtap="click" data-id="{{list[0].id}}" data-index="0" data-num="{{list[0].outputAmt}}" wx:if="{{list[0].outputAmt}}">
     <image src="../../images/apple.png"></image>
@@ -41,6 +53,26 @@
     <image src="../../images/apple.png"></image>
     <text>{{list[9].outputAmt}}</text>
   </view>
+  <view class="apple-item apple-item10" bindtap="click" data-id="{{list[10].id}}" data-index="10" data-num="{{list[10].outputAmt}}" wx:if="{{list[10].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[10].outputAmt}}</text>
+  </view>
+  <view class="apple-item apple-item11" bindtap="click" data-id="{{list[11].id}}" data-index="11" data-num="{{list[11].outputAmt}}" wx:if="{{list[11].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[11].outputAmt}}</text>
+  </view>
+  <view class="apple-item apple-item12" bindtap="click" data-id="{{list[12].id}}" data-index="12" data-num="{{list[12].outputAmt}}" wx:if="{{list[12].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[12].outputAmt}}</text>
+  </view>
+  <view class="apple-item apple-item13" bindtap="click" data-id="{{list[13].id}}" data-index="13" data-num="{{list[13].outputAmt}}" wx:if="{{list[13].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[13].outputAmt}}</text>
+  </view>
+  <view class="apple-item apple-item14" bindtap="click" data-id="{{list[14].id}}" data-index="14" data-num="{{list[14].outputAmt}}" wx:if="{{list[14].outputAmt}}">
+    <image src="../../images/apple.png"></image>
+    <text>{{list[14].outputAmt}}</text>
+  </view>
 </view>
 <view class="bottom">
 
@@ -49,7 +81,7 @@
     <view>提升收益</view>
   </view>
   <view class="invite" bindtap="invite">
-    <button open-type="share" plain="true">
+    <button plain="true">
        <image src="../../images/invite.png"></image>
     <view>邀请好友</view>
     </button>
@@ -65,7 +97,7 @@
  
 </view>
  <van-popup show="{{ show }}" bind:close="onClose" position="bottom" custom-style="height: 20%" custom-class="custom-class">
-  <button type="primary" plain="true" bindtap="goIndex">去购物</button>
-  <button open-type="share" type="primary" plain="true">邀请好友</button>
+  <van-button bindtap="goIndex" icon="shopping-cart-o" custom-class="icon-button" color="#FFE695">去购物</van-button>
+  <van-button open-type="share" icon="friends-o" custom-class="icon-button" color="#FFE695">邀请好友</van-button>
  </van-popup>
 <van-dialog title="提示" message="登录后即可继续操作" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#f80"></van-dialog>

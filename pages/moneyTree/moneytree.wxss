@@ -12,6 +12,38 @@ page{
   color: #fff;
   letter-spacing: 1rpx;
   font-weight: 600;
+  position: relative;
+}
+
+.asset{
+  display: flex;
+  justify-content: space-between;
+}
+
+.asset view{
+  display: flex;
+  align-items: center;
+}
+
+.rule{
+  font-size: 24rpx;
+  color: #888;
+  /* width: 210rpx; */
+  position: absolute;
+  top: 8rpx;
+  right: -10rpx;
+  z-index: 999;
+  background-color: #fff;
+  border-radius: 8rpx;
+  font-weight: normal;
+  padding: 15rpx 10rpx;
+  box-sizing: border-box;
+}
+
+.rule view{
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  box-sizing: border-box;
 }
 
 .apple{
@@ -20,13 +52,13 @@ page{
 
 .apple-item text{
   position: absolute;
-  left: 30rpx;
-  top: 75rpx;
+  left: 14rpx;
+  top: 56rpx;
 }
 
 .apple-item{
-  width: 150rpx;
-  height: 150rpx;
+  width: 110rpx;
+  height: 110rpx;
   text-align: center;
   color: black;
   font-size: 20rpx;
@@ -45,49 +77,73 @@ page{
 
 .apple-item1{
   top: 20rpx;
-  left: 300rpx;
+  left: 220rpx;
 }
 
 .apple-item2{
-  top: 30rpx;
-  left: 480rpx;
+  top: 60rpx;
+  left: 360rpx;
 }
 
 .apple-item3{
-  top: 250rpx;
-  left: 50rpx;
+  top: 30rpx;
+  left: 510rpx;
 }
 
 .apple-item4{
   top: 210rpx;
-  left: 300rpx;
+  left: 10rpx;
 }
 
 .apple-item5{
-  top: 205rpx;
-  left: 540rpx;
+  top: 178rpx;
+  left: 160rpx;
 }
 
 .apple-item6{
-  top: 470rpx;
+  top: 370rpx;
   left: 40rpx;
 }
 
 .apple-item7{
-  top: 410rpx;
-  left: 360rpx;
+  top: 215rpx;
+  left: 300rpx;
 }
 
 .apple-item8{
-  top: 390rpx;
+  top: 180rpx;
   left: 590rpx;
 }
 
 .apple-item9{
-  top: 500rpx;
-  left: 200rpx;
+  top: 252rpx;
+  left: 450rpx;
 }
 
+.apple-item10{
+  top: 340rpx;
+  left: 198rpx;
+}
+
+.apple-item11{
+  top: 380rpx;
+  left: 345rpx;
+}
+
+.apple-item12{
+  top: 370rpx;
+  left: 550rpx;
+}
+
+.apple-item13{
+  top: 490rpx;
+  left: 10rpx;
+}
+
+.apple-item14{
+  top: 480rpx;
+  left: 180rpx;
+}
 .bottom{
   width: 95%;
   height: 112rpx;
@@ -144,25 +200,16 @@ view image{
 } 
 
 .custom-class{
-  /* display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  font-size: 28rpx; */
+  font-size: 28rpx;
   padding: 10rpx 0;
 }
 
-.custom-class button:first-child{
-  margin-bottom: 10rpx;
-  box-sizing: border-box;
-}
-
-.custom-class button{
-  width: 80%;
-  /* height: 90rpx;
-  border-radius: 50%;
-  font-size: 28rpx;
+.icon-button{
+  width: 230rpx;
+  height: 60rpx;
+  color: #DA994C !important;
   padding: 0;
-  line-height: 90rpx; */
 }

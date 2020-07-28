@@ -26,7 +26,7 @@ Page({
     if (!shopId) {
       shopId = ''
     }
-    console.log(shopId)
+    // console.log(shopId)
     if (kw) {
       api._post("/goods/fuzzySearchGoods", {
         goodsName: kw,
@@ -82,24 +82,24 @@ Page({
   _search() {
     let kw = this.data.kw;
     let type = this.data.type
-    // if (kw) {
-    //   this._getSearchList();
-    // } else {
-    //   util._toast("请输入商品名");
-    // }
-    // if(type=="00"){
-    //   this.searchShopList
-    // }
-    switch (type) {
-      case '00':
-        this.searchShopList()
-        break;
-      case '01':
-        this._getSearchList()
-        break;
-      default:
-        break;
+    if (kw) {
+      this._getSearchList();
+    } else {
+      util._toast("请输入商品名");
     }
+    if(type=="00"){
+      this.searchShopList()
+    }
+    // switch (type) {
+    //   case '00':
+    //     this.searchShopList()
+    //     break;
+    //   case '01':
+    //     this._getSearchList()
+    //     break;
+    //   default:
+    //     break;
+    // }
   },
 
   // 添加购物车

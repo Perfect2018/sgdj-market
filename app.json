@@ -32,7 +32,9 @@
     "components/discountGroup/group",
     "pages/moneyTree/moneytree",
     "pages/conversion/conversion",
-    "pages/info/info"
+    "pages/info/info",
+    "pages/infoDetail/infoDetail",
+    "pages/release/release"
   ],
   "window": {
     "backgroundColor": "#fff",

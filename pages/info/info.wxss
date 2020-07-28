@@ -23,8 +23,13 @@ page {
   
 }
 
-.custom-class{
+.search .custom-class{
   width: 100%;
+  padding-left: 0;
+}
+
+.search .van-search__content{
+  padding-left: 0;
 }
 
 .advertising{
@@ -42,8 +47,8 @@ page {
 }
 
 .type{
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   display: flex;
   justify-content: space-around;
   font-size: 36rpx;
@@ -57,4 +62,71 @@ page {
 
 .active{
   color: #888;
+}
+
+.list{
+  padding: 0 20rpx;
+  border-bottom: 1rpx solid #f3f1f2;
+}
+
+.title{
+  font-size: 32rpx;
+  color: #888;
+  letter-spacing: 1rpx;
+}
+
+.label{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 120rpx;
+
+}
+
+.left{
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left text{
+  padding: 5rpx 10rpx;
+  box-sizing: border-box;
+  font-size: 32rpx;
+  border-radius: 8rpx;
+}
+
+.right{
+  height: 50rpx;
+  text-align: right;
+  padding: 5rpx 10rpx;
+  line-height: 50rpx;
+  box-sizing: border-box;
+}
+
+.right .van-icon{
+  top: 8rpx;
+  left: -10rpx;
+}
+
+.release-btn{
+  position: fixed;
+  right: 80rpx;
+  bottom: 200rpx;
+  background-color: #1296D4;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+}
+
+.release-btn view{
+  text-align: center;
+  position: relative;
+  top: 4rpx;
+}
+
+.release-btn text{
+  font-size: 30rpx;
 }

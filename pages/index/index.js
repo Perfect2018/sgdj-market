@@ -192,7 +192,7 @@ Page({
 
   // 摇钱树
   toTree(){
-    // if(app.globalData.isLogin){
+    if(app.globalData.isLogin){
       api._get('/cashCow/selectCashCow').then(res=>{
         if(res.success){
           wx.navigateTo({
@@ -202,11 +202,11 @@ Page({
           util._toast('请稍后重试')
         }
       })
-    // }else{
-    //   this.setData({
-    //     loginMould: true
-    //   });
-    // }
+    }else{
+      this.setData({
+        loginMould: true
+      });
+    }
   },
   /**
    * 生命周期函数--监听页面加载

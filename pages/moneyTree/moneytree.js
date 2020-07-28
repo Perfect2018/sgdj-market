@@ -11,10 +11,16 @@ Page({
     contribution:'',
     list:[],
     show:false,
+    isShow:false,
     custID:"",
-    loginMould: false
+    loginMould: false,
   },
 
+  rule(){
+    this.setData({
+      isShow:!this.data.isShow
+    })
+  },
 
   click(e){ 
     let cowId = e.currentTarget.dataset.id;
@@ -47,6 +53,8 @@ Page({
           list:res.data.custCowTime,
           isVip:res.data.custCow.isVip
         })
+      }else{
+        util._toast("请稍后重试")
       }
     })
   },
@@ -72,11 +80,46 @@ Page({
   },
 
   // 邀请好友
-  // invite(){
-  //   var that = this
-  //   console.log('0000')
-  //   that.onShareAppMessage()
-  // },
+  invite(){
+    // 判断是否已经生成海报
+    if (this.data.distribution.posterImage) {
+      this._setShowPoster();
+      return;
+    }
+    let custId = api.getCustID();
+    // 判断登录
+    if (app.globalData.isLogin && custId) {
+      util._loading('生成中...');
+      let goodsImage = util._getImageUrl(this.data.goodsDetail.img6);
+      let avatarUrl = util._getCodeUrl(`/distribution/getCustHeadimg?url=${app.globalData.userInfo.avatarUrl}`);
+      let codeUrl = util._getCodeUrl(`/distribution/distributionGoods?goodsId=${this.data.goodsDetail.id}&page=pages/moneyTree/moneytree&custId=${custId}&parentCustId=${app.globalData.parentCustId}`);
+      // let codeUrl = app.globalData.userInfo.avatarUrl;
+      Promise.all([api._download(goodsImage), api._download(avatarUrl), api._download(codeUrl)]).then(res => {
+        console.log(res)
+        this.setData({
+          ['distribution.goodsImage']: res[0].tempFilePath,
+          ['distribution.avatarImage']: res[1].tempFilePath,
+          ['distribution.codeImage']: res[2].tempFilePath,
+          // ['distribution.codeImage']: '/images/sh-code.jpg'
+        }, () => {
+          this._generatePoster().then(res => {
+            console.log(res)
+            this.setData({
+              ['distribution.posterImage']: res,
+              showPoster: true
+            });
+          });
+        });
+      }).catch(err => {
+        wx.hideLoading();
+        util._toast('生成失败，请重试...');
+      });
+    } else {
+      this.setData({
+        loginMould: true
+      });
+    }
+  },
 
   // 一键领取
   get(){
@@ -144,12 +187,14 @@ Page({
    */
   onLoad: function (options) {
     // this.getData()
+    console.log(app.globalData.isLogin)
     if(app.globalData.isLogin){
       this.setData({
         custID:options.custID
       })
-      util._toast(this.data.custID)
+      // util._toast(this.data.custID)
       // this.share(this.data.custID)
+      this.getData()
     }else{
       this.setData({
         loginMould:true
@@ -157,6 +202,15 @@ Page({
     }
   },
 
+   /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    return{
+      title:"蔬果到家",
+      path:"/pages/moneyTree/moneytree"
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -168,7 +222,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getData()
+    // this.getData()
   },
 
   /**
@@ -196,13 +250,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })
