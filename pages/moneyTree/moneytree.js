@@ -14,6 +14,16 @@ Page({
     isShow:false,
     custID:"",
     loginMould: false,
+    // 分销海报变量
+    showPoster: false, //是否显示海报
+    distribution: {
+      canvas_hb: '/images/share.jpg',
+      goodsImage: '',
+      codeImage: '',
+      avatarImage: '',
+      posterImage: '',
+      nickname:""
+    },
   },
 
   rule(){
@@ -79,6 +89,25 @@ Page({
     })
   },
 
+   // 长按保存图片
+   _savePosterImage() {
+    wx.saveImageToPhotosAlbum({
+      filePath: this.data.distribution.posterImage,
+      success: res => {
+        util._toast('保存成功');
+      },
+      fail: err => {
+        util._toast('保存失败');
+      }
+    })
+  },
+  // 显示隐藏海报
+  _setShowPoster(showPoster = this.data.showPoster) {
+    this.setData({
+      showPoster: !showPoster
+    });
+  },
+
   // 邀请好友
   invite(){
     // 判断是否已经生成海报
@@ -89,17 +118,23 @@ Page({
     let custId = api.getCustID();
     // 判断登录
     if (app.globalData.isLogin && custId) {
+      let nickname = app.globalData.userInfo.nickName
+      // this.setData({
+      //   nickname:app.globalData.userInfo.nickName
+      // })
+      console.log(app.globalData)
       util._loading('生成中...');
-      let goodsImage = util._getImageUrl(this.data.goodsDetail.img6);
-      let avatarUrl = util._getCodeUrl(`/distribution/getCustHeadimg?url=${app.globalData.userInfo.avatarUrl}`);
-      let codeUrl = util._getCodeUrl(`/distribution/distributionGoods?goodsId=${this.data.goodsDetail.id}&page=pages/moneyTree/moneytree&custId=${custId}&parentCustId=${app.globalData.parentCustId}`);
+      // let goodsImage = util._getImageUrl(this.data.goodsDetail.img6);
+      let avatarUrl = util._getCodeUrl(`/cashCow/getCustHeadimg?custId=${custId}`);
+      let codeUrl = util._getCodeUrl(`/cashCow/shareCashCowQRcode?page=pages/moneyTree/moneytree&custId=${custId}`);
       // let codeUrl = app.globalData.userInfo.avatarUrl;
-      Promise.all([api._download(goodsImage), api._download(avatarUrl), api._download(codeUrl)]).then(res => {
+      Promise.all([api._download(avatarUrl), api._download(codeUrl)]).then(res => {
         console.log(res)
         this.setData({
-          ['distribution.goodsImage']: res[0].tempFilePath,
-          ['distribution.avatarImage']: res[1].tempFilePath,
-          ['distribution.codeImage']: res[2].tempFilePath,
+          // ['distribution.goodsImage']: res[0].tempFilePath,
+          ['distribution.avatarImage']: res[0].tempFilePath,
+          ['distribution.codeImage']: res[1].tempFilePath,
+          ['distribution.nickname']:nickname
           // ['distribution.codeImage']: '/images/sh-code.jpg'
         }, () => {
           this._generatePoster().then(res => {
@@ -119,6 +154,64 @@ Page({
         loginMould: true
       });
     }
+  },
+
+  _generatePoster() {
+    return new Promise((resolve, reject) => {
+      let {
+        canvas_hb,
+        nickname,
+        codeImage,
+        avatarImage
+      } = this.data.distribution;
+      let context = wx.createCanvasContext('QRCanvas');
+      // const pattern = context.createPattern(canvas_hb, 'no-repeat')
+      // context.fillStyle = pattern
+      // context.setFillStyle("#fff");
+      context.fillRect(0, 0, 640, 1160);
+
+      //绘制商品图片
+      // context.drawImage(goodsImage, 0, 0, 640, 1040);
+      // context.save(); // 保存当前context的状态
+
+      //绘制描述图
+      context.drawImage(canvas_hb, 0, 0, 640, 1160);
+      context.save(); // 保存当前context的状态
+
+      //绘制二维码
+      context.drawImage(codeImage, 40, 780, 120, 120);
+      context.save(); // 保存当前context的状态
+
+      //绘制头像
+      context.arc(100, 840, 30, 0, 2 * Math.PI); //画出圆
+      context.fill();
+      context.clip(); //裁剪上面的圆形
+      context.drawImage(avatarImage, 70, 810, 60, 60);
+      context.save(); // 保存当前context的状态
+
+      //绘制文字
+      context.setFontSize(20);
+      context.setFillStyle('#fff');
+      context.setTextAlign('left');
+      context.fillText("nickname", 160, 760);
+      context.stroke();
+
+      context.draw();
+      //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时
+      setTimeout(() => {
+        wx.canvasToTempFilePath({
+          canvasId: 'QRCanvas',
+          success: res => {
+            wx.hideLoading();
+            resolve(res.tempFilePath);
+          },
+          fail: err => {
+            reject();
+          }
+        });
+      }, 200);
+    });
+
   },
 
   // 一键领取

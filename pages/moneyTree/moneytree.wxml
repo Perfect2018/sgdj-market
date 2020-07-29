@@ -101,3 +101,10 @@
   <van-button open-type="share" icon="friends-o" custom-class="icon-button" color="#FFE695">邀请好友</van-button>
  </van-popup>
 <van-dialog title="提示" message="登录后即可继续操作" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#f80"></van-dialog>
+<!-- 海报图展示 -->
+<view v-if="{{showPoster}}" class="{{showPoster?'QR-img QR-z-img':'QR-img'}}" bindtap="_setShowPoster">
+  <image class="img" src="{{distribution.posterImage}}" bindlongpress="_savePosterImage"></image>
+</view>
+<view class="canvas-box">
+  <canvas class="QRCanvas" canvas-id="QRCanvas" />
+</view>
