@@ -118,7 +118,7 @@
 </view>
 <van-dialog title="提示" message="登录后即可购买商品" show="{{loginMould}}" show-cancel-button confirm-button-open-type="getUserInfo" bind:close="_closeLoginMould" confirm-button-text="去登陆" bind:getuserinfo="_login" confirm-button-color="#ff8800" custom-style="dialog-login"></van-dialog>
 <!-- 海报图展示 -->
-<view v-if="{{showPoster}}" class="{{showPoster?'QR-img QR-z-img':'QR-img'}}" bindtap="_setShowPoster">
+<view wx:if="{{showPoster}}" class="{{showPoster?'QR-img QR-z-img':'QR-img'}}" bindtap="_setShowPoster">
   <image class="img" src="{{distribution.posterImage}}" bindlongpress="_savePosterImage"></image>
 </view>
 <view class="canvas-box">

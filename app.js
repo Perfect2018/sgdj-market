@@ -106,7 +106,7 @@ App({
             resolve();
             wx.hideLoading();
             util._toast("登录成功");
-
+            // wx.navigateBack()
           } else {
             reject();
             util._toast("登录失败");

@@ -1,1 +1,9 @@
 /* pages/infoDetail/infoDetail.wxss */
+page {
+  height: 100%;
+  background-color: #f3f1f2;
+  /* padding: 0 10rpx; */
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  box-sizing: border-box;
+}

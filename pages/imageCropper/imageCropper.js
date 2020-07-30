@@ -23,6 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // console.log(options)
     this.setData({
       baseUrl: options.baseUrl
     }, () => {
@@ -59,6 +60,7 @@ Page({
         img: img
       }).then(res => {
         if (res.success) {
+          // console.log(res)
           wx.setStorageSync("tempImage", {
             baseUrl: this.data.baseUrl,
             id: res.data

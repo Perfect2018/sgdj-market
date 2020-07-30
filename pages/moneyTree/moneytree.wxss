@@ -235,8 +235,10 @@ view image{
 .QR-img{}
 
 .QR-img .img{
-  width: 66%;
-  height: 72%;
+  /* width: 66%;
+  height: 72%; */
+  width: 500rpx;
+  height: 870rpx;
   position: absolute;
   left: 0;
   top: -40rpx;
@@ -246,4 +248,26 @@ view image{
   object-fit: initial;
   border-radius: 8rpx;
   /* border: 1rpx solid #315FAC; */
+}
+
+.poster-btn{
+  width: 500rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  border-radius: 50rpx;
+  position: absolute;
+  color: #fff;
+  background-color: #F80;
+  left: 0;
+  top: 950rpx;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  object-fit: initial;
+}
+
+.main{
+  width: 100%;
+  height: 100%;
 }

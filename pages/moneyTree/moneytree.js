@@ -64,8 +64,15 @@ Page({
           isVip:res.data.custCow.isVip
         })
       }else{
-        util._toast("请稍后重试")
+        console.log('00')
+        this.setData({
+          loginMould: true
+        });
       }
+    }).catch(err=>{
+      this.setData({
+        loginMould: true
+      });
     })
   },
 
@@ -106,6 +113,7 @@ Page({
     this.setData({
       showPoster: !showPoster
     });
+    // console.log(this.data.showPoster)
   },
 
   // 邀请好友
@@ -178,6 +186,13 @@ Page({
       context.drawImage(canvas_hb, 0, 0, 640, 1160);
       context.save(); // 保存当前context的状态
 
+      //绘制文字  文字绘制需在图片绘制后面
+      context.setFontSize(30);
+      context.setFillStyle('#f80');
+      // context.setTextAlign('left');
+      context.fillText(nickname, 170, 830);
+      context.save();
+
       //绘制二维码
       context.drawImage(codeImage, 40, 780, 120, 120);
       context.save(); // 保存当前context的状态
@@ -189,12 +204,6 @@ Page({
       context.drawImage(avatarImage, 70, 810, 60, 60);
       context.save(); // 保存当前context的状态
 
-      //绘制文字
-      context.setFontSize(20);
-      context.setFillStyle('#fff');
-      context.setTextAlign('left');
-      context.fillText("nickname", 160, 760);
-      context.stroke();
 
       context.draw();
       //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时
@@ -273,18 +282,65 @@ Page({
   },
   // 登录
   _login(e) {
-    app._login(e);
+    return new Promise((resolve, reject) => {
+      let session_key = this.globalData.session_key;
+      let encryptedData = e.detail.encryptedData;
+      let iv = e.detail.iv;
+      // console.log(e)
+      this.globalData.userInfo = e.detail.userInfo;
+      if (session_key && encryptedData && iv) {
+        util._loading('正在登陆...');
+        api._post('/wxcust/appuserinfo', {
+          session_key,
+          encryptedData,
+          iv
+        }).then(res => {
+          wx.hideLoading();
+          if (res.success && res.data) {
+            this.globalData.isLogin = true;
+
+            let custId = res.data['CUST-ID'];
+            api.setCustID(custId);
+
+            let parentCustId = this.globalData.parentCustId;
+            if (parentCustId && custId) {
+              api._post('/cashCow/share', {
+                shareCustId: parentCustId,
+                custId: custId
+              });
+            }
+            resolve();
+            wx.hideLoading();
+            util._toast("登录成功");
+
+          } else {
+            reject();
+            util._toast("登录失败");
+          }
+        });
+      }
+    })
+  },
+
+  login(){
+    console.log(app.globalData.isLogin)
+    if(!app.globalData.isLogin){
+      this.setData({
+        loginMould: true
+      });
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // this.getData()
-    console.log(app.globalData.isLogin)
+    // console.log(app.globalData.isLogin)
+    // this._login()
     if(app.globalData.isLogin){
-      this.setData({
-        custID:options.custID
-      })
+      // this.setData({
+      //   custID:options.custID
+      // })
       // util._toast(this.data.custID)
       // this.share(this.data.custID)
       this.getData()

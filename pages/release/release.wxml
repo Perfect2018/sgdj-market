@@ -1,2 +1,97 @@
 <!--pages/release/release.wxml-->
-<text>pages/release/release.wxml</text>
+<wxs src="../../wxs/util.wxs" module="util"></wxs>
+<view class="top">
+  <view class="messageType">
+    <label>供需类型:</label>
+    <radio-group  bindchange='_setType' data-key="messageType">
+      <label class="radio-label">
+					<radio value="01" color="#1e90ff" checked="{{messageType=='01'}}">
+						<text class="fs-34">供应</text>
+					</radio>
+				</label>
+				<label class="radio-label">
+					<radio value="02" color="#1e90ff" checked="{{messageType=='02'}}">
+						<text class="fs-34">需求</text>
+					</radio>
+				</label>
+    </radio-group>
+  </view>
+  <view class="item">
+    <label>信息标题:</label>
+    <input placeholder="请输入信息标题" placeholder-class="palce" data-key="title" bindinput="getParams"></input>
+  </view>
+
+  <view class="item">
+    <label>采购/供应数量:</label>
+    <input placeholder="请输入产品数量" placeholder-class="palce" type="number" data-key="number" bindinput="getParams"></input>
+  </view>
+
+  <view class="item">
+    <label>信息内容:</label>
+    <textarea placeholder="请输入信息内容" placeholder-class="palce" data-key="content" bindinput="getParams"></textarea>
+  </view>
+</view>
+
+<view class="img">
+  <view class="img-item">
+    <block wx:if="{{img1}}">
+      <view class="del" bindtap="del" data-baseUrl="img1">×</view>
+      <image src="{{util._getImageUrl(img1)}}" class="getimage"></image>
+    </block>
+    <view wx:else bindtap="upload" data-baseUrl="img1">
+      <image src="../../images/camera.png" class="camera"></image>
+    </view>
+  </view>
+  <view class="img-item">
+    <block wx:if="{{img2}}">
+      <view class="del" bindtap="del" data-baseUrl="img2">×</view>
+      <image src="{{util._getImageUrl(img2)}}" class="getimage"></image>
+    </block>
+    <view wx:else bindtap="upload" data-baseUrl="img2">
+    <image src="../../images/camera.png" class="camera"></image>
+    </view>
+  </view>
+  <view class="img-item">
+    <block wx:if="{{img3}}">
+      <view class="del" bindtap="del" data-baseUrl="img1">×</view>
+      <image src="{{util._getImageUrl(img3)}}" class="getimage"></image>
+    </block>
+    <view wx:else bindtap="upload" data-baseUrl="img3">
+    <image src="../../images/camera.png" class="camera"></image>
+    </view>
+  </view>
+</view>
+
+<view class="item">
+  <label>截止时间:</label>
+  <picker bindchange="select" placeholder="请输入截止时间" mode="date" start="2000-01-01" end="2050-01-01" value="{{date}}">
+     <view class="picker">
+     {{date ? date:'请输入截止时间如:2020-01-01'}}
+    </view>
+  </picker>
+</view>
+
+<view class="item">
+  <label>位置<text>(可删除修改)</text>:</label>
+  <input bindinput="getParams" value="{{address}}" data-key="address"></input>
+</view>
+
+<view class="item">
+  <label>联系人:</label>
+  <input bindinput="getParams" placeholder="请输入联系人姓名" data-key="user"></input>
+</view>
+
+<view class="item">
+  <label>联系电话:</label>
+  <input bindinput="getParams" placeholder="请输入联系人电话" data-key="phone"></input>
+</view>
+
+<view class="item">
+  <label>验证码:</label>
+  <input bindinput="getParams" placeholder="请输入验证码" data-key="code"></input>
+  <view bindtap="getCode" class="getcode">{{stateTime ? stateTime + 's' : "获取验证码"}}</view>
+</view>
+
+<view class="bottom">
+  <view class="confirm" bindtap="confirm">确认发布</view>
+</view>

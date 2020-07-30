@@ -137,7 +137,7 @@
 			</view>
 		</view>
 		<!-- 我的发布 -->
-		<view class="card">
+		<!-- <view class="card">
 			<view class="card-header">
 				我的发布
 			</view>
@@ -147,6 +147,6 @@
 					<view>历史发布</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 	</view>
 </view>

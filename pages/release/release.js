@@ -1,13 +1,102 @@
 // pages/release/release.js
+const validate = require("../../utils/validate.js");
+const util = require("../../utils/util.js")
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    messageType:"",
+    title:"",
+    number:"",
+    content:"",
+    date:'',
+    address:'陕西省西安市',
+    user:"",
+    phone:"",
+    code:"",
+    // 验证码倒计时
+    stateTime: 0,
+    img1:"",
+    img2:"",
+    img3:""
   },
 
+  // 供需类型
+  _setType(e){
+    this.setData({
+      messageType:e.detail.value
+    })
+  },
+
+  // 时间选择
+  select(e){
+    this.setData({
+      date:e.detail.value
+    })
+  },
+
+  // 获取验证码
+  getCode(){
+    if (this.data.stateTime > 0) {
+      return;
+    }
+    let phone = this.data.phone;
+    if(!phone){
+      util._toast("请输入手机号")
+      return;
+    }else if(!validate.validPhone(phone)){
+      util._toast("手机号格式错误")
+      return;
+    }
+    
+    this.setData({
+      stateTime:60
+    })
+
+    let timer = setInterval(()=>{
+      let stateTime = this.data.stateTime;
+      if(stateTime>1){
+        stateTime-=1;
+        this.setData({
+          stateTime:stateTime
+        })
+      }else{
+        clearInterval(timer)
+      }
+    },1000)
+    console.log(phone)
+  },
+
+  getParams(e){
+    let key = e.currentTarget.dataset.key
+    let value = e.detail.value
+    this.setData({
+      [key]:value
+    })
+  },
+
+  // 上传图片
+  upload(e){
+    let baseUrl = e.currentTarget.dataset.baseurl;
+    wx.navigateTo({
+      url: `../imageCropper/imageCropper?baseUrl=${baseUrl}`
+    });
+  },
+
+  // 删除图片
+  del(e){
+    let baseUrl = e.currentTarget.dataset.baseurl;
+    this.setData({
+      [baseUrl]:''
+    })
+  },
+
+  // 确认发布
+  confirm(){
+    console.log(this.data)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -26,7 +115,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+     // 获取图片
+     let temp = wx.getStorageSync("tempImage") || false;
+     // console.log(temp)
+     if (temp) {
+       this.setData({
+         [temp.baseUrl]: temp.id
+       });
+       wx.setStorageSync("tempImage", false);
+     }
   },
 
   /**
