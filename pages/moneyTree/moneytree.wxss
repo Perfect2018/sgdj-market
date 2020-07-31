@@ -33,16 +33,17 @@ page{
 .rule{
   font-size: 24rpx;
   color: #888;
-  /* width: 210rpx; */
+  width: 92%;
   position: absolute;
   top: 8rpx;
-  right: -10rpx;
+  right: 20rpx;
   z-index: 999;
   background-color: #fff;
-  border-radius: 8rpx;
+  border-radius: 16rpx;
   font-weight: normal;
   padding: 15rpx 10rpx;
   box-sizing: border-box;
+  border: 1rpx solid #ccc;
 }
 
 .rule view{
@@ -232,13 +233,21 @@ view image{
   width: 100%;
 }
 
-.QR-img{}
+.QRCanvas{
+  width: 500px;
+  height: 130px;
+}
+
+.QR-img{
+  /* width: 500rpx;
+  height: 400rpx; */
+}
 
 .QR-img .img{
   /* width: 66%;
   height: 72%; */
   width: 500rpx;
-  height: 870rpx;
+  height: 130rpx;
   position: absolute;
   left: 0;
   top: -40rpx;
@@ -246,12 +255,12 @@ view image{
   right: 0;
   margin: auto;
   object-fit: initial;
-  border-radius: 8rpx;
+  border-radius: 100rpx;
   /* border: 1rpx solid #315FAC; */
 }
 
 .poster-btn{
-  width: 500rpx;
+  width: 380rpx;
   height: 80rpx;
   text-align: center;
   line-height: 80rpx;
@@ -260,11 +269,12 @@ view image{
   color: #fff;
   background-color: #F80;
   left: 0;
-  top: 950rpx;
+  top: 500rpx;
   bottom: 0;
   right: 0;
   margin: auto;
   object-fit: initial;
+  letter-spacing: 4rpx;
 }
 
 .main{

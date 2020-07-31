@@ -3,6 +3,7 @@
     "van-popup":"../../miniprogram_npm/vant-weapp/popup/index",
     "van-button":"../../miniprogram_npm/vant-weapp/button/index",
     "van-icon":"../../miniprogram_npm/vant-weapp/icon/index",
+    "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index",
     "van-transition": "../../miniprogram_npm/vant-weapp/transition/index"
   }
 }

@@ -74,7 +74,7 @@
 					"name": "pages/moneyTree/moneytree",
 					"pathName": "pages/moneyTree/moneytree",
 					"query": "id=2b0757c8be8e43a59ad6ce1b23eced82",
-					"scene": null
+					"scene": 1012
 				},
 				{
 					"id": -1,
@@ -91,16 +91,30 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "pages/snapUpDetail/snapUpDetail",
 					"pathName": "pages/snapUpDetail/snapUpDetail",
 					"query": "id=2b0757c8be8e43a59ad6ce1b23eced82",
-					"scene": null
+					"scene": 1011
 				},
 				{
 					"id": -1,
 					"name": "pages/shop/shop",
 					"pathName": "pages/shop/shop",
+					"query": "id=2b0757c8be8e43a59ad6ce1b23eced82",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/moneyTree/moneytree",
+					"pathName": "pages/moneyTree/moneytree",
+					"query": "id=2b0757c8be8e43a59ad6ce1b23eced82",
+					"scene": 1012
+				},
+				{
+					"id": -1,
+					"name": "pages/snapUp/snapUp",
+					"pathName": "pages/snapUp/snapUp",
 					"query": "id=2b0757c8be8e43a59ad6ce1b23eced82",
 					"scene": null
 				}

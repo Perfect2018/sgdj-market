@@ -7,3 +7,122 @@ page {
   padding-right: 10rpx;
   box-sizing: border-box;
 }
+
+.detail{
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 10rpx 20rpx;
+  color: #aaa;
+  font-size: 30rpx;
+}
+
+.detail>view{
+  display: flex;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.detail text{
+  color: #000;
+  margin-right: 20rpx;
+  box-sizing: border-box;
+  font-weight: 600;
+}
+
+.detail .content{
+  flex-wrap: wrap;
+  height: 300rpx;
+
+}
+
+.detail .content>view{
+  line-height: 40rpx;
+  height: 200rpx;
+  width: 100%;
+  border: 1rpx solid #ccc;
+  box-sizing: border-box;
+  border-radius: 16rpx;
+  padding: 10rpx;
+}
+
+.img{
+  margin-top: 10rpx;
+  width: 100%;
+  height: 400rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+}
+
+.img image{
+  width: 100%;
+  height: 100%;
+}
+
+.date,.user{
+  display: flex;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 10rpx 20rpx;
+  color: #aaa;
+  font-size: 30rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.date text , .user text{
+  color: #000;
+  font-weight: 600;
+  margin-right: 20rpx;
+  box-sizing: border-box;
+}
+
+.date{
+  margin: 10rpx 0;
+}
+
+.bottom{
+  height: 200rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50rpx;
+  box-sizing: border-box;
+}
+
+.bottom>view.call{
+  width: 230rpx;
+  height: 70rpx;
+  text-align: center;
+  line-height: 70rpx;
+  border-radius: 30rpx;
+  letter-spacing: 4rpx;
+  font-size: 32rpx;
+  color: #000;
+  background-color: #C5E0B5;
+}
+
+.bottom button{
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+button image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+button view{
+  width: 100%;
+  text-align: center;
+  font-size: 32rpx;
+  color: #aaa;
+}

@@ -1,4 +1,5 @@
 // pages/release/release.js
+const api = require('../../utils/api.js');
 const validate = require("../../utils/validate.js");
 const util = require("../../utils/util.js")
 Page({
@@ -96,6 +97,43 @@ Page({
   // 确认发布
   confirm(){
     console.log(this.data)
+    if(!this.data.messageType){
+      util._toast("请选择供需类型")
+      return;
+    }else if(!this.data.title){
+      util._toast("请输入信息标题")
+      return;
+    }else if(!this.data.number){
+      util._toast("请输入产品数量")
+      return;
+    }else if(!this.data.content){
+      util._toast("请输入信息内容")
+      return;
+    }else if(!this.data.img1 || !this.data.img2 || !this.data.img3){
+      util._toast("请上传图片")
+      return;
+    }else if(!this.data.date){
+      util._toast("请选择时间")
+      return;
+    }else if(!this.data.address){
+      util._toast("请输入地理位置")
+      return;
+    }else if(!this.data.user){
+      util._toast("请输入联系人姓名")
+      return;
+    }else if(!this.data.phone){
+      util._toast("请输入联系人电话")
+      return;
+    }else if(!this.data.code){
+      util._toast("请输入验证码")
+      return;
+    }
+    console.log("确认发布")
+    api._post('',{}).then(res=>{
+      if(res.success){
+        util._toast("发布成功")
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载

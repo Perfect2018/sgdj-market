@@ -107,7 +107,7 @@
 <!-- 海报图展示 -->
 <view wx:if="{{showPoster}}" class="{{showPoster?'QR-img QR-z-img':'QR-img'}}" bindtap="_setShowPoster">
 	<image class="img" src="{{distribution.posterImage}}" bindlongpress="_savePosterImage"></image>
-	<view wx:if="{{showPoster}}" class="poster-btn" bindtap="_savePosterImage">保存图片</view>
+	<view wx:if="{{showPoster}}" class="poster-btn" bindtap="_savePosterImage">点击保存发送给好友</view>
 </view>
 <view class="canvas-box">
 	<canvas class="QRCanvas" canvas-id="QRCanvas" />

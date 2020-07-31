@@ -24,6 +24,7 @@ Page({
       posterImage: '',
       nickname:""
     },
+    parentCustId:""
   },
 
   rule(){
@@ -33,6 +34,7 @@ Page({
   },
 
   click(e){ 
+    let that = this;
     let cowId = e.currentTarget.dataset.id;
     // let num = e.currentTarget.dataset.num;
     let index = e.currentTarget.dataset.index;
@@ -46,6 +48,9 @@ Page({
           list:this.data.list,
           total:res.data
         })
+        if(this.data.list.length<1){
+          that.getData()
+        }
       }else{
         util._toast('请稍后重试')
       }
@@ -64,7 +69,7 @@ Page({
           isVip:res.data.custCow.isVip
         })
       }else{
-        console.log('00')
+        // console.log('00')
         this.setData({
           loginMould: true
         });
@@ -175,33 +180,40 @@ Page({
       let context = wx.createCanvasContext('QRCanvas');
       // const pattern = context.createPattern(canvas_hb, 'no-repeat')
       // context.fillStyle = pattern
-      // context.setFillStyle("#fff");
-      context.fillRect(0, 0, 640, 1160);
+      context.setFillStyle("#FBF5C6");
+      context.fillRect(0, 0, 600, 180);
+      // context.fillRect(0, 0, 500, 800);
 
       //绘制商品图片
       // context.drawImage(goodsImage, 0, 0, 640, 1040);
       // context.save(); // 保存当前context的状态
 
       //绘制描述图
-      context.drawImage(canvas_hb, 0, 0, 640, 1160);
-      context.save(); // 保存当前context的状态
+      // context.drawImage(canvas_hb, 0, 0, 640, 1160);
+      // context.save(); // 保存当前context的状态
 
       //绘制文字  文字绘制需在图片绘制后面
-      context.setFontSize(30);
-      context.setFillStyle('#f80');
+      context.setFontSize(28);
+      context.setFillStyle('#000');
       // context.setTextAlign('left');
-      context.fillText(nickname, 170, 830);
+      context.fillText(`我是:蔬果到家-${nickname}`, 135, 55);
+      context.save();
+
+      context.setFontSize(30);
+      context.setFillStyle('#FF8830');
+      // context.setTextAlign('left');
+      context.fillText("赠你5个金苹果快来领取", 135, 105);
       context.save();
 
       //绘制二维码
-      context.drawImage(codeImage, 40, 780, 120, 120);
+      context.drawImage(codeImage, 0, 5, 120, 120);
       context.save(); // 保存当前context的状态
 
       //绘制头像
-      context.arc(100, 840, 30, 0, 2 * Math.PI); //画出圆
+      context.arc(60, 65, 30, 0, 2 * Math.PI); //画出圆
       context.fill();
       context.clip(); //裁剪上面的圆形
-      context.drawImage(avatarImage, 70, 810, 60, 60);
+      context.drawImage(avatarImage, 30, 35, 60, 60);
       context.save(); // 保存当前context的状态
 
 
@@ -250,6 +262,7 @@ Page({
             total:res.data
           })
           util._toast("领取成功")
+          that.getData()
         }else{
           util._toast('请稍后重试')
         }
@@ -282,12 +295,14 @@ Page({
   },
   // 登录
   _login(e) {
+    let that = this
     return new Promise((resolve, reject) => {
-      let session_key = this.globalData.session_key;
+      // console.log(e)
+      let session_key = app.globalData.session_key;
       let encryptedData = e.detail.encryptedData;
       let iv = e.detail.iv;
       // console.log(e)
-      this.globalData.userInfo = e.detail.userInfo;
+      app.globalData.userInfo = e.detail.userInfo;
       if (session_key && encryptedData && iv) {
         util._loading('正在登陆...');
         api._post('/wxcust/appuserinfo', {
@@ -297,12 +312,17 @@ Page({
         }).then(res => {
           wx.hideLoading();
           if (res.success && res.data) {
-            this.globalData.isLogin = true;
+            // console.log(res)
+            // console.log(app.globalData)
+            app.globalData.isLogin = true;
 
             let custId = res.data['CUST-ID'];
             api.setCustID(custId);
 
-            let parentCustId = this.globalData.parentCustId;
+            // let parentCustId = app.globalData.parentCustId;
+            let parentCustId = this.data.parentCustId
+            // console.log(custId)
+            // console.log(parentCustId)
             if (parentCustId && custId) {
               api._post('/cashCow/share', {
                 shareCustId: parentCustId,
@@ -312,7 +332,7 @@ Page({
             resolve();
             wx.hideLoading();
             util._toast("登录成功");
-
+            that.getData()
           } else {
             reject();
             util._toast("登录失败");
@@ -323,7 +343,7 @@ Page({
   },
 
   login(){
-    console.log(app.globalData.isLogin)
+    // console.log(app.globalData.isLogin)
     if(!app.globalData.isLogin){
       this.setData({
         loginMould: true
@@ -334,9 +354,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getData()
-    // console.log(app.globalData.isLogin)
-    // this._login()
+    
+    // console.log(app.globalData)
+    if(options.scene){
+      // let parentCustId = app.globalData.parentCustId
+      var scene = decodeURIComponent(options.scene)
+      // console.log(scene)
+      this.setData({
+        parentCustId:scene
+      })
+    }
     if(app.globalData.isLogin){
       // this.setData({
       //   custID:options.custID

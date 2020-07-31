@@ -315,6 +315,7 @@ Page({
    */
   onLoad: function(options) {
     let goodsId;
+    // console.log(options.scene)
     if (options.scene) {
       app.globalData.scene = options.scene;
       api._post('/distribution/selectDistributionGoods', {

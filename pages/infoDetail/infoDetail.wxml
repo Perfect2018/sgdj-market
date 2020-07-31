@@ -1,2 +1,44 @@
 <!--pages/infoDetail/infoDetail.wxml-->
+<view class="detail">
+	<view></view>
+	<view>
+		<text>供需类型:</text>
+		<view>需求</view>
+	</view>
+	<view>
+		<text>信息标题:</text>
+		<view>{{}}</view>
+	</view>
+	<view>
+		<text>采购/供应数量:</text>
+		<view>{{}}</view>
+	</view>
+	<view class="content">
+		<text>信息内容:</text>
+		<view>荆防颗粒的市附近的流口水发动机卡拉发动机上课了放到数据库啦放到数据库啦放到数据库啦发大家快来</view>
+	</view>
+</view>
 
+<view class="img">
+	<image></image>
+</view>
+
+<view class="date">
+	<text>截止时间:</text>
+	<view>2020-09-03</view>
+</view>
+
+<view class="user">
+	<text>联系人:</text>
+	<view>需求</view>
+</view>
+
+<view class="bottom">
+  <view>
+  <button open-type="share">
+    <image src="../../images/sgdj_distribution.png"></image>
+    <view>分享</view>
+  </button>
+  </view>
+  <view bindtap="call" class="call">立即联系</view>
+</view>
