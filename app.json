@@ -34,7 +34,8 @@
     "pages/conversion/conversion",
     "pages/info/info",
     "pages/infoDetail/infoDetail",
-    "pages/release/release"
+    "pages/release/release",
+    "pages/infoList/infoList"
   ],
   "window": {
     "backgroundColor": "#fff",
@@ -61,6 +62,12 @@
         "iconPath": "/images/icon_sort02.jpg",
         "selectedIconPath": "/images/icon_sort01.jpg",
         "text": "嗨购"
+      },
+      {
+        "pagePath": "pages/info/info",
+        "iconPath": "/images/release.png",
+        "selectedIconPath": "/images/release-a.png",
+        "text": "供求"
       },
       {
         "pagePath": "pages/global/global",

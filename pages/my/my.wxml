@@ -137,16 +137,16 @@
 			</view>
 		</view>
 		<!-- 我的发布 -->
-		<!-- <view class="card">
+		<view class="card">
 			<view class="card-header">
 				我的发布
 			</view>
 			<view class="card-body1 color-888">
-				<view class="card-item" bindtap="_toView" data-navigate="release" data-type="0">
+				<view class="card-item" bindtap="_toView" data-navigate="infoList" data-type="0">
 					<van-icon name="records" class="fs-50 color-000" />
 					<view>历史发布</view>
 				</view>
 			</view>
-		</view> -->
+		</view>
 	</view>
 </view>

@@ -43,14 +43,19 @@ Page({
     }).then(res=>{
       // console.log(res)
       if(res.success){
-        this.data.list.splice(index,1)
+        this.data.list.splice(index,1,"")
         this.setData({
           list:this.data.list,
           total:res.data
         })
-        if(this.data.list.length<1){
+        if(this.data.list.every(function(item,index,arr){
+          return item == ""
+        })){
           that.getData()
         }
+        // if(this.data.list.length<1){
+        //   that.getData()
+        // }
       }else{
         util._toast('请稍后重试')
       }
@@ -60,6 +65,7 @@ Page({
 
   // 获取页面数据
   getData(){
+    let that = this
     api._get('/cashCow/selectCustCashCowTime').then(res=>{
       if(res.success){
         this.setData({
@@ -68,6 +74,21 @@ Page({
           list:res.data.custCowTime,
           isVip:res.data.custCow.isVip
         })
+        if(res.data.custCowTime.length<1){
+          wx.showModal({
+            title:"提示",
+            content:"本时段金苹果已领完,一小时后再来领取!",
+            confirmText:"去购物",
+            success(res){
+              if(res.confirm){
+                that.goIndex()
+                // wx.switchTab({
+                //   url: '../index/index',
+                // })
+              }
+            }
+          })
+        }
       }else{
         // console.log('00')
         this.setData({
@@ -123,6 +144,9 @@ Page({
 
   // 邀请好友
   invite(){
+    this.setData({
+      show:false
+    })
     // 判断是否已经生成海报
     if (this.data.distribution.posterImage) {
       this._setShowPoster();
@@ -191,18 +215,18 @@ Page({
       //绘制描述图
       // context.drawImage(canvas_hb, 0, 0, 640, 1160);
       // context.save(); // 保存当前context的状态
-
-      //绘制文字  文字绘制需在图片绘制后面
-      context.setFontSize(28);
-      context.setFillStyle('#000');
-      // context.setTextAlign('left');
-      context.fillText(`我是:蔬果到家-${nickname}`, 135, 55);
-      context.save();
-
       context.setFontSize(30);
       context.setFillStyle('#FF8830');
       // context.setTextAlign('left');
       context.fillText("赠你5个金苹果快来领取", 135, 105);
+      context.save();
+
+      //绘制文字  文字绘制需在图片绘制后面
+      context.setFontSize(26);
+      context.setFillStyle('#000');
+      // context.setTextAlign('left');
+      context.font = "normal bold 26px sans-serif";
+      context.fillText(`我是:${nickname}`, 135, 55);
       context.save();
 
       //绘制二维码

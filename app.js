@@ -90,7 +90,7 @@ App({
           iv
         }).then(res => {
           wx.hideLoading();
-          console.log(thia.globalData)
+          // console.log(thia.globalData)
           if (res.success && res.data) {
             this.globalData.isLogin = true;
 

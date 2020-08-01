@@ -35,7 +35,13 @@ page{
 .messageType>label{
   margin-right: 20rpx;
   box-sizing: border-box;
+  color: #000;
 }
+
+.place{
+  color: #ccc;
+}
+
 
 .fs-34{
   font-size: 34rpx;
@@ -55,11 +61,12 @@ page{
 }
 
 .item input{
-  color: #aaa;
+  color: #ccc;
 }
 
 .item label{
   margin-right: 20rpx;
+  color: #000;
 }
 
 .item textarea{
@@ -79,7 +86,7 @@ page{
 }
 
 .picker{
-  color: #aaa;
+  color: #ccc;
 }
 
 .bottom{

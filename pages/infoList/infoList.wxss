@@ -1,0 +1,49 @@
+/* pages/infoList/infoList.wxss */
+page{
+  height: 100%;
+  background-color: #f3f1f2;
+  /* padding: 0 10rpx; */
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+  font-size: 26rpx;
+  color: #aaa;
+}
+
+.item{
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.item>view{
+  display: flex;
+  height: 70rpx;
+  line-height: 70rpx;
+  padding-left: 26rpx;
+  padding-right: 26rpx;
+  box-sizing: border-box;
+}
+
+.item>view>text{
+  margin-right: 20rpx;
+  box-sizing: border-box;
+  color: #000;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+.item .btns{
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btns>view{
+  width: 100rpx;
+  text-align: center;
+  color: #000;
+}

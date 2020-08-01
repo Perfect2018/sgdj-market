@@ -58,7 +58,7 @@ Page({
 
     let timer = setInterval(()=>{
       let stateTime = this.data.stateTime;
-      if(stateTime>1){
+      if(stateTime>0){
         stateTime-=1;
         this.setData({
           stateTime:stateTime
@@ -67,7 +67,15 @@ Page({
         clearInterval(timer)
       }
     },1000)
-    console.log(phone)
+    // console.log(phone)
+    api._post("/sendSms",{
+      mobile:phone
+    }).then(res=>{
+      if(!res.success){
+        clearInterval(timer);
+        util._toast("发送失败");
+      }
+    })
   },
 
   getParams(e){
@@ -96,7 +104,7 @@ Page({
 
   // 确认发布
   confirm(){
-    console.log(this.data)
+    // console.log(this.data)
     if(!this.data.messageType){
       util._toast("请选择供需类型")
       return;
@@ -128,10 +136,28 @@ Page({
       util._toast("请输入验证码")
       return;
     }
-    console.log("确认发布")
-    api._post('',{}).then(res=>{
+    // console.log("确认发布")
+    api._post('/message/insertMessage',{
+      titleName:this.data.title,
+      messageType:this.data.messageType,
+      numbers:this.data.number,
+      describle:this.data.content,
+      img1:this.data.img1,
+      img2:this.data.img2,
+      img3:this.data.img3,
+      endTime:this.data.date,
+      userName:this.data.user,
+      phone:this.data.phone,
+      address:this.data.address,
+      vcode:this.data.code
+    }).then(res=>{
       if(res.success){
         util._toast("发布成功")
+        wx.navigateBack({
+          complete: (res) => {},
+        })
+      }else{
+        util._toast(res.error.msg)  
       }
     })
   },

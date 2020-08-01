@@ -1,0 +1,21 @@
+<!--pages/infoList/infoList.wxml-->
+<view class="item">
+  <view>
+    <text>信息类别:</text>
+    <view>需求</view>
+  </view>
+   <view>
+    <text>标题:</text>
+    <view>需求范德萨发</view>
+  </view>
+   <view>
+    <text>浏览量:</text>
+    <view>152345</view>
+  </view>
+  <view class="btns">
+    <view data-id="" bindtap="stick">置顶</view>
+    <view data-id="" bindtap="edit">编辑</view>
+    <view data-id="" bindtap="remove">下架</view>
+    <view data-id="" bindtap="delete">删除</view>
+  </view>
+</view>

@@ -1,6 +1,20 @@
 <!--pages/infoDetail/infoDetail.wxml-->
 <view class="detail">
-	<view></view>
+	<view class="top">
+		<view class="avatar">
+			<view>
+				<image src="../../images/kefu.png"></image>
+			</view>
+			<text>戏命师</text>
+		</view>
+		<view class="browse">
+			<view>
+				<image src="../../images/bll.png"></image>
+				<text>6666</text>
+			</view>
+			<view>2020-07-30 20:33</view>
+		</view>
+	</view>
 	<view>
 		<text>供需类型:</text>
 		<view>需求</view>
@@ -19,6 +33,7 @@
 	</view>
 </view>
 
+<!-- 这个地方三张图片遍历出来 -->
 <view class="img">
 	<image></image>
 </view>
@@ -35,10 +50,10 @@
 
 <view class="bottom">
   <view>
-  <button open-type="share">
-    <image src="../../images/sgdj_distribution.png"></image>
-    <view>分享</view>
-  </button>
+		<button open-type="share" plain="true">
+			<image src="../../images/icon-share.png "></image>
+		</button>
+		<view>分享</view>
   </view>
   <view bindtap="call" class="call">立即联系</view>
-</view>
+</view> 
